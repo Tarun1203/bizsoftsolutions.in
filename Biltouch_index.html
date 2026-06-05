@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bill Touch — Restaurant Billing Software, POS & KDS for India 2026</title>
+  <meta name="description" content="Bill Touch is India's smart restaurant POS software with Zomato & Swiggy integration, KDS, table management and real-time reports. Get a free demo."/>
+  <meta name="keywords" content="restaurant billing software india, pos software for restaurant, zomato swiggy integration billing, kds software restaurant, cloud kitchen billing software, restaurant pos india"/>
+  <link rel="canonical" href="https://bizsoftsolutions.in/bill-touch/"/>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Bill Touch",
+    "operatingSystem": "Android",
+    "applicationCategory": "BusinessApplication",
+    "description": "Restaurant billing software with POS, KDS, Zomato Swiggy integration for Indian restaurants and cloud kitchens"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #e65100; --primary-light: #f4511e; --dark: #0d1b2a;
+      --text: #2c3e50; --muted: #607d8b; --light: #fff8f5;
+      --white: #fff; --border: #ffe0cc; --blue: #1565c0;
+      --shadow: 0 4px 24px rgba(230,81,0,.10);
+    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: var(--text); background: var(--white); }
+
+    nav { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 1px solid #dde3ec; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 58px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    .logo { font-size: 1.2rem; font-weight: 800; color: #1565c0; text-decoration: none; }
+    .logo span { color: #00897b; }
+    .breadcrumb { font-size: .82rem; color: var(--muted); }
+    .breadcrumb a { color: var(--blue); text-decoration: none; }
+    .nav-cta { background: var(--primary); color: var(--white); padding: .4rem 1.1rem; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: .88rem; cursor: pointer; border: none; font-family: inherit; }
+
+    .hero { background: linear-gradient(135deg, #1a0a00, #4e342e 40%, #e65100 100%); color: var(--white); padding: 65px 5% 55px; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 3rem; align-items: center; flex-wrap: wrap; }
+    .hero-content { flex: 1; min-width: 280px; }
+    .hero-badge { display: inline-block; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); color: #ffccbc; padding: .28rem .9rem; border-radius: 20px; font-size: .78rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; margin-bottom: 1rem; }
+    .hero h1 { font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 800; line-height: 1.2; margin-bottom: .9rem; }
+    .hero h1 em { font-style: normal; color: #ffccbc; }
+    .hero p { font-size: 1.05rem; opacity: .88; line-height: 1.7; max-width: 520px; margin-bottom: 1.8rem; }
+    .hero-list { list-style: none; margin-bottom: 2rem; }
+    .hero-list li { font-size: .95rem; padding: .3rem 0; opacity: .9; }
+    .hero-list li::before { content: "✓ "; color: #ffab91; font-weight: 700; }
+    .btn-demo { background: #fff; color: var(--primary); font-weight: 700; padding: .75rem 1.8rem; border-radius: 8px; text-decoration: none; transition: transform .15s; font-size: .98rem; cursor: pointer; border: none; font-family: inherit; display: inline-block; }
+    .btn-demo:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+
+    .quick-stats { background: var(--primary); display: flex; justify-content: center; flex-wrap: wrap; }
+    .qs { flex: 1; min-width: 130px; text-align: center; padding: 1.2rem 1rem; border-right: 1px solid rgba(255,255,255,.15); color: var(--white); }
+    .qs:last-child { border-right: none; }
+    .qs h3 { font-size: 1.5rem; font-weight: 800; }
+    .qs p { font-size: .78rem; opacity: .8; margin-top: .1rem; }
+
+    section { padding: 65px 5%; }
+    .section-wrap { max-width: 1100px; margin: 0 auto; }
+    .s-label { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: .4rem; }
+    .s-title { font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 800; color: var(--dark); margin-bottom: .4rem; }
+    .s-sub { color: var(--muted); font-size: .98rem; margin-bottom: 2rem; }
+    .text-center { text-align: center; }
+
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.2rem; }
+    .feat-card { background: var(--white); border-radius: 12px; padding: 1.5rem; border: 1px solid #dde3ec; box-shadow: var(--shadow); }
+    .feat-icon { font-size: 2rem; margin-bottom: .7rem; }
+    .feat-card h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: .4rem; }
+    .feat-card p { font-size: .87rem; color: var(--muted); line-height: 1.6; }
+
+    /* INTEGRATIONS */
+    .integrations { background: var(--light); }
+    .int-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .int-card { background: var(--white); border-radius: 12px; padding: 1.5rem; text-align: center; border: 2px solid #dde3ec; box-shadow: 0 2px 12px rgba(0,0,0,.05); transition: transform .2s; }
+    .int-card:hover { transform: translateY(-3px); }
+    .int-icon { font-size: 2.2rem; margin-bottom: .5rem; }
+    .int-card h4 { font-weight: 700; color: var(--dark); margin-bottom: .3rem; }
+    .int-card p { font-size: .82rem; color: var(--muted); }
+
+    /* LEAD FORM */
+    .lead-section { background: var(--light); }
+    .lead-wrap { max-width: 580px; margin: 0 auto; background: var(--white); border-radius: 16px; padding: 2.2rem; box-shadow: var(--shadow); border: 2px solid #dde3ec; }
+    .form-group { display: flex; flex-direction: column; margin-bottom: .9rem; }
+    .form-group label { font-size: .83rem; font-weight: 700; color: var(--dark); margin-bottom: .3rem; }
+    .form-group input, .form-group select, .form-group textarea { padding: .6rem .85rem; border: 1.5px solid #dde3ec; border-radius: 8px; font-size: .95rem; color: var(--text); background: var(--white); transition: border-color .2s; font-family: inherit; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(230,81,0,.1); }
+    .form-group textarea { resize: vertical; min-height: 75px; }
+    .submit-btn { width: 100%; padding: .85rem; background: var(--primary); color: var(--white); border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background .2s; font-family: inherit; }
+    .submit-btn:hover { background: var(--primary-light); }
+    .submit-btn:disabled { background: #aaa; cursor: not-allowed; }
+    #bt-form-msg { display: none; padding: .75rem; border-radius: 8px; text-align: center; font-weight: 600; font-size: .9rem; margin-top: .75rem; }
+    #bt-form-msg.success { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+
+    .faq-section { background: #fff; }
+    .faq-list { max-width: 780px; margin: 0 auto; }
+    .faq-item { background: var(--light); border-radius: 10px; padding: 1.2rem 1.5rem; margin-bottom: .75rem; border: 1px solid #dde3ec; }
+    .faq-item summary { font-weight: 700; font-size: .97rem; color: var(--dark); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    .faq-item summary::after { content: "+"; font-size: 1.3rem; color: var(--primary); }
+    .faq-item[open] summary::after { content: "−"; }
+    .faq-item p { margin-top: .75rem; font-size: .92rem; color: var(--muted); line-height: 1.7; }
+
+    .cta-band { background: var(--primary); color: var(--white); text-align: center; padding: 50px 5%; }
+    .cta-band h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: .5rem; }
+    .cta-band p { opacity: .85; margin-bottom: 1.5rem; }
+    .btn-cta-white { background: var(--white); color: var(--primary); font-weight: 700; padding: .8rem 2.2rem; border-radius: 8px; font-size: 1rem; transition: transform .15s; display: inline-block; cursor: pointer; border: none; font-family: inherit; }
+    .btn-cta-white:hover { transform: translateY(-2px); }
+
+    .disclaimer { background: #fff8e1; border-top: 2px solid #ffe082; padding: .65rem 5%; font-size: .78rem; color: #5d4037; text-align: center; }
+    footer { background: var(--dark); color: rgba(255,255,255,.6); padding: 2rem 5%; text-align: center; font-size: .83rem; }
+    footer a { color: #90caf9; text-decoration: none; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: .75rem; flex-wrap: wrap; }
+    .toast { position: fixed; bottom: 1.5rem; right: 1.5rem; background: #2e7d32; color: white; padding: .9rem 1.4rem; border-radius: 10px; font-size: .9rem; font-weight: 600; box-shadow: 0 4px 20px rgba(0,0,0,.3); transform: translateY(120px); opacity: 0; transition: all .4s cubic-bezier(.175,.885,.32,1.275); z-index: 9999; }
+    .toast.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">BizSoft<span>Solutions</span></a>
+  <div class="breadcrumb"><a href="/">Home</a> › Bill Touch</div>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Free Demo →</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">🍽️ Restaurant POS Software</div>
+      <h1>Bill Touch — Smart <em>Restaurant Billing & POS</em> with Zomato & Swiggy Integration</h1>
+      <p>India's complete restaurant billing software — manage dine-in, takeaway and online orders (Zomato, Swiggy) from one screen. Works on any Android device.</p>
+      <ul class="hero-list">
+        <li>Full POS for dine-in, takeaway & delivery</li>
+        <li>Auto-sync Zomato & Swiggy orders</li>
+        <li>Kitchen Display System (KDS) support</li>
+        <li>Table management & captain ordering</li>
+        <li>Real-time sales reports & analytics</li>
+        <li>Works on any Android tablet or phone</li>
+      </ul>
+      <div class="hero-btns">
+        <button class="btn-demo" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">📩 Get Free Demo →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quick-stats">
+  <div class="qs"><h3>POS</h3><p>Full Restaurant System</p></div>
+  <div class="qs"><h3>Zomato</h3><p>& Swiggy Integrated</p></div>
+  <div class="qs"><h3>KDS</h3><p>Kitchen Display</p></div>
+  <div class="qs"><h3>Android</h3><p>Any Device</p></div>
+  <div class="qs"><h3>GST</h3><p>Compliant Billing</p></div>
+</div>
+
+<!-- FEATURES -->
+<section style="background:#fff;">
+  <div class="section-wrap">
+    <div class="text-center">
+      <div class="s-label">Features</div>
+      <div class="s-title">Everything Your Restaurant Needs</div>
+      <div class="s-sub">From billing to kitchen to delivery — Bill Touch handles it all</div>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card"><div class="feat-icon">🍽️</div><h3>Restaurant POS</h3><p>Fast billing for dine-in, takeaway and delivery. Table-wise billing, split bills and multiple payment modes.</p></div>
+      <div class="feat-card"><div class="feat-icon">🛵</div><h3>Zomato & Swiggy Integration</h3><p>Online orders from Zomato and Swiggy automatically appear on the billing screen — no manual entry, no missed orders.</p></div>
+      <div class="feat-card"><div class="feat-icon">📺</div><h3>Kitchen Display System (KDS)</h3><p>Orders appear directly on the kitchen screen as they're placed. Reduce errors, speed up preparation and improve service.</p></div>
+      <div class="feat-card"><div class="feat-icon">🪑</div><h3>Table Management</h3><p>Visual table layout, table status (empty/occupied/bill requested), easy table merging and transfer.</p></div>
+      <div class="feat-card"><div class="feat-icon">📱</div><h3>Captain Ordering</h3><p>Waiters take orders on their phone/tablet, which go directly to the kitchen and billing counter instantly.</p></div>
+      <div class="feat-card"><div class="feat-icon">📊</div><h3>Sales Reports</h3><p>Daily, weekly, monthly sales reports. Item-wise analysis, peak hours, discount reports and staff performance.</p></div>
+      <div class="feat-card"><div class="feat-icon">🧾</div><h3>GST Billing</h3><p>GST-compliant invoices and receipts. CGST, SGST, IGST auto-calculation. Print or send via WhatsApp.</p></div>
+      <div class="feat-card"><div class="feat-icon">☁️</div><h3>Cloud Kitchen Ready</h3><p>Manage multiple brands and menus from one kitchen. Perfect for cloud kitchen operators running multiple virtual restaurants.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section class="integrations">
+  <div class="section-wrap">
+    <div class="text-center">
+      <div class="s-label">Integrations</div>
+      <div class="s-title">Connects With All Major Platforms</div>
+      <div class="s-sub">One system for all your order channels</div>
+    </div>
+    <div class="int-grid">
+      <div class="int-card"><div class="int-icon">🛵</div><h4>Zomato</h4><p>Online orders auto-sync to your POS</p></div>
+      <div class="int-card"><div class="int-icon">🟠</div><h4>Swiggy</h4><p>All Swiggy orders direct to kitchen</p></div>
+      <div class="int-card"><div class="int-icon">🖨️</div><h4>Thermal Printer</h4><p>Works with all standard bill printers</p></div>
+      <div class="int-card"><div class="int-icon">📲</div><h4>WhatsApp</h4><p>Send digital bills to customers instantly</p></div>
+      <div class="int-card"><div class="int-icon">💳</div><h4>Payment Modes</h4><p>Cash, UPI, card, wallet — all supported</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section>
+  <div class="section-wrap">
+    <div class="text-center">
+      <div class="s-label">Who Should Use Bill Touch</div>
+      <div class="s-title">Built for All Food Businesses</div>
+      <div class="s-sub">Whether you're a single restaurant or a growing chain, Bill Touch scales with you</div>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card"><div class="feat-icon">🍽️</div><h3>Restaurants</h3><p>Full dine-in management — tables, captain ordering, KDS, billing, and online order integration in one system.</p></div>
+      <div class="feat-card"><div class="feat-icon">☕</div><h3>Cafes & QSR</h3><p>Fast counter billing for quick service restaurants and cafes with high transaction volume and multiple payment types.</p></div>
+      <div class="feat-card"><div class="feat-icon">☁️</div><h3>Cloud Kitchens</h3><p>Run multiple virtual brands, manage Zomato/Swiggy orders centrally and track each brand's performance separately.</p></div>
+      <div class="feat-card"><div class="feat-icon">🍕</div><h3>Food Delivery Outlets</h3><p>Optimised for delivery-first businesses — order tracking, packaging, and delivery status management built in.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD FORM -->
+<section id="contact" class="lead-section">
+  <div class="section-wrap">
+    <div class="text-center">
+      <div class="s-label">Get Started</div>
+      <div class="s-title">Request a Free Bill Touch Demo</div>
+      <div class="s-sub">Fill your details — our expert will call you and give you a live walkthrough</div>
+    </div>
+    <div class="lead-wrap">
+      <form id="btLeadForm">
+        <input type="hidden" name="software" value="Bill Touch"/>
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" name="name" placeholder="Suresh Patel" required/>
+        </div>
+        <div class="form-group">
+          <label>Mobile Number *</label>
+          <input type="tel" name="phone" placeholder="9876543210" required/>
+        </div>
+        <div class="form-group">
+          <label>Business Type</label>
+          <select name="businessType">
+            <option value="">Select your food business</option>
+            <option>Restaurant / Dhaba</option>
+            <option>Cafe / Coffee Shop</option>
+            <option>Cloud Kitchen</option>
+            <option>QSR / Fast Food</option>
+            <option>Bakery / Sweet Shop</option>
+            <option>Food Delivery Outlet</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" name="city" placeholder="Your city"/>
+        </div>
+        <div class="form-group">
+          <label>Your Query (Optional)</label>
+          <textarea name="message" placeholder="E.g. I have a restaurant with 20 tables, also on Zomato and Swiggy, want to manage all orders from one system..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="btSubmitBtn">Request Free Demo →</button>
+        <p style="text-align:center;font-size:.8rem;color:var(--muted);margin-top:.6rem;">📱 Our expert will call / WhatsApp you within 24 hours</p>
+        <div id="bt-form-msg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-wrap">
+    <div class="text-center">
+      <div class="s-label">FAQ</div>
+      <div class="s-title">Common Questions About Bill Touch</div>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Does Bill Touch work on any Android device?</summary>
+        <p>Yes. Bill Touch runs on any Android phone or tablet. No special hardware required — your existing Android device is enough to get started.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How does the Zomato and Swiggy integration work?</summary>
+        <p>Once integrated, orders placed on Zomato and Swiggy automatically appear on your Bill Touch POS screen. You accept the order, it goes to the kitchen (KDS), and the bill is generated automatically — without any manual entry.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is a Kitchen Display System (KDS)?</summary>
+        <p>A KDS is a screen placed in the kitchen that shows orders in real time as they are placed at the counter or by captains. It replaces kitchen order tickets (KOTs) and reduces errors in order preparation.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I use Bill Touch for multiple branches?</summary>
+        <p>Yes. Bill Touch supports multi-branch operations with a centralised dashboard to see all branches' performance from one place.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is Bill Touch GST compliant?</summary>
+        <p>Yes. Bill Touch generates fully GST-compliant receipts with CGST, SGST, and IGST calculations. You can print or send digital bills via WhatsApp.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>Run Your Restaurant Smarter with Bill Touch</h2>
+  <p>Get a free demo — our expert will show you everything in 30 minutes.</p>
+  <button class="btn-cta-white" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">📩 Request Free Demo Now →</button>
+</div>
+
+<div class="disclaimer">
+  <strong>Affiliate Disclaimer:</strong> BizSoft Solutions earns a referral commission on Bill Touch purchases made through our leads — at no extra cost to you.
+  <a href="/disclaimer.html">Read full disclaimer</a>.
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/vyapar/">Vyapar</a>
+    <a href="/biz-analyst/">Biz Analyst</a>
+    <a href="/blog/best-restaurant-pos-software.html">Best Restaurant POS</a>
+    <a href="/disclaimer.html">Disclaimer</a>
+  </div>
+  <p>© 2026 BizSoft Solutions — Independent review site. Not the official Bill Touch website.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="../form.js"></script>
+<script>
+  BIZSFT.wire({
+    formId:           "btLeadForm",
+    btnId:            "btSubmitBtn",
+    msgId:            "bt-form-msg",
+    softwareOverride: "Bill Touch"
+  });
+</script>
+</body>
+</html>

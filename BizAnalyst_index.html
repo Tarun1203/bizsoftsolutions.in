@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Biz Analyst App — Tally on Mobile & Sales Analytics for Indian Businesses 2026</title>
+  <meta name="description" content="Biz Analyst lets you access Tally data on your mobile, track sales team performance and get real-time business analytics. Free demo available."/>
+  <meta name="keywords" content="biz analyst app, tally on mobile, tally mobile app india, biz analyst pricing, sales team tracking app india, tally data on mobile"/>
+  <link rel="canonical" href="https://bizsoftsolutions.in/biz-analyst/"/>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Biz Analyst",
+    "operatingSystem": "Android, iOS",
+    "applicationCategory": "BusinessApplication",
+    "description": "Mobile app to access Tally data, track sales team and get real-time business analytics",
+    "offers": { "@type": "Offer", "priceCurrency": "INR" }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #2e7d32; --primary-light: #388e3c; --dark: #0d1b2a;
+      --text: #2c3e50; --muted: #607d8b; --light: #f4f7fb;
+      --white: #fff; --border: #dde3ec; --blue: #1565c0;
+      --shadow: 0 4px 24px rgba(46,125,50,.10);
+    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: var(--text); background: var(--white); }
+
+    nav { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 58px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    .logo { font-size: 1.2rem; font-weight: 800; color: #1565c0; text-decoration: none; }
+    .logo span { color: #00897b; }
+    .breadcrumb { font-size: .82rem; color: var(--muted); }
+    .breadcrumb a { color: var(--blue); text-decoration: none; }
+    .nav-cta { background: var(--primary); color: var(--white); padding: .4rem 1.1rem; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: .88rem; cursor: pointer; border: none; font-family: inherit; }
+
+    .hero { background: linear-gradient(135deg, #0d1b2a, #1b5e20 50%, #2e7d32); color: var(--white); padding: 65px 5% 55px; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 3rem; align-items: center; flex-wrap: wrap; }
+    .hero-content { flex: 1; min-width: 280px; }
+    .hero-badge { display: inline-block; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); color: #c8e6c9; padding: .28rem .9rem; border-radius: 20px; font-size: .78rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; margin-bottom: 1rem; }
+    .hero h1 { font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 800; line-height: 1.2; margin-bottom: .9rem; }
+    .hero h1 em { font-style: normal; color: #a5d6a7; }
+    .hero p { font-size: 1.05rem; opacity: .88; line-height: 1.7; max-width: 520px; margin-bottom: 1.8rem; }
+    .hero-list { list-style: none; margin-bottom: 2rem; }
+    .hero-list li { font-size: .95rem; padding: .3rem 0; opacity: .9; }
+    .hero-list li::before { content: "✓ "; color: #80cbc4; font-weight: 700; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-demo { background: #fff; color: var(--primary); font-weight: 700; padding: .75rem 1.8rem; border-radius: 8px; text-decoration: none; transition: transform .15s; font-size: .98rem; cursor: pointer; border: none; font-family: inherit; }
+    .btn-demo:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+
+    .quick-stats { background: var(--primary); display: flex; justify-content: center; flex-wrap: wrap; }
+    .qs { flex: 1; min-width: 130px; text-align: center; padding: 1.2rem 1rem; border-right: 1px solid rgba(255,255,255,.15); color: var(--white); }
+    .qs:last-child { border-right: none; }
+    .qs h3 { font-size: 1.5rem; font-weight: 800; }
+    .qs p { font-size: .78rem; opacity: .8; margin-top: .1rem; }
+
+    section { padding: 65px 5%; }
+    .section-wrap { max-width: 1100px; margin: 0 auto; }
+    .s-label { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: .4rem; }
+    .s-title { font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 800; color: var(--dark); margin-bottom: .4rem; }
+    .s-sub { color: var(--muted); font-size: .98rem; margin-bottom: 2rem; }
+    .text-center { text-align: center; }
+
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.2rem; }
+    .feat-card { background: var(--white); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .feat-icon { font-size: 2rem; margin-bottom: .7rem; }
+    .feat-card h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: .4rem; }
+    .feat-card p { font-size: .87rem; color: var(--muted); line-height: 1.6; }
+
+    .use-cases { background: var(--light); }
+    .use-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .use-card { background: var(--white); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--primary); box-shadow: var(--shadow); }
+    .use-card h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: .5rem; }
+    .use-card p { font-size: .88rem; color: var(--muted); line-height: 1.6; }
+
+    /* LEAD FORM */
+    .lead-section { background: var(--light); }
+    .lead-wrap { max-width: 580px; margin: 0 auto; background: var(--white); border-radius: 16px; padding: 2.2rem; box-shadow: var(--shadow); border: 2px solid var(--border); }
+    .form-group { display: flex; flex-direction: column; margin-bottom: .9rem; }
+    .form-group label { font-size: .83rem; font-weight: 700; color: var(--dark); margin-bottom: .3rem; }
+    .form-group input, .form-group select, .form-group textarea { padding: .6rem .85rem; border: 1.5px solid var(--border); border-radius: 8px; font-size: .95rem; color: var(--text); background: var(--white); transition: border-color .2s; font-family: inherit; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(46,125,50,.1); }
+    .form-group textarea { resize: vertical; min-height: 75px; }
+    .submit-btn { width: 100%; padding: .85rem; background: var(--primary); color: var(--white); border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background .2s; font-family: inherit; margin-top: .3rem; }
+    .submit-btn:hover { background: var(--primary-light); }
+    .submit-btn:disabled { background: #aaa; cursor: not-allowed; }
+    #ba-form-msg { display: none; padding: .75rem; border-radius: 8px; text-align: center; font-weight: 600; font-size: .9rem; margin-top: .75rem; }
+    #ba-form-msg.success { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    #ba-form-msg.error { background: #ffebee; color: #c62828; }
+    .partner-note { background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 8px; padding: .75rem 1rem; font-size: .83rem; color: #2e7d32; margin-bottom: 1rem; font-weight: 600; }
+
+    .faq-section { background: var(--light); }
+    .faq-list { max-width: 780px; margin: 0 auto; }
+    .faq-item { background: var(--white); border-radius: 10px; padding: 1.2rem 1.5rem; margin-bottom: .75rem; border: 1px solid var(--border); }
+    .faq-item summary { font-weight: 700; font-size: .97rem; color: var(--dark); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    .faq-item summary::after { content: "+"; font-size: 1.3rem; color: var(--primary); }
+    .faq-item[open] summary::after { content: "−"; }
+    .faq-item p { margin-top: .75rem; font-size: .92rem; color: var(--muted); line-height: 1.7; }
+
+    .cta-band { background: var(--primary); color: var(--white); text-align: center; padding: 50px 5%; }
+    .cta-band h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: .5rem; }
+    .cta-band p { opacity: .85; margin-bottom: 1.5rem; }
+    .btn-cta-white { background: var(--white); color: var(--primary); font-weight: 700; padding: .8rem 2.2rem; border-radius: 8px; text-decoration: none; font-size: 1rem; transition: transform .15s; display: inline-block; cursor: pointer; border: none; font-family: inherit; }
+    .btn-cta-white:hover { transform: translateY(-2px); }
+
+    .disclaimer { background: #fff8e1; border-top: 2px solid #ffe082; padding: .65rem 5%; font-size: .78rem; color: #5d4037; text-align: center; }
+    footer { background: var(--dark); color: rgba(255,255,255,.6); padding: 2rem 5%; text-align: center; font-size: .83rem; }
+    footer a { color: #90caf9; text-decoration: none; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: .75rem; flex-wrap: wrap; }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 1.5rem; right: 1.5rem; background: #2e7d32; color: white; padding: .9rem 1.4rem; border-radius: 10px; font-size: .9rem; font-weight: 600; box-shadow: 0 4px 20px rgba(0,0,0,.3); transform: translateY(120px); opacity: 0; transition: all .4s cubic-bezier(.175,.885,.32,1.275); z-index: 9999; }
+    .toast.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">BizSoft<span>Solutions</span></a>
+  <div class="breadcrumb"><a href="/">Home</a> › Biz Analyst</div>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Free Demo →</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">📱 Tally on Your Mobile</div>
+      <h1>Biz Analyst — <em>Access Tally on Mobile</em> & Track Your Sales Team</h1>
+      <p>Already using Tally? Now access all your Tally data from your mobile, track your sales team in real time, and get instant business analytics — without changing your existing setup.</p>
+      <ul class="hero-list">
+        <li>View Tally data on Android/iOS — anywhere, anytime</li>
+        <li>Real-time sales & analytics dashboards</li>
+        <li>Track sales team performance & targets</li>
+        <li>Inventory alerts on your phone</li>
+        <li>Works with your existing Tally installation</li>
+      </ul>
+      <div class="hero-btns">
+        <button class="btn-demo" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">📩 Get Free Demo →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quick-stats">
+  <div class="qs"><h3>50K+</h3><p>Businesses Using It</p></div>
+  <div class="qs"><h3>Tally</h3><p>Full Integration</p></div>
+  <div class="qs"><h3>Live</h3><p>Real-time Data</p></div>
+  <div class="qs"><h3>Android</h3><p>& iOS Apps</p></div>
+</div>
+
+<!-- FEATURES -->
+<section style="background:var(--light);">
+  <div class="section-wrap">
+    <div class="text-center">
+      <div class="s-label">Key Features</div>
+      <div class="s-title">What Biz Analyst Does for You</div>
+      <div class="s-sub">The mobile layer your Tally was always missing</div>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card"><div class="feat-icon">📱</div><h3>Tally on Mobile</h3><p>Access all your Tally data — ledgers, stock, sales, parties — from your Android or iOS phone from anywhere.</p></div>
+      <div class="feat-card"><div class="feat-icon">📊</div><h3>Business Analytics</h3><p>Visual dashboards showing sales trends, top products, party-wise performance and profit margins in real time.</p></div>
+      <div class="feat-card"><div class="feat-icon">👥</div><h3>Sales Team Tracking</h3><p>Assign targets to your sales team, track their performance, see who's meeting goals and who needs support.</p></div>
+      <div class="feat-card"><div class="feat-icon">🔔</div><h3>Smart Alerts</h3><p>Get WhatsApp/push notifications for low stock, payment due, sales targets, and daily business summaries.</p></div>
+      <div class="feat-card"><div class="feat-icon">📦</div><h3>Inventory on the Go</h3><p>Check stock levels, item-wise reports and godown data from your phone without sitting in front of the PC.</p></div>
+      <div class="feat-card"><div class="feat-icon">💰</div><h3>Outstanding Reports</h3><p>See who owes you money and how much. Party-wise outstanding, overdue receivables and payables — on your phone.</p></div>
+      <div class="feat-card"><div class="feat-icon">📋</div><h3>Sales Orders</h3><p>Sales team can place orders from the field which sync directly to Tally — no manual data entry needed.</p></div>
+      <div class="feat-card"><div class="feat-icon">🔒</div><h3>Secure Access</h3><p>Role-based access for owner, manager, and salesperson. Each sees only what they're allowed to see.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="use-cases">
+  <div class="section-wrap">
+    <div class="text-center">
+      <div class="s-label">Who Benefits Most</div>
+      <div class="s-title">Built for These Tally Users</div>
+      <div class="s-sub">If any of these sound like you, Biz Analyst is exactly what you need</div>
+    </div>
+    <div class="use-grid">
+      <div class="use-card"><h3>📊 Business Owners Who Use Tally</h3><p>You use Tally on the office PC but want to check sales, stock and cash flow from anywhere — on your phone, even at home or while travelling.</p></div>
+      <div class="use-card"><h3>👔 Sales Managers</h3><p>You manage a field sales team and need to track who visited which customer, how much they sold, and whether they're on target — in real time.</p></div>
+      <div class="use-card"><h3>🏭 Distributors & Traders</h3><p>You have large inventory in Tally and need daily stock alerts, party balances, and sales reports without opening the PC every time.</p></div>
+      <div class="use-card"><h3>📱 Sales Representatives</h3><p>You're on the field and need to check product availability, customer outstanding balance, or place a new order — right from your phone.</p></div>
+      <div class="use-card"><h3>💼 Business Analysts</h3><p>You want visual analytics — trend charts, growth comparisons, top/bottom performers — that Tally doesn't show natively.</p></div>
+      <div class="use-card"><h3>🏢 Multi-Branch Businesses</h3><p>Consolidate data from multiple Tally instances across branches and get a unified view of your entire business performance.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD FORM -->
+<section id="contact" class="lead-section">
+  <div class="section-wrap">
+    <div class="text-center">
+      <div class="s-label">Get Started</div>
+      <div class="s-title">Request a Free Biz Analyst Demo</div>
+      <div class="s-sub">Our expert will call you, show you a live demo and help you set it up with your Tally</div>
+    </div>
+    <div class="lead-wrap">
+      <div class="partner-note">🤝 We're an authorised Biz Analyst partner. Use code <strong>TARUNC</strong> at checkout for partner benefits.</div>
+      <form id="baLeadForm">
+        <input type="hidden" name="software" value="Biz Analyst"/>
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" name="name" placeholder="Ramesh Kumar" required/>
+        </div>
+        <div class="form-group">
+          <label>Mobile Number *</label>
+          <input type="tel" name="phone" placeholder="9876543210" required/>
+        </div>
+        <div class="form-group">
+          <label>Business Type</label>
+          <select name="businessType">
+            <option value="">Select...</option>
+            <option>Trading / Distribution</option>
+            <option>Manufacturing</option>
+            <option>Retail Shop</option>
+            <option>Service Business</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" name="city" placeholder="Your city"/>
+        </div>
+        <div class="form-group">
+          <label>Your Query (Optional)</label>
+          <textarea name="message" placeholder="E.g. I use Tally at my trading firm, have 5 salespersons, want to track them on mobile..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="baSubmitBtn">Request Free Demo →</button>
+        <p style="text-align:center;font-size:.8rem;color:var(--muted);margin-top:.6rem;">📱 Our expert will WhatsApp / call you within 24 hours</p>
+        <div id="ba-form-msg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-wrap">
+    <div class="text-center">
+      <div class="s-label">FAQ</div>
+      <div class="s-title">Common Questions About Biz Analyst</div>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Do I need to change my Tally setup to use Biz Analyst?</summary>
+        <p>No. Biz Analyst works with your existing Tally installation. You install a small connector on the PC where Tally is running, and your Tally data becomes accessible on your mobile app. No data migration needed.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Which version of Tally does Biz Analyst support?</summary>
+        <p>Biz Analyst supports Tally ERP 9 and Tally Prime — the two most common versions used by Indian businesses.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is my Tally data safe in Biz Analyst?</summary>
+        <p>Yes. Biz Analyst uses end-to-end encryption. Your data is not stored on their servers permanently — it is fetched securely when you access the app.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How many users can use Biz Analyst?</summary>
+        <p>Plans vary — you can add your owner, managers and sales team members as separate users, each with their own access level. Check the pricing for the exact user limit per plan.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is partner code TARUNC?</summary>
+        <p>TARUNC is our authorised partner code. When you purchase Biz Analyst through us and apply this code, you get partner support and pricing benefits. Our expert will guide you through the process.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>Access Your Tally from Anywhere — On Your Phone</h2>
+  <p>Get a free demo today. Our expert will set it up with your Tally and show you everything.</p>
+  <button class="btn-cta-white" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">📩 Request Free Demo Now →</button>
+</div>
+
+<div class="disclaimer">
+  <strong>Affiliate Disclaimer:</strong> BizSoft Solutions is an authorised Biz Analyst partner and earns a commission on purchases made through our partner code TARUNC — at no extra cost to you.
+  <a href="/disclaimer.html">Read full disclaimer</a>.
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/vyapar/">Vyapar</a>
+    <a href="/bill-touch/">Bill Touch</a>
+    <a href="/disclaimer.html">Disclaimer</a>
+  </div>
+  <p>© 2026 BizSoft Solutions — Independent partner site. Not the official Biz Analyst website.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="../form.js"></script>
+<script>
+  BIZSFT.wire({
+    formId:           "baLeadForm",
+    btnId:            "baSubmitBtn",
+    msgId:            "ba-form-msg",
+    softwareOverride: "Biz Analyst"
+  });
+</script>
+</body>
+</html>
