@@ -1,135 +1,142 @@
 // ============================================================
 //  BizSoft Solutions — form.js
-//  Shared form handler for ALL pages
+//  Lead handler: saves to Firebase Firestore + email via Apps Script
 //
-//  HOW IT WORKS (zero API keys needed):
-//    1. Form data is POSTed to Google Apps Script → saved to Sheet
-//    2. Apps Script sends an email alert to the owner (free)
-//    3. Browser auto-opens wa.me/OWNER_NUMBER?text=... in new tab
-//       → Lead's WhatsApp opens with details pre-filled
-//       → Lead taps Send → Owner gets the WhatsApp directly
-//
-//  SETUP:
-//    1. Replace APPS_SCRIPT_URL with your deployed Web App URL
-//    2. Replace OWNER_WA_NUMBER with your WhatsApp number
-//       (country code + number, no + sign, no spaces)
-//       Example: India 98765 43210  →  "919876543210"
+//  Firebase Firestore: primary storage (100% reliable, free tier)
+//  Apps Script: email alert to owner (fire-and-forget)
 // ============================================================
 
 const BIZSFT = {
 
-  // ── CONFIG — update these two values ──────────────────────
-  APPS_SCRIPT_URL : "https://script.google.com/macros/s/AKfycbxTth1KmROkse9uY4wQ5N5RipEXxmQNxlYMBeeeNinduR9f00JX6w8ktIbnk_KOBcfMVw/exec",
-  OWNER_WA_NUMBER : "919876543210",   // ← your WhatsApp number
-  // ──────────────────────────────────────────────────────────
+  // ── Firebase config ────────────────────────────────────────
+  FIREBASE_API_KEY  : "AIzaSyC73JoUh4hUrnNq30USD_l-1DoPXSAjii8",
+  FIREBASE_PROJECT  : "bizsoftsolutions",
+  COLLECTION        : "leads",
 
-  // Build WhatsApp wa.me URL with lead details pre-filled
-  buildWaURL(data) {
-    const msg = [
-      `Hi BizSoft Solutions! 👋`,
-      ``,
-      `I just filled out your enquiry form. Here are my details:`,
-      ``,
-      `👤 Name: ${data.name || "—"}`,
-      `📱 Mobile: ${data.phone || "—"}`,
-      `💼 Business: ${data.businessType || "—"}`,
-      `🖥 Software: ${data.software || "—"}`,
-      `📍 City: ${data.city || "—"}`,
-      `💬 Message: ${data.message || "—"}`,
-      ``,
-      `Please get in touch with me. Thank you!`
-    ].join("\n");
+  // ── Apps Script (email alert only) ────────────────────────
+  APPS_SCRIPT_URL   : "https://script.google.com/macros/s/AKfycbxTth1KmROkse9uY4wQ5N5RipEXxmQNxlYMBeeeNinduR9f00JX6w8ktIbnk_KOBcfMVw/exec",
 
-    return `https://wa.me/${this.OWNER_WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-  },
+  // ── Save lead to Firestore via REST API ───────────────────
+  async saveToFirestore(data) {
+    const url = `https://firestore.googleapis.com/v1/projects/${this.FIREBASE_PROJECT}/databases/(default)/documents/${this.COLLECTION}?key=${this.FIREBASE_API_KEY}`;
 
-  // Show a toast notification
-  showToast(msg, color) {
-    let toast = document.getElementById("bizsft-toast");
-    if (!toast) {
-      toast = document.createElement("div");
-      toast.id = "bizsft-toast";
-      toast.style.cssText = [
-        "position:fixed", "bottom:1.5rem", "right:1.5rem",
-        "padding:.9rem 1.4rem", "border-radius:10px",
-        "font-family:Segoe UI,Arial,sans-serif",
-        "font-size:.92rem", "font-weight:700", "color:#fff",
-        "box-shadow:0 4px 20px rgba(0,0,0,.3)",
-        "transform:translateY(120px)", "opacity:0",
-        "transition:all .4s cubic-bezier(.175,.885,.32,1.275)",
-        "z-index:9999", "max-width:320px", "line-height:1.4"
-      ].join(";");
-      document.body.appendChild(toast);
+    // Convert flat object → Firestore field format
+    const fields = {};
+    Object.entries(data).forEach(([k, v]) => {
+      fields[k] = { stringValue: String(v || "") };
+    });
+
+    const res = await fetch(url, {
+      method  : "POST",
+      headers : { "Content-Type": "application/json" },
+      body    : JSON.stringify({ fields })
+    });
+
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error("Firestore error: " + err);
     }
-    toast.textContent = msg;
-    toast.style.background = color || "#1565c0";
-    setTimeout(() => { toast.style.transform = "translateY(0)"; toast.style.opacity = "1"; }, 10);
-    setTimeout(() => { toast.style.transform = "translateY(120px)"; toast.style.opacity = "0"; }, 4500);
+    return res.json();
   },
 
-  // Set a message element's state
+  // ── Send email alert via Apps Script (best-effort) ────────
+  pingEmailAlert(data) {
+    fetch(this.APPS_SCRIPT_URL, {
+      method  : "POST",
+      mode    : "no-cors",
+      headers : { "Content-Type": "application/json" },
+      body    : JSON.stringify(data)
+    }).catch(() => {}); // silent fail — Firestore is the source of truth
+  },
+
+  // ── Toast notification ────────────────────────────────────
+  showToast(msg, color) {
+    let t = document.getElementById("bizsft-toast");
+    if (!t) {
+      t = document.createElement("div");
+      t.id = "bizsft-toast";
+      t.style.cssText = [
+        "position:fixed","bottom:1.5rem","right:1.5rem",
+        "padding:.9rem 1.4rem","border-radius:10px",
+        "font-family:Segoe UI,Arial,sans-serif",
+        "font-size:.92rem","font-weight:700","color:#fff",
+        "box-shadow:0 4px 20px rgba(0,0,0,.3)",
+        "transform:translateY(120px)","opacity:0",
+        "transition:all .4s cubic-bezier(.175,.885,.32,1.275)",
+        "z-index:9999","max-width:320px","line-height:1.4"
+      ].join(";");
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.style.background = color || "#1565c0";
+    setTimeout(() => { t.style.transform = "translateY(0)"; t.style.opacity = "1"; }, 10);
+    setTimeout(() => { t.style.transform = "translateY(120px)"; t.style.opacity = "0"; }, 4500);
+  },
+
+  // ── Inline message helper ─────────────────────────────────
   setMsg(el, type, text) {
     if (!el) return;
-    const styles = {
-      success: "background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7",
-      error:   "background:#ffebee;color:#c62828;border:1px solid #ef9a9a",
-      info:    "background:#e3f2fd;color:#1565c0;border:1px solid #90caf9"
+    const s = {
+      success : "background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7",
+      error   : "background:#ffebee;color:#c62828;border:1px solid #ef9a9a",
+      info    : "background:#e3f2fd;color:#1565c0;border:1px solid #90caf9"
     };
     el.style.cssText = `display:block;padding:.8rem 1rem;border-radius:8px;
       text-align:center;font-weight:600;font-size:.93rem;margin-top:.8rem;
-      ${styles[type] || styles.info}`;
+      ${s[type] || s.info}`;
     el.textContent = text;
   },
 
-  // Main submit function
+  // ── Main submit handler ───────────────────────────────────
   async submit({ formEl, btnEl, msgEl, softwareOverride, onSuccess }) {
-    if (btnEl) { btnEl.disabled = true; btnEl._orig = btnEl._orig || btnEl.textContent; btnEl.textContent = "Saving…"; }
+    if (btnEl) {
+      btnEl.disabled    = true;
+      btnEl._orig       = btnEl._orig || btnEl.textContent;
+      btnEl.textContent = "Submitting…";
+    }
 
     const fd   = new FormData(formEl);
     const data = Object.fromEntries(fd.entries());
     if (softwareOverride) data.software = softwareOverride;
-    data.timestamp = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
-    data.status    = "New Lead";
-    data.source    = window.location.href;
+    data.timestamp   = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+    data.status      = "New Lead";
+    data.source      = window.location.href;
 
     try {
-      // Step 1 — save to Google Sheet via Apps Script
-      await fetch(this.APPS_SCRIPT_URL, {
-        method:  "POST",
-        mode:    "no-cors",   // required for Apps Script; response is opaque
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify(data)
-      });
+      // 1. Save to Firestore (primary)
+      await this.saveToFirestore(data);
 
-      // Step 2 — show success
-      this.showToast("✅ Details saved! We'll contact you within 24 hours.", "#2e7d32");
+      // 2. Ping Apps Script for email alert (non-blocking)
+      this.pingEmailAlert(data);
 
-      // Update UI
+      // 3. Success UI
       this.setMsg(msgEl, "success",
-        "✅ Details received! Our expert will call/WhatsApp you within 24 hours.");
+        "✅ Details received! Our expert will contact you within 24 hours.");
+      this.showToast("✅ Lead saved! We'll be in touch soon.", "#2e7d32");
 
       if (typeof onSuccess === "function") onSuccess();
       formEl.reset();
 
     } catch (err) {
+      console.error("Submit error:", err);
       this.setMsg(msgEl, "error",
-        "⚠️ Something went wrong. Please try again or WhatsApp us directly.");
+        "⚠️ Something went wrong. Please try again or email us directly.");
       this.showToast("⚠️ Error — please retry", "#c62828");
     } finally {
       if (btnEl) {
-        btnEl.disabled = false;
+        btnEl.disabled    = false;
         btnEl.textContent = btnEl._orig || "Submit";
       }
     }
   },
 
-  // Wire up a form automatically
-  // Usage: BIZSFT.wire({ formId, btnId, msgId, softwareOverride, onSuccess })
+  // ── Wire a form ───────────────────────────────────────────
   wire({ formId, btnId, msgId, softwareOverride, onSuccess }) {
     const formEl = document.getElementById(formId);
     if (!formEl) return;
-    const btnEl  = btnId  ? document.getElementById(btnId)  : formEl.querySelector("button[type=submit]");
-    const msgEl  = msgId  ? document.getElementById(msgId)  : null;
+    const btnEl = btnId ? document.getElementById(btnId)
+                        : formEl.querySelector("button[type=submit]");
+    const msgEl = msgId ? document.getElementById(msgId) : null;
 
     formEl.addEventListener("submit", (e) => {
       e.preventDefault();
