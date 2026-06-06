@@ -16,20 +16,14 @@
     body{font-family:'Segoe UI',Arial,sans-serif;color:var(--text);background:var(--white);line-height:1.7}
 
     /* NAV */
-     nav {
-      position: sticky; top: 0; z-index: 200;
-      background: var(--white); border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5%; height: 62px; box-shadow: 0 2px 8px rgba(0,0,0,.06); gap: 1rem;
-    }
-    .logo { font-size: 1.3rem; font-weight: 800; color: var(--primary); text-decoration: none; white-space: nowrap; }
-    .logo span { color: var(--accent); }
-    nav ul { list-style: none; display: flex; gap: 1.4rem; align-items: center; }
-    nav ul a { text-decoration: none; color: var(--text); font-weight: 500; font-size: .88rem; }
-    nav ul a:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: var(--white) !important; padding: .4rem 1.1rem; border-radius: 6px; font-size: .88rem !important; }
-    @media(max-width:700px){ nav ul li:not(:last-child){ display:none; } }
-
+    nav{position:sticky;top:0;z-index:200;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:62px;box-shadow:0 2px 8px rgba(0,0,0,.06);gap:1rem}
+    .logo{font-size:1.25rem;font-weight:800;color:var(--primary);text-decoration:none;white-space:nowrap}
+    .logo span{color:#00897b}
+    .nav-links{list-style:none;display:flex;gap:1.3rem;align-items:center}
+    .nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:.87rem}
+    .nav-links a:hover,.nav-links a.active{color:var(--primary)}
+    .nav-cta{background:var(--primary);color:var(--white)!important;padding:.4rem 1.1rem;border-radius:6px;font-weight:700;font-size:.87rem!important}
+    @media(max-width:680px){.nav-links{display:none}}
 
     /* HERO */
     .hero{background:linear-gradient(135deg,#0d1b2a,#1a237e 50%,#1565c0);color:#fff;padding:70px 5% 60px}
@@ -181,14 +175,15 @@
 
 <!-- NAV -->
 <nav>
-  <a href="/" class="logo">BizSoft<span>Solutions</span></a>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="Vyapar_index.html">Vyapar</a></li>
-    <li><a href="BizAnalyst_index.html">Biz Analyst</a></li>
-    <li><a href="Biltouch_index.html">Bill Touch</a></li>
-    <li><a href="#contact" class="nav-cta">Free Demo →</a></li>
+  <a href="../" class="logo">BizSoft<span>Solutions</span></a>
+  <ul class="nav-links">
+    <li><a href="../">Home</a></li>
+    <li><a href="../vyapar/" class="active">Vyapar</a></li>
+    <li><a href="../biz-analyst/">Biz Analyst</a></li>
+    <li><a href="../bill-touch/">Bill Touch</a></li>
+    <li><a href="../#blog">Blog</a></li>
   </ul>
+  <a href="#contact" class="nav-cta">Get Free Demo →</a>
 </nav>
 
 <!-- HERO / BRIEF -->
@@ -206,7 +201,7 @@
         <span class="chip">✓ Hindi &amp; English UI</span>
       </div>
       <div class="hero-btns">
-        <a>Download Vyapar Free →</a>
+        <a href="https://vyaparapp.in/?referrer_code=Z7Y1WP" target="_blank" rel="nofollow noopener" class="btn-primary">Download Vyapar Free →</a>
         <a href="#contact" class="btn-outline">Talk to Expert</a>
       </div>
     </div>
@@ -340,7 +335,8 @@
         <li class="no-feat">Multi-user Access</li>
         <li class="no-feat">Barcode Scanner</li>
       </ul>
-      </div>
+      <a href="https://vyaparapp.in/?referrer_code=Z7Y1WP" target="_blank" rel="nofollow noopener" class="plan-btn outline">Download Free →</a>
+    </div>
 
     <!-- SILVER -->
     <div class="plan-card recommended">
@@ -360,7 +356,7 @@
         <li>Multi-user (2 users)</li>
         <li>Priority Support</li>
       </ul>
-      <a>Get Silver Plan →</a>
+      <a href="https://vyaparapp.in/?referrer_code=Z7Y1WP" target="_blank" rel="nofollow noopener" class="plan-btn primary">Get Silver Plan →</a>
     </div>
 
     <!-- GOLD -->
@@ -380,7 +376,7 @@
         <li>Custom Invoice Templates</li>
         <li>Dedicated Account Manager</li>
       </ul>
-      <a>Get Gold Plan →</a>
+      <a href="https://vyaparapp.in/?referrer_code=Z7Y1WP" target="_blank" rel="nofollow noopener" class="plan-btn primary">Get Gold Plan →</a>
     </div>
 
   </div>
@@ -390,25 +386,25 @@
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="tc" style="margin-bottom:2.5rem">
-    <div class="sec-label">Free Guidance</div>
-    <div class="sec-title">Talk to a Vyapar Expert</div>
-    <div class="sec-sub">Not sure which plan to pick? We'll help you decide — free of charge.</div>
+    <div class="sec-label">Free Expert Guidance</div>
+    <div class="sec-title">Not Sure Which Plan is Right?</div>
+    <div class="sec-sub">Tell us about your business — our expert will call/WhatsApp you within 24 hours. Completely free, no obligation.</div>
   </div>
   <div class="contact-layout">
     <div class="contact-info">
-      <h3>Why Contact Us?</h3>
-      <p>We're authorised Vyapar partners. We help hundreds of Indian businesses choose the right plan and get set up correctly from day one.</p>
+      <h3>Why Talk to Us?</h3>
+      <p>We've helped hundreds of Indian SMBs choose the right software. A quick call saves you weeks of confusion and avoids costly wrong choices.</p>
       <ul class="promise-list">
-        <li><span>✅</span><span>Free consultation — no fees</span></li>
-        <li><span>📞</span><span>We call/WhatsApp within 24 hours</span></li>
-        <li><span>🎯</span><span>Right plan for your business size</span></li>
-        <li><span>💰</span><span>Best price via our partner link</span></li>
-        <li><span>🛠️</span><span>Free setup guidance after purchase</span></li>
-        <li><span>🔒</span><span>Your details are 100% private</span></li>
+        <li><span>✅</span><span>Free consultation — no fees, no obligation</span></li>
+        <li><span>📞</span><span>We call or WhatsApp you within 24 hours</span></li>
+        <li><span>🎯</span><span>Personalised recommendation for your exact business</span></li>
+        <li><span>💰</span><span>Get best pricing through our partner links</span></li>
+        <li><span>🔒</span><span>Your number stays private — zero spam</span></li>
+        <li><span>🤝</span><span>Post-purchase support &amp; setup help available</span></li>
       </ul>
-       <div class="contact-card"><div class="cc-icon">📧</div><div class="cc-text"><strong>Email Response</strong><span>bizsofsolution@gmail.com</span></div></div>
-      <div class="contact-card"><div class="cc-icon">📱</div><div class="cc-text"><strong>WhatsApp Response</strong><span>We reply within a few hours</span></div></div>
-      <div class="contact-card"><div class="cc-icon">⏱️</div><div class="cc-text"><strong>Mon–Sat, 9 AM – 8 PM IST</strong></div></div>
+      <div class="contact-card"><div class="cc-icon">📱</div><div class="cc-text"><strong>WhatsApp Us</strong><span>We reply on WhatsApp within hours</span></div></div>
+      <div class="contact-card"><div class="cc-icon">📧</div><div class="cc-text"><strong>bizsofsolution@gmail.com</strong><span>Email us your requirements</span></div></div>
+      <div class="contact-card"><div class="cc-icon">⏱️</div><div class="cc-text"><strong>Quick Response</strong><span>Mon–Sat, 10 AM – 7 PM IST</span></div></div>
     </div>
     <div class="lead-box">
       <h3>📩 Get Free Vyapar Guidance</h3>
@@ -421,26 +417,23 @@
         <div class="form-row">
           <div class="fg"><label>Business Type *</label>
             <select name="businessType" required>
-              <option value="">Select…</option>
+              <option value="">Select your business</option>
               <option>Retail Shop / Kirana</option>
-              <option>Wholesale / Distribution</option>
+              <option>Restaurant / Cafe</option>
+              <option>Cloud Kitchen</option>
+              <option>Trading / Distribution</option>
               <option>Manufacturing</option>
-              <option>Trading</option>
               <option>Service Business</option>
+              <option>Wholesale / FMCG</option>
               <option>Other</option>
             </select>
           </div>
-          <div class="fg"><label>City</label><input type="text" name="city" placeholder="Mumbai, Surat…"/></div>
+          <div class="fg"><label>City</label><input type="text" name="city" placeholder="Mumbai, Delhi…"/></div>
         </div>
-        <div class="fg"><label>Which Plan are you considering?</label>
-          <select name="message">
-            <option value="Not sure which plan">Not sure — need help choosing</option>
-            <option value="Interested in Free Plan">Free Plan</option>
-            <option value="Interested in Silver Plan">Silver Plan (₹1,499/yr)</option>
-            <option value="Interested in Gold Plan">Gold Plan (₹2,499/yr)</option>
-          </select>
+        <div class="fg"><label>Your Query (Optional)</label>
+          <textarea name="message" placeholder="E.g. I have a retail shop with 500 SKUs. Need GST billing + stock alerts. Which plan is best for me?"></textarea>
         </div>
-        <button type="submit" class="submit-btn" id="vyaparSubmitBtn">Get Free Expert Advice →</button>
+        <button type="submit" class="submit-btn" id="vyaparSubmitBtn">Get Free Expert Guidance →</button>
         <div class="form-note">🔒 Your number is safe. No spam, ever. &nbsp;|&nbsp; 📱 WhatsApp confirmation shortly</div>
         <div id="vy-msg"></div>
       </form>
@@ -468,11 +461,21 @@
     <div class="faq-item"><div class="faq-q">How do I get started with Vyapar?<span class="faq-arrow">▼</span></div><div class="faq-a">Download Vyapar free using our referral link below — it gives you access to the full app with a free trial. Or fill in the contact form above and our expert will guide you through choosing the right plan and setting up your business on Vyapar within 24 hours.</div></div>
   </div>
   <div style="text-align:center;margin-top:2rem">
-    <a href="https://vyaparapp.in" target="_blank" rel="nofollow noopener" class="btn-primary" style="background:var(--primary);color:#fff;padding:.8rem 2rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:.97rem">Download Vyapar Free →</a>
+    <a href="https://vyaparapp.in/?referrer_code=Z7Y1WP" target="_blank" rel="nofollow noopener" class="btn-primary" style="background:var(--primary);color:#fff;padding:.8rem 2rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:.97rem">Download Vyapar Free →</a>
   </div>
 </section>
 
+<div class="disclaimer-bar">⚠️ BizSoft Solutions is an authorised Vyapar referral partner. We may earn a commission when you purchase via our links — at no extra cost to you.</div>
+
 <footer>
+  <div class="footer-links">
+    <a href="../">Home</a>
+    <a href="../vyapar/">Vyapar</a>
+    <a href="../biz-analyst/">Biz Analyst</a>
+    <a href="../bill-touch/">Bill Touch</a>
+    <a href="../#blog">Blog</a>
+    <a href="#contact">Contact</a>
+  </div>
   <p>© 2026 BizSoft Solutions — Not affiliated with Vyapar Technologies Pvt Ltd.</p>
 </footer>
 <div class="toast" id="toast"></div>
