@@ -14,14 +14,23 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--primary:#bf360c;--pl:#e65100;--dark:#0d1b2a;--text:#2c3e50;--muted:#607d8b;--light:#fff8f5;--white:#fff;--border:#dde3ec;--green:#2e7d32;--shadow:0 4px 24px rgba(191,54,12,.10)}
     body{font-family:'Segoe UI',Arial,sans-serif;color:var(--text);background:var(--white);line-height:1.7}
-    nav{position:sticky;top:0;z-index:200;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:62px;box-shadow:0 2px 8px rgba(0,0,0,.06);gap:1rem}
-    .logo{font-size:1.25rem;font-weight:800;color:#1565c0;text-decoration:none;white-space:nowrap}
-    .logo span{color:#00897b}
-    .nav-links{list-style:none;display:flex;gap:1.3rem;align-items:center}
-    .nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:.87rem}
-    .nav-links a:hover,.nav-links a.active{color:#1565c0}
-    .nav-cta{background:var(--primary);color:var(--white)!important;padding:.4rem 1.1rem;border-radius:6px;font-weight:700;font-size:.87rem!important}
-    @media(max-width:680px){.nav-links{display:none}}
+   
+    /* Nav*/
+    
+     nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--white); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 62px; box-shadow: 0 2px 8px rgba(0,0,0,.06); gap: 1rem;
+    }
+    .logo { font-size: 1.3rem; font-weight: 800; color: var(--primary); text-decoration: none; white-space: nowrap; }
+    .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 1.4rem; align-items: center; }
+    nav ul a { text-decoration: none; color: var(--text); font-weight: 500; font-size: .88rem; }
+    nav ul a:hover { color: var(--primary); }
+    .nav-cta { background: var(--primary); color: var(--white) !important; padding: .4rem 1.1rem; border-radius: 6px; font-size: .88rem !important; }
+    @media(max-width:700px){ nav ul li:not(:last-child){ display:none; } }
+
     /* HERO */
     .hero{background:linear-gradient(135deg,#1a0a00,#4e342e 40%,#e65100 100%);color:#fff;padding:70px 5% 60px}
     .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center}
@@ -176,12 +185,10 @@
 <nav>
   <a href="/" class="logo">BizSoft<span>Solutions</span></a>
   <ul>
-    <li><a href="#about">About</a></li>
-    <li><a href="#software">Software</a></li>
+    <li><a href="index.html">Home</a></li>
     <li><a href="Vyapar_index.html">Vyapar</a></li>
     <li><a href="BizAnalyst_index.html">Biz Analyst</a></li>
     <li><a href="Biltouch_index.html">Bill Touch</a></li>
-    <li><a href="#blog">Blog</a></li>
     <li><a href="#contact" class="nav-cta">Free Demo →</a></li>
   </ul>
 </nav>
