@@ -19,7 +19,7 @@
 const BIZSFT = {
 
   // ── CONFIG — update these two values ──────────────────────
-  APPS_SCRIPT_URL : "YOUR_APPS_SCRIPT_WEB_APP_URL_HERE",
+  APPS_SCRIPT_URL : "https://script.google.com/macros/s/AKfycbxTth1KmROkse9uY4wQ5N5RipEXxmQNxlYMBeeeNinduR9f00JX6w8ktIbnk_KOBcfMVw/exec",
   OWNER_WA_NUMBER : "919876543210",   // ← your WhatsApp number
   // ──────────────────────────────────────────────────────────
 
@@ -101,17 +101,12 @@ const BIZSFT = {
         body:    JSON.stringify(data)
       });
 
-      // Step 2 — open WhatsApp with pre-filled message (no API needed)
-      if (btnEl) btnEl.textContent = "Opening WhatsApp…";
-      this.showToast("✅ Details saved! Opening WhatsApp…", "#25d366");
-
-      setTimeout(() => {
-        window.open(this.buildWaURL(data), "_blank");
-      }, 600);
+      // Step 2 — show success
+      this.showToast("✅ Details saved! We'll contact you within 24 hours.", "#2e7d32");
 
       // Update UI
       this.setMsg(msgEl, "success",
-        "✅ Details saved! A WhatsApp will open — tap Send to reach us directly.");
+        "✅ Details received! Our expert will call/WhatsApp you within 24 hours.");
 
       if (typeof onSuccess === "function") onSuccess();
       formEl.reset();
