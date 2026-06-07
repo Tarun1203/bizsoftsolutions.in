@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>BizSoft Solutions — Leads Dashboard</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Admin — BizSoft</title>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -71,7 +72,6 @@
     .td-phone a{color:var(--primary);text-decoration:none;font-weight:600}
     .td-phone a:hover{text-decoration:underline}
     .td-time{color:var(--muted);font-size:.78rem;white-space:nowrap}
-    .td-src{color:var(--muted);font-size:.75rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
     /* Inline dropdowns */
     .sel-status,.sel-decision{padding:.35rem .55rem;border-radius:6px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;border:none;appearance:none;-webkit-appearance:none;padding-right:1.6rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23fff' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .5rem center;min-width:110px}
@@ -117,7 +117,6 @@
     <input id="passInput" class="gate-input" type="password" placeholder="Enter access code" autocomplete="off"/>
     <button class="gate-btn" onclick="checkPass()">Enter Dashboard →</button>
     <div class="gate-err" id="gateErr">❌ Incorrect access code</div>
-    <p style="margin-top:1.2rem;font-size:.75rem;color:#b0bec5">Default code: <strong>bizsft2026</strong></p>
   </div>
 </div>
 
@@ -134,7 +133,7 @@
 
   <main>
     <!-- Stats -->
-    <div class="stats" id="statsRow">
+    <div class="stats">
       <div class="stat-card total"><div class="stat-num" id="cTotal">—</div><div class="stat-lbl">Total Leads</div></div>
       <div class="stat-card s-new"><div class="stat-num" id="cNew">—</div><div class="stat-lbl">New</div></div>
       <div class="stat-card s-attended"><div class="stat-num" id="cAttended">—</div><div class="stat-lbl">Attended</div></div>
@@ -146,23 +145,15 @@
     <div class="filters">
       <select id="fStatus" onchange="renderTable()">
         <option value="">All Status</option>
-        <option>New</option>
-        <option>Attended</option>
-        <option>In Review</option>
-        <option>Closed</option>
+        <option>New</option><option>Attended</option><option>In Review</option><option>Closed</option>
       </select>
       <select id="fDecision" onchange="renderTable()">
         <option value="">All Decisions</option>
-        <option>Need Time</option>
-        <option>Not Interested</option>
-        <option>Waiting for payment</option>
-        <option>Completed</option>
+        <option>Need Time</option><option>Not Interested</option><option>Waiting for payment</option><option>Completed</option>
       </select>
       <select id="fSoftware" onchange="renderTable()">
         <option value="">All Software</option>
-        <option>Vyapar</option>
-        <option>Biz Analyst</option>
-        <option>Bill Touch</option>
+        <option>Vyapar</option><option>Biz Analyst</option><option>Bill Touch</option>
       </select>
       <input id="fSearch" type="text" placeholder="Search name / phone / city…" oninput="renderTable()" style="min-width:200px"/>
       <button class="filter-clear" onclick="clearFilters()">✕ Clear</button>
@@ -171,19 +162,12 @@
 
     <!-- Table -->
     <div class="tbl-wrap">
-      <table id="leadsTable">
+      <table>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Mobile</th>
-            <th>Software</th>
-            <th>Business Type</th>
-            <th>City</th>
-            <th>Message</th>
-            <th>Submitted</th>
-            <th>Status</th>
-            <th>Decision</th>
+            <th>#</th><th>Name</th><th>Mobile</th><th>Software</th>
+            <th>Business Type</th><th>City</th><th>Message</th>
+            <th>Submitted</th><th>Status</th><th>Decision</th>
           </tr>
         </thead>
         <tbody id="tableBody">
@@ -197,27 +181,23 @@
 <div id="toast"></div>
 
 <script>
-// ── CONFIG ──────────────────────────────────────────────────────
-const ACCESS_CODE  = "bizsft2026";           // Change this if needed
-const FB_API_KEY   = "AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4";
-const FB_PROJECT   = "bizsoftsolutions-8846b";
-const BASE_URL     = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents`;
+// ── CONFIG ─────────────────────────────────────────────
+const ACCESS_CODE = "bizsft2026";   // ← change your access code here
+const FB_API_KEY  = "AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4";
+const FB_PROJECT  = "bizsoftsolutions-8846b";
+const BASE_URL    = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents`;
 
-// ── STATUS OPTIONS ───────────────────────────────────────────────
-const STATUS_OPTIONS   = ["New", "Attended", "In Review", "Closed"];
-const DECISION_OPTIONS = ["—", "Need Time", "Not Interested", "Waiting for payment", "Completed"];
-
-// Status → CSS class
-const statusClass  = { "New":"s-new","Attended":"s-attended","In Review":"s-review","Closed":"s-closed" };
-const decisionClass = { "Need Time":"d-needtime","Not Interested":"d-notint","Waiting for payment":"d-waitpay","Completed":"d-done" };
-const swClass       = { "Vyapar":"sw-vyapar","Biz Analyst":"sw-biz","Bill Touch":"sw-bill" };
+const STATUS_OPTIONS   = ["New","Attended","In Review","Closed"];
+const DECISION_OPTIONS = ["—","Need Time","Not Interested","Waiting for payment","Completed"];
+const statusClass      = {"New":"s-new","Attended":"s-attended","In Review":"s-review","Closed":"s-closed"};
+const decisionClass    = {"Need Time":"d-needtime","Not Interested":"d-notint","Waiting for payment":"d-waitpay","Completed":"d-done"};
+const swClass          = {"Vyapar":"sw-vyapar","Biz Analyst":"sw-biz","Bill Touch":"sw-bill"};
 
 let allLeads = [];
 
-// ── GATE ─────────────────────────────────────────────────────────
+// ── GATE ───────────────────────────────────────────────
 function checkPass() {
-  const v = document.getElementById("passInput").value.trim();
-  if (v === ACCESS_CODE) {
+  if (document.getElementById("passInput").value.trim() === ACCESS_CODE) {
     document.getElementById("gate").style.display = "none";
     document.getElementById("app").style.display  = "block";
     loadLeads();
@@ -234,202 +214,149 @@ function logout() {
   document.getElementById("passInput").value    = "";
 }
 
-// ── LOAD LEADS ───────────────────────────────────────────────────
+// ── LOAD ───────────────────────────────────────────────
 async function loadLeads() {
   document.getElementById("tableBody").innerHTML =
     `<tr><td colspan="10"><div class="state-box"><div class="spinner"></div><p>Loading leads…</p></div></td></tr>`;
   try {
     allLeads = await fetchAllLeads();
-    // Sort newest first (by timestamp string, fallback to name)
     allLeads.sort((a,b) => (b.timestamp||"").localeCompare(a.timestamp||""));
     updateStats();
     renderTable();
     document.getElementById("lastRefresh").textContent =
-      "Last updated: " + new Date().toLocaleTimeString("en-IN");
+      "Updated: " + new Date().toLocaleTimeString("en-IN");
   } catch(err) {
     console.error(err);
     document.getElementById("tableBody").innerHTML =
-      `<tr><td colspan="10"><div class="state-box"><div class="ico">⚠️</div>
-       <p><strong>Could not load leads.</strong><br>
-       Please update Firestore rules: <code>allow read: if true</code><br>
-       <small style="color:#b0bec5">${err.message}</small></p>
-       </div></td></tr>`;
+      `<tr><td colspan="10"><div class="state-box">
+        <div class="ico">⚠️</div>
+        <p><strong>Cannot load leads.</strong><br>
+        Update Firestore rules → <code>allow read: if true</code><br>
+        <small style="color:#b0bec5">${err.message}</small></p>
+      </div></td></tr>`;
   }
 }
 
 async function fetchAllLeads() {
-  let docs = [], nextPage = null;
+  let docs = [], next = null;
   do {
     let url = `${BASE_URL}/leads?key=${FB_API_KEY}&pageSize=300`;
-    if (nextPage) url += `&pageToken=${nextPage}`;
+    if (next) url += `&pageToken=${next}`;
     const res = await fetch(url);
-    if (!res.ok) {
-      const txt = await res.text();
-      throw new Error(txt);
-    }
+    if (!res.ok) throw new Error(await res.text());
     const json = await res.json();
-    if (json.documents) {
-      json.documents.forEach(doc => {
-        const id = doc.name.split("/").pop();
-        const f  = doc.fields || {};
-        docs.push({
-          id,
-          name         : f.name?.stringValue         || "",
-          phone        : f.phone?.stringValue        || "",
-          software     : f.software?.stringValue     || "",
-          businessType : f.businessType?.stringValue || "",
-          city         : f.city?.stringValue         || "",
-          message      : f.message?.stringValue      || "",
-          timestamp    : f.timestamp?.stringValue    || "",
-          status       : f.status?.stringValue       || "New",
-          decision     : f.decision?.stringValue     || "",
-          source       : f.source?.stringValue       || ""
-        });
+    (json.documents || []).forEach(doc => {
+      const id = doc.name.split("/").pop();
+      const f  = doc.fields || {};
+      docs.push({
+        id,
+        name        : f.name?.stringValue        || "",
+        phone       : f.phone?.stringValue       || "",
+        software    : f.software?.stringValue    || "",
+        businessType: f.businessType?.stringValue|| "",
+        city        : f.city?.stringValue        || "",
+        message     : f.message?.stringValue     || "",
+        timestamp   : f.timestamp?.stringValue   || "",
+        status      : f.status?.stringValue      || "New",
+        decision    : f.decision?.stringValue    || "",
       });
-    }
-    nextPage = json.nextPageToken || null;
-  } while (nextPage);
+    });
+    next = json.nextPageToken || null;
+  } while (next);
   return docs;
 }
 
-// ── STATS ─────────────────────────────────────────────────────────
+// ── STATS ──────────────────────────────────────────────
 function updateStats() {
-  const byStatus = s => allLeads.filter(l => l.status === s).length;
+  const by = s => allLeads.filter(l => l.status===s).length;
   document.getElementById("cTotal").textContent    = allLeads.length;
-  document.getElementById("cNew").textContent      = byStatus("New");
-  document.getElementById("cAttended").textContent = byStatus("Attended");
-  document.getElementById("cReview").textContent   = byStatus("In Review");
-  document.getElementById("cClosed").textContent   = byStatus("Closed");
+  document.getElementById("cNew").textContent      = by("New");
+  document.getElementById("cAttended").textContent = by("Attended");
+  document.getElementById("cReview").textContent   = by("In Review");
+  document.getElementById("cClosed").textContent   = by("Closed");
 }
 
-// ── RENDER TABLE ─────────────────────────────────────────────────
+// ── RENDER ─────────────────────────────────────────────
 function renderTable() {
-  const fStatus   = document.getElementById("fStatus").value;
-  const fDecision = document.getElementById("fDecision").value;
-  const fSoftware = document.getElementById("fSoftware").value;
-  const fSearch   = document.getElementById("fSearch").value.toLowerCase().trim();
+  const fSt = document.getElementById("fStatus").value;
+  const fDc = document.getElementById("fDecision").value;
+  const fSw = document.getElementById("fSoftware").value;
+  const fQ  = document.getElementById("fSearch").value.toLowerCase().trim();
 
-  let filtered = allLeads.filter(l => {
-    if (fStatus   && l.status   !== fStatus)   return false;
-    if (fDecision && (l.decision || "") !== fDecision) return false;
-    if (fSoftware && l.software !== fSoftware) return false;
-    if (fSearch && ![l.name, l.phone, l.city, l.businessType, l.message]
-        .join(" ").toLowerCase().includes(fSearch)) return false;
+  const filtered = allLeads.filter(l => {
+    if (fSt && l.status   !== fSt) return false;
+    if (fDc && (l.decision||"") !== fDc) return false;
+    if (fSw && l.software !== fSw) return false;
+    if (fQ && ![l.name,l.phone,l.city,l.businessType,l.message].join(" ").toLowerCase().includes(fQ)) return false;
     return true;
   });
 
   document.getElementById("filterCount").textContent =
-    filtered.length < allLeads.length
-      ? `Showing ${filtered.length} of ${allLeads.length}`
-      : `${allLeads.length} leads`;
+    filtered.length < allLeads.length ? `Showing ${filtered.length} of ${allLeads.length}` : `${allLeads.length} leads`;
 
-  if (filtered.length === 0) {
+  if (!filtered.length) {
     document.getElementById("tableBody").innerHTML =
-      `<tr><td colspan="10"><div class="state-box"><div class="ico">🔍</div><p>No leads match your filters.</p></div></td></tr>`;
+      `<tr><td colspan="10"><div class="state-box"><div class="ico">🔍</div><p>No leads match filters.</p></div></td></tr>`;
     return;
   }
 
-  let rows = "";
-  filtered.forEach((lead, idx) => {
-    const sc  = statusClass[lead.status]   || "s-new";
-    const dc  = decisionClass[lead.decision] || "d-none";
-    const swc = swClass[lead.software]     || "";
-    const dec = lead.decision || "—";
-
-    // Status dropdown
-    const sSel = STATUS_OPTIONS.map(s =>
-      `<option value="${s}" ${lead.status===s?"selected":""}>${s}</option>`
-    ).join("");
-
-    // Decision dropdown
-    const dSel = DECISION_OPTIONS.map(d =>
-      `<option value="${d}" ${dec===d?"selected":""}>${d}</option>`
-    ).join("");
-
-    rows += `
-    <tr id="row-${lead.id}">
-      <td style="color:var(--muted);font-size:.78rem">${idx+1}</td>
-      <td class="td-name">${esc(lead.name)}</td>
-      <td class="td-phone"><a href="tel:${esc(lead.phone)}">${esc(lead.phone)}</a></td>
-      <td><span class="badge-sw ${swc}">${esc(lead.software)||"—"}</span></td>
-      <td style="font-size:.82rem">${esc(lead.businessType)}</td>
-      <td style="font-size:.82rem">${esc(lead.city)}</td>
-      <td><div class="td-msg" title="${esc(lead.message)}">${esc(lead.message)||"—"}</div></td>
-      <td class="td-time">${esc(lead.timestamp)}</td>
-      <td>
-        <select class="sel-status ${sc}" id="st-${lead.id}"
-          onchange="updateLead('${lead.id}','status',this.value)">
-          ${sSel}
-        </select>
-      </td>
-      <td>
-        <select class="sel-decision ${dc}" id="dc-${lead.id}"
-          onchange="updateLead('${lead.id}','decision',this.value)">
-          ${dSel}
-        </select>
-      </td>
+  document.getElementById("tableBody").innerHTML = filtered.map((l,i) => {
+    const sc  = statusClass[l.status]    || "s-new";
+    const dc  = decisionClass[l.decision]|| "d-none";
+    const dec = l.decision || "—";
+    const sSel = STATUS_OPTIONS.map(s   => `<option value="${s}" ${l.status===s?"selected":""}>${s}</option>`).join("");
+    const dSel = DECISION_OPTIONS.map(d => `<option value="${d}" ${dec===d?"selected":""}>${d}</option>`).join("");
+    return `
+    <tr>
+      <td style="color:var(--muted);font-size:.78rem">${i+1}</td>
+      <td class="td-name">${esc(l.name)}</td>
+      <td class="td-phone"><a href="tel:${esc(l.phone)}">${esc(l.phone)}</a></td>
+      <td><span class="badge-sw ${swClass[l.software]||""}">${esc(l.software)||"—"}</span></td>
+      <td style="font-size:.82rem">${esc(l.businessType)}</td>
+      <td style="font-size:.82rem">${esc(l.city)}</td>
+      <td><div class="td-msg" title="${esc(l.message)}">${esc(l.message)||"—"}</div></td>
+      <td class="td-time">${esc(l.timestamp)}</td>
+      <td><select class="sel-status ${sc}" id="st-${l.id}" onchange="updateLead('${l.id}','status',this.value)">${sSel}</select></td>
+      <td><select class="sel-decision ${dc}" id="dc-${l.id}" onchange="updateLead('${l.id}','decision',this.value)">${dSel}</select></td>
     </tr>`;
-  });
-
-  document.getElementById("tableBody").innerHTML = rows;
+  }).join("");
 }
 
-// ── UPDATE LEAD ───────────────────────────────────────────────────
+// ── UPDATE ─────────────────────────────────────────────
 async function updateLead(id, field, value) {
   const stEl = document.getElementById(`st-${id}`);
   const dcEl = document.getElementById(`dc-${id}`);
-  [stEl, dcEl].forEach(el => el && el.classList.add("saving"));
-
-  // Update local cache
-  const lead = allLeads.find(l => l.id === id);
+  [stEl,dcEl].forEach(el => el?.classList.add("saving"));
+  const lead = allLeads.find(l=>l.id===id);
   if (lead) lead[field] = value;
-
   try {
     const url = `${BASE_URL}/leads/${id}?updateMask.fieldPaths=${field}&key=${FB_API_KEY}`;
     const res = await fetch(url, {
-      method : "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body   : JSON.stringify({ fields: { [field]: { stringValue: value } } })
+      method:"PATCH", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ fields:{ [field]:{ stringValue: value } } })
     });
     if (!res.ok) throw new Error(await res.text());
-
-    // Update dropdown colour class
-    if (field === "status" && stEl) {
-      stEl.className = `sel-status ${statusClass[value]||"s-new"}`;
-    }
-    if (field === "decision" && dcEl) {
-      dcEl.className = `sel-decision ${decisionClass[value]||"d-none"}`;
-    }
+    if (field==="status"   && stEl) stEl.className = `sel-status ${statusClass[value]||"s-new"}`;
+    if (field==="decision" && dcEl) dcEl.className = `sel-decision ${decisionClass[value]||"d-none"}`;
     updateStats();
-    toast("✅ Saved", "#2e7d32");
+    toast("✅ Saved","#2e7d32");
   } catch(err) {
     console.error(err);
-    toast("⚠️ Save failed — retry", "#c62828");
+    toast("⚠️ Save failed","#c62828");
   } finally {
-    [stEl, dcEl].forEach(el => el && el.classList.remove("saving"));
+    [stEl,dcEl].forEach(el => el?.classList.remove("saving"));
   }
 }
 
-// ── HELPERS ───────────────────────────────────────────────────────
+// ── HELPERS ────────────────────────────────────────────
 function clearFilters() {
-  ["fStatus","fDecision","fSoftware"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("fSearch").value = "";
+  ["fStatus","fDecision","fSoftware"].forEach(id=>document.getElementById(id).value="");
+  document.getElementById("fSearch").value="";
   renderTable();
 }
-
-function esc(s) {
-  return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-}
-
-let toastTimer;
-function toast(msg, bg) {
-  const t = document.getElementById("toast");
-  t.textContent = msg;
-  t.style.background = bg || "#1565c0";
-  t.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove("show"), 2500);
-}
+function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+let _tt;
+function toast(msg,bg){ const t=document.getElementById("toast"); t.textContent=msg; t.style.background=bg||"#1565c0"; t.classList.add("show"); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove("show"),2500); }
 </script>
 </body>
 </html>
