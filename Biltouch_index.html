@@ -21,7 +21,11 @@
     .nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:.87rem}
     .nav-links a:hover,.nav-links a.active{color:#1565c0}
     .nav-cta{background:var(--primary);color:var(--white)!important;padding:.4rem 1.1rem;border-radius:6px;font-weight:700;font-size:.87rem!important}
-    @media(max-width:680px){.nav-links{display:none}}
+    @media(max-width:680px){
+      nav{height:auto;flex-wrap:wrap;padding:.6rem 5%;gap:.5rem}
+      .nav-links{display:flex;flex-wrap:wrap;gap:.6rem}
+      .nav-links a{font-size:.78rem}
+    }
     /* HERO */
     .hero{background:linear-gradient(135deg,#1a0a00,#4e342e 40%,#e65100 100%);color:#fff;padding:70px 5% 60px}
     .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center}
@@ -174,12 +178,13 @@
 <body>
 
 <nav>
-  <a href="../" class="logo">BizSoft<span>Solutions</span></a>
+  <a href="index.html" class="logo">BizSoft<span>Solutions</span></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="Vyapar_index.html">Vyapar</a></li>
     <li><a href="BizAnalyst_index.html">Biz Analyst</a></li>
     <li><a href="Biltouch_index.html" class="active">Bill Touch</a></li>
+    <li><a href="#faq">FAQ</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Get Free Demo →</a>
 </nav>
@@ -282,7 +287,7 @@
 </section>
 
 <!-- FEATURES -->
-<section class="features-section">
+<section class="features-section" id="features">
   <div class="tc max-w">
     <div class="sec-label">All Features</div>
     <div class="sec-title">Everything Bill Touch Can Do</div>
@@ -535,9 +540,73 @@
 </footer>
 <div class="toast" id="toast"></div>
 
-<script src="../form.js"></script>
 <script>
-  BIZSFT.wire({ formId:"btLeadForm", btnId:"btSubmitBtn", msgId:"bt-msg", softwareOverride:"Bill Touch" });
+// ── Firebase Firestore (inline — no external dependency) ──
+const FB_API_KEY  = "AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4";
+const FB_PROJECT  = "bizsoftsolutions-8846b";
+const APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbxTth1KmROkse9uY4wQ5N5RipEXxmQNxlYMBeeeNinduR9f00JX6w8ktIbnk_KOBcfMVw/exec";
+
+async function saveToFirestore(data) {
+  const url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents/leads?key=${FB_API_KEY}`;
+  const fields = {};
+  Object.entries(data).forEach(([k, v]) => { fields[k] = { stringValue: String(v || "") }; });
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ fields })
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+function pingEmail(data) {
+  fetch(APPS_SCRIPT, { method:"POST", mode:"no-cors",
+    headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)
+  }).catch(()=>{});
+}
+
+function showMsg(el, type, text) {
+  if (!el) return;
+  const styles = {
+    success: "background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7",
+    error:   "background:#ffebee;color:#c62828;border:1px solid #ef9a9a"
+  };
+  el.style.cssText = `display:block;padding:.8rem 1rem;border-radius:8px;text-align:center;
+    font-weight:600;font-size:.93rem;margin-top:.8rem;${styles[type]}`;
+  el.textContent = text;
+}
+
+// Wire Bill Touch form
+const btForm = document.getElementById("btLeadForm");
+if (btForm) {
+  btForm.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById("btSubmitBtn");
+    const msg = document.getElementById("bt-msg");
+    btn.disabled = true;
+    btn.textContent = "Submitting…";
+    const fd = new FormData(btForm);
+    const data = Object.fromEntries(fd.entries());
+    data.software  = "Bill Touch";
+    data.timestamp = new Date().toLocaleString("en-IN", { timeZone:"Asia/Kolkata" });
+    data.status    = "New Lead";
+    data.source    = window.location.href;
+    try {
+      await saveToFirestore(data);
+      pingEmail(data);
+      showMsg(msg, "success", "✅ Details received! Our expert will contact you within 24 hours.");
+      btForm.reset();
+    } catch(err) {
+      console.error(err);
+      showMsg(msg, "error", "⚠️ Something went wrong. Please try again or email us directly.");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Get Free Expert Guidance →";
+    }
+  });
+}
+</script>
+<script>
   document.querySelectorAll('.faq-q').forEach(q => {
     q.addEventListener('click', () => {
       const item = q.parentElement;
