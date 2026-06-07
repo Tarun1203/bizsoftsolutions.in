@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/> 
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bill Touch — Restaurant POS &amp; Liquor Management Software India 2026</title>
   <meta name="description" content="Bill Touch is India's complete Restaurant POS and Liquor Management Software. Zomato/Swiggy integration, KDS, table billing, liquor shop billing — free demo 2026."/>
@@ -14,23 +14,14 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--primary:#bf360c;--pl:#e65100;--dark:#0d1b2a;--text:#2c3e50;--muted:#607d8b;--light:#fff8f5;--white:#fff;--border:#dde3ec;--green:#2e7d32;--shadow:0 4px 24px rgba(191,54,12,.10)}
     body{font-family:'Segoe UI',Arial,sans-serif;color:var(--text);background:var(--white);line-height:1.7}
-   
-    /* Nav*/
-    
-     nav {
-      position: sticky; top: 0; z-index: 200;
-      background: var(--white); border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5%; height: 62px; box-shadow: 0 2px 8px rgba(0,0,0,.06); gap: 1rem;
-    }
-    .logo { font-size: 1.3rem; font-weight: 800; color: var(--primary); text-decoration: none; white-space: nowrap; }
-    .logo span { color: var(--accent); }
-    nav ul { list-style: none; display: flex; gap: 1.4rem; align-items: center; }
-    nav ul a { text-decoration: none; color: var(--text); font-weight: 500; font-size: .88rem; }
-    nav ul a:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: var(--white) !important; padding: .4rem 1.1rem; border-radius: 6px; font-size: .88rem !important; }
-    @media(max-width:700px){ nav ul li:not(:last-child){ display:none; } }
-
+    nav{position:sticky;top:0;z-index:200;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:62px;box-shadow:0 2px 8px rgba(0,0,0,.06);gap:1rem}
+    .logo{font-size:1.25rem;font-weight:800;color:#1565c0;text-decoration:none;white-space:nowrap}
+    .logo span{color:#00897b}
+    .nav-links{list-style:none;display:flex;gap:1.3rem;align-items:center}
+    .nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:.87rem}
+    .nav-links a:hover,.nav-links a.active{color:#1565c0}
+    .nav-cta{background:var(--primary);color:var(--white)!important;padding:.4rem 1.1rem;border-radius:6px;font-weight:700;font-size:.87rem!important}
+    @media(max-width:680px){.nav-links{display:none}}
     /* HERO */
     .hero{background:linear-gradient(135deg,#1a0a00,#4e342e 40%,#e65100 100%);color:#fff;padding:70px 5% 60px}
     .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center}
@@ -183,14 +174,14 @@
 <body>
 
 <nav>
-  <a href="/" class="logo">BizSoft<span>Solutions</span></a>
-  <ul>
+  <a href="../" class="logo">BizSoft<span>Solutions</span></a>
+  <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="Vyapar_index.html">Vyapar</a></li>
     <li><a href="BizAnalyst_index.html">Biz Analyst</a></li>
-    <li><a href="Biltouch_index.html">Bill Touch</a></li>
-    <li><a href="#contact" class="nav-cta">Free Demo →</a></li>
+    <li><a href="Biltouch_index.html" class="active">Bill Touch</a></li>
   </ul>
+  <a href="#contact" class="nav-cta">Get Free Demo →</a>
 </nav>
 
 <!-- HERO -->
@@ -455,58 +446,55 @@
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="tc" style="margin-bottom:2.5rem">
-    <div class="sec-label">Free Demo</div>
-    <div class="sec-title">Request a Free Bill Touch Demo</div>
-    <div class="sec-sub">Tell us about your business and we'll give you a live demo + custom pricing within 24 hours.</div>
+    <div class="sec-label">Free Expert Guidance</div>
+    <div class="sec-title">Not Sure Which Plan is Right?</div>
+    <div class="sec-sub">Tell us about your business — our expert will call/WhatsApp you within 24 hours. Completely free, no obligation.</div>
   </div>
   <div class="contact-layout">
     <div class="contact-info">
-      <h3>What to Expect</h3>
-      <p>We'll show you exactly how Bill Touch works for your specific outlet type — restaurant, bar, cloud kitchen, or liquor shop. Live demo, no sales pressure.</p>
+      <h3>Why Talk to Us?</h3>
+      <p>We've helped hundreds of Indian SMBs choose the right software. A quick call saves you weeks of confusion and avoids costly wrong choices.</p>
       <ul class="promise-list">
-        <li><span>✅</span><span>Free live demo — no obligation</span></li>
-        <li><span>📞</span><span>Call / WhatsApp within 24 hours</span></li>
-        <li><span>🎯</span><span>Demo customised for your business type</span></li>
-        <li><span>💰</span><span>Transparent pricing — no hidden costs</span></li>
-        <li><span>🛠️</span><span>Free installation &amp; training support</span></li>
-        <li><span>🔒</span><span>100% private — zero spam</span></li>
+        <li><span>✅</span><span>Free consultation — no fees, no obligation</span></li>
+        <li><span>📞</span><span>We call or WhatsApp you within 24 hours</span></li>
+        <li><span>🎯</span><span>Personalised recommendation for your exact business</span></li>
+        <li><span>💰</span><span>Get best pricing through our partner links</span></li>
+        <li><span>🔒</span><span>Your number stays private — zero spam</span></li>
+        <li><span>🤝</span><span>Post-purchase support &amp; setup help available</span></li>
       </ul>
-      <div class="contact-card"><div class="cc-icon">📱</div><div class="cc-text"><strong>WhatsApp Response</strong><span>We reply within a few hours</span></div></div>
-      <div class="contact-card"><div class="cc-icon">📧</div><div class="cc-text"><strong>tarunchettam@gmail.com</strong><span>Mon–Sat, 9 AM – 8 PM IST</span></div></div>
+      <div class="contact-card"><div class="cc-icon">📱</div><div class="cc-text"><strong>WhatsApp Us</strong><span>We reply on WhatsApp within hours</span></div></div>
+      <div class="contact-card"><div class="cc-icon">📧</div><div class="cc-text"><strong>bizsofsolution@gmail.com</strong><span>Email us your requirements</span></div></div>
+      <div class="contact-card"><div class="cc-icon">⏱️</div><div class="cc-text"><strong>Quick Response</strong><span>Mon–Sat, 10 AM – 7 PM IST</span></div></div>
     </div>
     <div class="lead-box">
-      <h3>🍽️ Get Free Bill Touch Demo</h3>
+      <h3>📩 Get Free Bill Touch Guidance</h3>
       <form id="btLeadForm">
         <input type="hidden" name="software" value="Bill Touch"/>
         <div class="form-row">
-          <div class="fg"><label>Name *</label><input type="text" name="name" placeholder="Priya Sharma" required/></div>
+          <div class="fg"><label>Name *</label><input type="text" name="name" placeholder="Ramesh Kumar" required/></div>
           <div class="fg"><label>Mobile *</label><input type="tel" name="phone" placeholder="9876543210" required/></div>
         </div>
         <div class="form-row">
           <div class="fg"><label>Business Type *</label>
             <select name="businessType" required>
               <option value="">Select your business</option>
+              <option>Retail Shop / Kirana</option>
               <option>Restaurant / Cafe</option>
               <option>Cloud Kitchen</option>
-              <option>QSR / Fast Food</option>
-              <option>Bar / Pub</option>
-              <option>Liquor Shop</option>
-              <option>Bakery / Sweet Shop</option>
-              <option>Hotel Restaurant</option>
-              <option>Other F&amp;B</option>
+              <option>Trading / Distribution</option>
+              <option>Manufacturing</option>
+              <option>Service Business</option>
+              <option>Wholesale / FMCG</option>
+              <option>Other</option>
             </select>
           </div>
-          <div class="fg"><label>City</label><input type="text" name="city" placeholder="Mumbai, Kochi…"/></div>
+          <div class="fg"><label>City</label><input type="text" name="city" placeholder="Mumbai, Delhi…"/></div>
         </div>
-        <div class="fg"><label>Number of Outlets</label>
-          <select name="message">
-            <option value="Single outlet">1 outlet</option>
-            <option value="2-3 outlets">2–3 outlets</option>
-            <option value="4+ outlets">4+ outlets (chain)</option>
-          </select>
+        <div class="fg"><label>Your Query (Optional)</label>
+          <textarea name="message" placeholder="E.g. I run a restaurant with Zomato/Swiggy orders. Need KDS + table billing. What's the pricing?"></textarea>
         </div>
-        <button type="submit" class="submit-btn" id="btSubmitBtn">Request Free Demo →</button>
-        <div class="form-note">🔒 Private &amp; spam-free. &nbsp;|&nbsp; 📱 WhatsApp confirmation within 24 hrs</div>
+        <button type="submit" class="submit-btn" id="btSubmitBtn">Get Free Expert Guidance →</button>
+        <div class="form-note">🔒 Your number is safe. No spam, ever. &nbsp;|&nbsp; 📱 WhatsApp confirmation shortly</div>
         <div id="bt-msg"></div>
       </form>
     </div>
