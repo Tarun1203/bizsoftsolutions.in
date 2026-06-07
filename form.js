@@ -9,8 +9,8 @@
 const BIZSFT = {
 
   // ── Firebase config ────────────────────────────────────────
-  FIREBASE_API_KEY  : "AIzaSyC73JoUh4hUrnNq30USD_l-1DoPXSAjii8",
-  FIREBASE_PROJECT  : "bizsoftsolutions",
+  FIREBASE_API_KEY  : "AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4",
+  FIREBASE_PROJECT  : "bizsoftsolutions-8846b",
   COLLECTION        : "leads",
 
   // ── Apps Script (email alert only) ────────────────────────
