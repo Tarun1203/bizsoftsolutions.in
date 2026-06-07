@@ -14,24 +14,14 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--primary:#1b5e20;--pl:#2e7d32;--dark:#0d1b2a;--text:#2c3e50;--muted:#607d8b;--light:#f1f8f2;--white:#fff;--border:#dde3ec;--blue:#1565c0;--shadow:0 4px 24px rgba(27,94,32,.10)}
     body{font-family:'Segoe UI',Arial,sans-serif;color:var(--text);background:var(--white);line-height:1.7}
-   
-    /* Nav */
-     nav {
-      position: sticky; top: 0; z-index: 200;
-      background: var(--white); border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5%; height: 62px; box-shadow: 0 2px 8px rgba(0,0,0,.06); gap: 1rem;
-    }
-    .logo { font-size: 1.3rem; font-weight: 800; color: var(--primary); text-decoration: none; white-space: nowrap; }
-    .logo span { color: var(--accent); }
-    nav ul { list-style: none; display: flex; gap: 1.4rem; align-items: center; }
-    nav ul a { text-decoration: none; color: var(--text); font-weight: 500; font-size: .88rem; }
-    nav ul a:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: var(--white) !important; padding: .4rem 1.1rem; border-radius: 6px; font-size: .88rem !important; }
-    @media(max-width:700px){ nav ul li:not(:last-child){ display:none; } }
-
-    
-    /* Hero */
+    nav{position:sticky;top:0;z-index:200;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:62px;box-shadow:0 2px 8px rgba(0,0,0,.06);gap:1rem}
+    .logo{font-size:1.25rem;font-weight:800;color:#1565c0;text-decoration:none;white-space:nowrap}
+    .logo span{color:#00897b}
+    .nav-links{list-style:none;display:flex;gap:1.3rem;align-items:center}
+    .nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:.87rem}
+    .nav-links a:hover,.nav-links a.active{color:#1565c0}
+    .nav-cta{background:var(--primary);color:var(--white)!important;padding:.4rem 1.1rem;border-radius:6px;font-weight:700;font-size:.87rem!important}
+    @media(max-width:680px){.nav-links{display:none}}
     .hero{background:linear-gradient(135deg,#0d1b2a,#1b5e20 50%,#2e7d32);color:#fff;padding:70px 5% 60px}
     .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center}
     @media(max-width:760px){.hero-inner{grid-template-columns:1fr}}
@@ -180,14 +170,14 @@
 <body>
 
 <nav>
-  <a href="/" class="logo">BizSoft<span>Solutions</span></a>
-  <ul>
+  <a href="index.html" class="logo">BizSoft<span>Solutions</span></a>
+  <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="Vyapar_index.html">Vyapar</a></li>
-    <li><a href="BizAnalyst_index.html">Biz Analyst</a></li>
+    <li><a href="BizAnalyst_index.html" class="active">Biz Analyst</a></li>
     <li><a href="Biltouch_index.html">Bill Touch</a></li>
-    <li><a href="#contact" class="nav-cta">Free Demo →</a></li>
-  </ul> 
+   </ul>
+  <a href="#contact" class="nav-cta">Get Free Demo →</a>
 </nav>
 
 <!-- HERO -->
@@ -423,57 +413,55 @@
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="tc" style="margin-bottom:2.5rem">
-    <div class="sec-label">Free Demo</div>
-    <div class="sec-title">Request a Free Biz Analyst Demo</div>
-    <div class="sec-sub">Fill in your details. Our expert will call/WhatsApp you within 24 hours.</div>
+    <div class="sec-label">Free Expert Guidance</div>
+    <div class="sec-title">Not Sure Which Plan is Right?</div>
+    <div class="sec-sub">Tell us about your business — our expert will call/WhatsApp you within 24 hours. Completely free, no obligation.</div>
   </div>
   <div class="contact-layout">
     <div class="contact-info">
-      <h3>What You Get</h3>
-      <p>We're authorised Biz Analyst partners. We'll show you exactly how the app works for your specific business and team size — live demo on a call.</p>
+      <h3>Why Talk to Us?</h3>
+      <p>We've helped hundreds of Indian SMBs choose the right software. A quick call saves you weeks of confusion and avoids costly wrong choices.</p>
       <ul class="promise-list">
-        <li><span>✅</span><span>Free live demo — no pressure</span></li>
-        <li><span>📞</span><span>Call / WhatsApp within 24 hours</span></li>
-        <li><span>🎯</span><span>Configured for your Tally setup</span></li>
-        <li><span>💰</span><span>Best price with code TARUNC</span></li>
-        <li><span>🛠️</span><span>Free installation &amp; training support</span></li>
-        <li><span>🔒</span><span>100% private — zero spam</span></li>
+        <li><span>✅</span><span>Free consultation — no fees, no obligation</span></li>
+        <li><span>📞</span><span>We call or WhatsApp you within 24 hours</span></li>
+        <li><span>🎯</span><span>Personalised recommendation for your exact business</span></li>
+        <li><span>💰</span><span>Get best pricing through our partner links</span></li>
+        <li><span>🔒</span><span>Your number stays private — zero spam</span></li>
+        <li><span>🤝</span><span>Post-purchase support &amp; setup help available</span></li>
       </ul>
-      <div class="contact-card"><div class="cc-icon">🎁</div><div class="cc-text"><strong>Partner Code: TARUNC</strong><span>Mention at checkout for special pricing</span></div></div>
-      <div class="contact-card"><div class="cc-icon">📱</div><div class="cc-text"><strong>WhatsApp Response</strong><span>tarunchettam@gmail.com</span></div></div>
+      <div class="contact-card"><div class="cc-icon">📱</div><div class="cc-text"><strong>WhatsApp Us</strong><span>We reply on WhatsApp within hours</span></div></div>
+      <div class="contact-card"><div class="cc-icon">📧</div><div class="cc-text"><strong>bizsofsolution@gmail.com</strong><span>Email us your requirements</span></div></div>
+      <div class="contact-card"><div class="cc-icon">⏱️</div><div class="cc-text"><strong>Quick Response</strong><span>Mon–Sat, 10 AM – 7 PM IST</span></div></div>
     </div>
     <div class="lead-box">
-      <h3>📊 Get Free Biz Analyst Demo</h3>
+      <h3>📩 Get Free Biz Analyst Guidance</h3>
       <form id="baLeadForm">
         <input type="hidden" name="software" value="Biz Analyst"/>
         <div class="form-row">
-          <div class="fg"><label>Name *</label><input type="text" name="name" placeholder="Suresh Mehta" required/></div>
+          <div class="fg"><label>Name *</label><input type="text" name="name" placeholder="Ramesh Kumar" required/></div>
           <div class="fg"><label>Mobile *</label><input type="tel" name="phone" placeholder="9876543210" required/></div>
         </div>
         <div class="form-row">
           <div class="fg"><label>Business Type *</label>
             <select name="businessType" required>
-              <option value="">Select…</option>
-              <option>FMCG Distribution</option>
-              <option>Pharma Distribution</option>
+              <option value="">Select your business</option>
+              <option>Retail Shop / Kirana</option>
+              <option>Restaurant / Cafe</option>
+              <option>Cloud Kitchen</option>
+              <option>Trading / Distribution</option>
               <option>Manufacturing</option>
-              <option>Wholesale / Trading</option>
-              <option>Hardware / Building Materials</option>
+              <option>Service Business</option>
+              <option>Wholesale / FMCG</option>
               <option>Other</option>
             </select>
           </div>
-          <div class="fg"><label>City</label><input type="text" name="city" placeholder="Ahmedabad, Pune…"/></div>
+          <div class="fg"><label>City</label><input type="text" name="city" placeholder="Mumbai, Delhi…"/></div>
         </div>
-        <div class="fg"><label>No. of Sales Reps in your team</label>
-          <select name="message">
-            <option value="1 user (owner only)">1 — Just me (owner)</option>
-            <option value="2-5 sales reps">2–5 sales reps</option>
-            <option value="6-10 sales reps">6–10 sales reps</option>
-            <option value="10+ sales reps">10+ sales reps</option>
-          </select>
+        <div class="fg"><label>Your Query (Optional)</label>
+          <textarea name="message" placeholder="E.g. I have 5 sales reps on Tally. Need GPS tracking + mobile orders. Which plan is best for me?"></textarea>
         </div>
-        <button type="submit" class="submit-btn" id="baSubmitBtn">Request Free Demo →</button>
-        <div class="form-note">🔒 Private &amp; spam-free. &nbsp;|&nbsp; 📱 WhatsApp within 24 hrs &nbsp;|&nbsp; Use code <strong>TARUNC</strong></div>
+        <button type="submit" class="submit-btn" id="baSubmitBtn">Get Free Expert Guidance →</button>
+        <div class="form-note">🔒 Your number is safe. No spam, ever. &nbsp;|&nbsp; 📱 WhatsApp confirmation shortly</div>
         <div id="ba-msg"></div>
       </form>
     </div>
