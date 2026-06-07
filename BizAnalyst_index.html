@@ -21,7 +21,11 @@
     .nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:.87rem}
     .nav-links a:hover,.nav-links a.active{color:#1565c0}
     .nav-cta{background:var(--primary);color:var(--white)!important;padding:.4rem 1.1rem;border-radius:6px;font-weight:700;font-size:.87rem!important}
-    @media(max-width:680px){.nav-links{display:none}}
+    @media(max-width:680px){
+      nav{height:auto;flex-wrap:wrap;padding:.6rem 5%;gap:.5rem}
+      .nav-links{display:flex;flex-wrap:wrap;gap:.6rem}
+      .nav-links a{font-size:.78rem}
+    }
     .hero{background:linear-gradient(135deg,#0d1b2a,#1b5e20 50%,#2e7d32);color:#fff;padding:70px 5% 60px}
     .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center}
     @media(max-width:760px){.hero-inner{grid-template-columns:1fr}}
@@ -176,7 +180,12 @@
     <li><a href="Vyapar_index.html">Vyapar</a></li>
     <li><a href="BizAnalyst_index.html" class="active">Biz Analyst</a></li>
     <li><a href="Biltouch_index.html">Bill Touch</a></li>
-   </ul>
+    <li><a href="#testimonials">Review</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#compare">Compare</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
   <a href="#contact" class="nav-cta">Get Free Demo →</a>
 </nav>
 
@@ -250,7 +259,7 @@
 </section>
 
 <!-- FEATURES -->
-<section class="features-section">
+<section class="features-section" id="features">
   <div class="tc max-w">
     <div class="sec-label">Key Features</div>
     <div class="sec-title">Everything Biz Analyst Can Do</div>
@@ -501,21 +510,78 @@
 </footer>
 <div class="toast" id="toast"></div>
 
-<script src="../form.js"></script>
 <script>
-  BIZSFT.wire({ formId:"baLeadForm", btnId:"baSubmitBtn", msgId:"ba-msg", softwareOverride:"Biz Analyst" });
-  document.querySelectorAll('.faq-q').forEach(q => {
-    q.addEventListener('click', () => {
-      const item = q.parentElement;
-      const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!wasOpen) item.classList.add('open');
+  // ── Firebase Firestore config ──────────────────────────────
+  const FB_API_KEY = "AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4";
+  const FB_PROJECT = "bizsoftsolutions-8846b";
+
+  async function saveToFirestore(data) {
+    const url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents/leads?key=${FB_API_KEY}`;
+    const fields = {};
+    Object.entries(data).forEach(([k, v]) => { fields[k] = { stringValue: String(v || "") }; });
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fields })
     });
-  });
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const t = document.querySelector(a.getAttribute('href'));
-      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+    if (!res.ok) throw new Error(await res.text());
+    return res.json();
+  }
+
+  function showMsg(el, type, text) {
+    if (!el) return;
+    const s = { success:"background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7", error:"background:#ffebee;color:#c62828;border:1px solid #ef9a9a" };
+    el.style.cssText = `display:block;padding:.8rem 1rem;border-radius:8px;text-align:center;font-weight:600;font-size:.93rem;margin-top:.8rem;${s[type]}`;
+    el.textContent = text;
+  }
+
+  // ── Wire Biz Analyst lead form ─────────────────────────────
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("baLeadForm");
+    const btn  = document.getElementById("baSubmitBtn");
+    const msg  = document.getElementById("ba-msg");
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.textContent = "Submitting…";
+        const fd   = new FormData(form);
+        const data = Object.fromEntries(fd.entries());
+        data.software  = "Biz Analyst";
+        data.timestamp = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+        data.status    = "New Lead";
+        data.source    = window.location.href;
+        try {
+          await saveToFirestore(data);
+          showMsg(msg, "success", "✅ Details received! Our expert will contact you within 24 hours.");
+          form.reset();
+        } catch (err) {
+          console.error(err);
+          showMsg(msg, "error", "⚠️ Something went wrong. Please try again.");
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Get Free Expert Guidance →";
+        }
+      });
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+      });
     });
   });
 </script>
