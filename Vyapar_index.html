@@ -23,7 +23,11 @@
     .nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:.87rem}
     .nav-links a:hover,.nav-links a.active{color:var(--primary)}
     .nav-cta{background:var(--primary);color:var(--white)!important;padding:.4rem 1.1rem;border-radius:6px;font-weight:700;font-size:.87rem!important}
-    @media(max-width:680px){.nav-links{display:none}}
+    @media(max-width:680px){
+      nav{height:auto;flex-wrap:wrap;padding:.6rem 5%;gap:.5rem}
+      .nav-links{display:flex;flex-wrap:wrap;gap:.6rem}
+      .nav-links a{font-size:.78rem}
+    }
 
     /* HERO */
     .hero{background:linear-gradient(135deg,#0d1b2a,#1a237e 50%,#1565c0);color:#fff;padding:70px 5% 60px}
@@ -176,12 +180,17 @@
 <!-- NAV -->
 <nav>
   <a href="index.html" class="logo">BizSoft<span>Solutions</span></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
     <li><a href="Vyapar_index.html" class="active">Vyapar</a></li>
     <li><a href="BizAnalyst_index.html">Biz Analyst</a></li>
     <li><a href="Biltouch_index.html">Bill Touch</a></li>
-   </ul>
+    <li><a href="../#blog">Blog</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#compare">Compare</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
   <a href="#contact" class="nav-cta">Get Free Demo →</a>
 </nav>
 
@@ -385,24 +394,25 @@
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="tc" style="margin-bottom:2.5rem">
-    <div class="sec-label">Free Guidance</div>
-    <div class="sec-title">Talk to a Vyapar Expert</div>
-    <div class="sec-sub">Not sure which plan to pick? We'll help you decide — free of charge.</div>
+    <div class="sec-label">Free Expert Guidance</div>
+    <div class="sec-title">Not Sure Which Plan is Right?</div>
+    <div class="sec-sub">Tell us about your business — our expert will call/WhatsApp you within 24 hours. Completely free, no obligation.</div>
   </div>
   <div class="contact-layout">
     <div class="contact-info">
-      <h3>Why Contact Us?</h3>
-      <p>We're authorised Vyapar partners. We help hundreds of Indian businesses choose the right plan and get set up correctly from day one.</p>
+      <h3>Why Talk to Us?</h3>
+      <p>We've helped hundreds of Indian SMBs choose the right software. A quick call saves you weeks of confusion and avoids costly wrong choices.</p>
       <ul class="promise-list">
-        <li><span>✅</span><span>Free consultation — no fees</span></li>
-        <li><span>📞</span><span>We call/WhatsApp within 24 hours</span></li>
-        <li><span>🎯</span><span>Right plan for your business size</span></li>
-        <li><span>💰</span><span>Best price via our partner link</span></li>
-        <li><span>🛠️</span><span>Free setup guidance after purchase</span></li>
-        <li><span>🔒</span><span>Your details are 100% private</span></li>
+        <li><span>✅</span><span>Free consultation — no fees, no obligation</span></li>
+        <li><span>📞</span><span>We call or WhatsApp you within 24 hours</span></li>
+        <li><span>🎯</span><span>Personalised recommendation for your exact business</span></li>
+        <li><span>💰</span><span>Get best pricing through our partner links</span></li>
+        <li><span>🔒</span><span>Your number stays private — zero spam</span></li>
+        <li><span>🤝</span><span>Post-purchase support &amp; setup help available</span></li>
       </ul>
-      <div class="contact-card"><div class="cc-icon">📱</div><div class="cc-text"><strong>WhatsApp Response</strong><span>We reply within a few hours</span></div></div>
-      <div class="contact-card"><div class="cc-icon">⏱️</div><div class="cc-text"><strong>Mon–Sat, 9 AM – 8 PM IST</strong><span>bizsofsolution@gmail.com</span></div></div>
+      <div class="contact-card"><div class="cc-icon">📱</div><div class="cc-text"><strong>WhatsApp Us</strong><span>We reply on WhatsApp within hours</span></div></div>
+      <div class="contact-card"><div class="cc-icon">📧</div><div class="cc-text"><strong>bizsofsolution@gmail.com</strong><span>Email us your requirements</span></div></div>
+      <div class="contact-card"><div class="cc-icon">⏱️</div><div class="cc-text"><strong>Quick Response</strong><span>Mon–Sat, 10 AM – 7 PM IST</span></div></div>
     </div>
     <div class="lead-box">
       <h3>📩 Get Free Vyapar Guidance</h3>
@@ -415,26 +425,23 @@
         <div class="form-row">
           <div class="fg"><label>Business Type *</label>
             <select name="businessType" required>
-              <option value="">Select…</option>
+              <option value="">Select your business</option>
               <option>Retail Shop / Kirana</option>
-              <option>Wholesale / Distribution</option>
+              <option>Restaurant / Cafe</option>
+              <option>Cloud Kitchen</option>
+              <option>Trading / Distribution</option>
               <option>Manufacturing</option>
-              <option>Trading</option>
               <option>Service Business</option>
+              <option>Wholesale / FMCG</option>
               <option>Other</option>
             </select>
           </div>
-          <div class="fg"><label>City</label><input type="text" name="city" placeholder="Mumbai, Surat…"/></div>
+          <div class="fg"><label>City</label><input type="text" name="city" placeholder="Mumbai, Delhi…"/></div>
         </div>
-        <div class="fg"><label>Which Plan are you considering?</label>
-          <select name="message">
-            <option value="Not sure which plan">Not sure — need help choosing</option>
-            <option value="Interested in Free Plan">Free Plan</option>
-            <option value="Interested in Silver Plan">Silver Plan (₹1,499/yr)</option>
-            <option value="Interested in Gold Plan">Gold Plan (₹2,499/yr)</option>
-          </select>
+        <div class="fg"><label>Your Query (Optional)</label>
+          <textarea name="message" placeholder="E.g. I have a retail shop with 500 SKUs. Need GST billing + stock alerts. Which plan is best for me?"></textarea>
         </div>
-        <button type="submit" class="submit-btn" id="vyaparSubmitBtn">Get Free Expert Advice →</button>
+        <button type="submit" class="submit-btn" id="vyaparSubmitBtn">Get Free Expert Guidance →</button>
         <div class="form-note">🔒 Your number is safe. No spam, ever. &nbsp;|&nbsp; 📱 WhatsApp confirmation shortly</div>
         <div id="vy-msg"></div>
       </form>
@@ -481,22 +488,80 @@
 </footer>
 <div class="toast" id="toast"></div>
 
-<script src="../form.js"></script>
 <script>
-  BIZSFT.wire({ formId:"vyaparLeadForm", btnId:"vyaparSubmitBtn", msgId:"vy-msg", softwareOverride:"Vyapar" });
-  document.querySelectorAll('.faq-q').forEach(q => {
-    q.addEventListener('click', () => {
-      const item = q.parentElement;
-      const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!wasOpen) item.classList.add('open');
+  // ── Firebase Firestore config ──────────────────────────────
+  const FB_API_KEY = "AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4";
+  const FB_PROJECT = "bizsoftsolutions-8846b";
+
+  async function saveToFirestore(data) {
+    const url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents/leads?key=${FB_API_KEY}`;
+    const fields = {};
+    Object.entries(data).forEach(([k, v]) => { fields[k] = { stringValue: String(v || "") }; });
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fields })
     });
-  });
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const t = document.querySelector(a.getAttribute('href'));
-      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+    if (!res.ok) throw new Error(await res.text());
+    return res.json();
+  }
+
+  function showMsg(el, type, text) {
+    if (!el) return;
+    const s = { success:"background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7", error:"background:#ffebee;color:#c62828;border:1px solid #ef9a9a" };
+    el.style.cssText = `display:block;padding:.8rem 1rem;border-radius:8px;text-align:center;font-weight:600;font-size:.93rem;margin-top:.8rem;${s[type]}`;
+    el.textContent = text;
+  }
+
+  // ── Wire Vyapar lead form ──────────────────────────────────
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("vyaparLeadForm");
+    const btn  = document.getElementById("vyaparSubmitBtn");
+    const msg  = document.getElementById("vy-msg");
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.textContent = "Submitting…";
+        const fd   = new FormData(form);
+        const data = Object.fromEntries(fd.entries());
+        data.software    = "Vyapar";
+        data.timestamp   = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+        data.status      = "New Lead";
+        data.source      = window.location.href;
+        try {
+          await saveToFirestore(data);
+          showMsg(msg, "success", "✅ Details received! Our expert will contact you within 24 hours.");
+          form.reset();
+        } catch (err) {
+          console.error(err);
+          showMsg(msg, "error", "⚠️ Something went wrong. Please try again.");
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Get Free Expert Guidance →";
+        }
+      });
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+      });
     });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+
   });
 </script>
 </body>
