@@ -142,5 +142,9 @@ const BIZSFT = {
       e.preventDefault();
       this.submit({ formEl, btnEl, msgEl, softwareOverride, onSuccess });
     });
+
+    //----Token
+    data._token = "bsft_alert_9x2k";
+pingEmail(data);
   }
 };
