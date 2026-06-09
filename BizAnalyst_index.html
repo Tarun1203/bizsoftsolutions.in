@@ -172,7 +172,6 @@
   </style>
 </head>
 <body>
-
 <nav>
   <a href="index.html" class="logo">BizSoft<span>Solutions</span></a>
   <ul class="nav-links">
@@ -188,7 +187,6 @@
   </ul>
   <a href="#contact" class="nav-cta">Get Free Demo →</a>
 </nav>
-
 <!-- HERO -->
 <section class="hero" id="brief">
   <div class="hero-inner">
@@ -214,7 +212,6 @@
     </div>
   </div>
 </section>
-
 <!-- USE CASES -->
 <section style="background:var(--white);padding:60px 5%">
   <div class="tc max-w">
@@ -255,9 +252,8 @@
     </div>
   </div>
 </section>
-
 <!-- FEATURES -->
-<section class="features-section" id="features"> 
+<section class="features-section" id="features">
   <div class="tc max-w">
     <div class="sec-label">Key Features</div>
     <div class="sec-title">Everything Biz Analyst Can Do</div>
@@ -275,7 +271,6 @@
     <div class="feat-card"><div class="feat-icon">📋</div><h4>Create Vouchers in Tally</h4><p>Create sales orders, receipts, and payments in Tally remotely from the mobile app. No need to be at the office.</p></div>
   </div>
 </section>
-
 <!-- WHO -->
 <section style="background:var(--white);padding:55px 5%">
   <div class="tc max-w">
@@ -294,7 +289,6 @@
     <div class="who-card"><div class="wi">📊</div><p>Any Tally Business</p></div>
   </div>
 </section>
-
 <!-- COMPARE -->
 <section class="compare-section" id="compare">
   <div class="tc max-w">
@@ -322,14 +316,13 @@
         <tr><td>Invoice Discounting</td><td class="no">✗ No</td><td class="win">✓ Yes</td><td class="no">✗ No</td></tr>
         <tr><td>Create Vouchers in Tally</td><td class="win">✓ Yes</td><td class="no">✗ No</td><td class="no">✗ No</td></tr>
         <tr><td>Stock Reports</td><td class="win">✓ Yes</td><td class="no">✗ No</td><td class="yes">✓ Yes</td></tr>
-        <tr><td>Entry Price</td><td>₹3,999/yr</td><td>₹2,999/yr</td><td class="win">₹1,499/yr</td></tr>
+        <tr><td>Entry Price</td><td>₹3,300/yr</td><td>₹2,999/yr</td><td class="win">₹1,499/yr</td></tr>
         <tr><td>Best For</td><td class="win">Field sales teams (3+ reps)</td><td>Large receivables</td><td>Solo owner</td></tr>
       </tbody>
     </table>
   </div>
   <p style="text-align:center;margin-top:1.2rem;font-size:.83rem;color:var(--muted)">Also read: <a href="../blog/biz-analyst-vs-credflow-vs-livekeeping.html" style="color:#1565c0">Full Biz Analyst vs Credflow vs LiveKeeping Comparison →</a></p>
 </section>
-
 <!-- TESTIMONIALS -->
 <section class="testi-section" id="testimonials">
   <div class="tc max-w">
@@ -346,7 +339,6 @@
     <div class="testi-card"><div class="tq">"</div><div class="stars">★★★★★</div><p class="testi-text">"Target vs achievement tracking is the best feature. I set monthly targets for each rep and watch the progress live. My team has become more motivated since they can also see their own numbers."</p><div class="testi-author"><div class="avatar av6">N</div><div><div class="t-name">Neha Gupta</div><div class="t-role">Textile Manufacturer, Surat</div></div></div></div>
   </div>
 </section>
-
 <!-- PRICING -->
 <section class="pricing-section" id="pricing">
   <div class="tc max-w">
@@ -415,7 +407,6 @@
     We are an authorised Biz Analyst partner. When you contact us or at checkout to access special pricing and free onboarding support.
   </div>
 </section>
-
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="tc" style="margin-bottom:2.5rem">
@@ -443,6 +434,8 @@
       <h3>📩 Get Free Biz Analyst Guidance</h3>
       <form id="baLeadForm">
         <input type="hidden" name="software" value="Biz Analyst"/>
+        <!-- Honeypot: hidden from humans, bots fill it → submission rejected -->
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
         <div class="form-row">
           <div class="fg"><label>Name *</label><input type="text" name="name" placeholder="Ramesh Kumar" required/></div>
           <div class="fg"><label>Mobile *</label><input type="tel" name="phone" placeholder="9876543210" required/></div>
@@ -473,7 +466,6 @@
     </div>
   </div>
 </section>
-
 <!-- FAQ -->
 <section class="faq-section" id="faq">
   <div class="tc max-w">
@@ -492,7 +484,8 @@
     <div class="faq-item"><div class="faq-q">How is Biz Analyst different from Credflow?<span class="faq-arrow">▼</span></div><div class="faq-a">Biz Analyst focuses on sales team management — GPS tracking, order booking, beat plans, and Tally data on mobile. Credflow focuses on receivables collection — automated WhatsApp/SMS payment reminders and invoice discounting. Many businesses use both together: Biz Analyst for sales operations and Credflow for collections. They are complementary, not competing.</div></div>
   </div>
 </section>
-
+<div class="disclaimer-bar">⚠️ BizSoft Solutions is an authorised Biz Analyst partner. We may earn a commission when you sign up via our links.</div>
+<footer>
   <div class="footer-links">
     <a href="index.html">Home</a>
     <a href="Vyapar_index.html">Vyapar</a>
@@ -504,12 +497,19 @@
   <p>© 2026 BizSoft Solutions — Not affiliated with Biz Analyst / Reach Accountant.</p>
 </footer>
 <div class="toast" id="toast"></div>
-
 <script>
   // ── Firebase Firestore config ──────────────────────────────
-  const FB_API_KEY = "AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4";
-  const FB_PROJECT = "bizsoftsolutions-8846b";
+  const FB_API_KEY   = "AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4";
+  const FB_PROJECT   = "bizsoftsolutions-8846b";
+  const APPS_SCRIPT  = "https://script.google.com/macros/s/AKfycbyd18400nxsS1JvSSl17hlx6ImC0tu5W1HINXT2Q_WQ6Q5NqtQo89dmdCKT6Tn_f3SR_Q/exec";
+  const SECRET_TOKEN = "bsft_alert_9x2k";
 
+  function pingEmail(data) {
+    const payload = Object.assign({}, data, { _token: SECRET_TOKEN });
+    fetch(APPS_SCRIPT, { method:"POST", mode:"no-cors",
+      headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)
+    }).catch(()=>{});
+  }
   async function saveToFirestore(data) {
     const url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents/leads?key=${FB_API_KEY}`;
     const fields = {};
@@ -522,20 +522,17 @@
     if (!res.ok) throw new Error(await res.text());
     return res.json();
   }
-
   function showMsg(el, type, text) {
     if (!el) return;
     const s = { success:"background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7", error:"background:#ffebee;color:#c62828;border:1px solid #ef9a9a" };
     el.style.cssText = `display:block;padding:.8rem 1rem;border-radius:8px;text-align:center;font-weight:600;font-size:.93rem;margin-top:.8rem;${s[type]}`;
     el.textContent = text;
   }
-
   // ── Wire Biz Analyst lead form ─────────────────────────────
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("baLeadForm");
     const btn  = document.getElementById("baSubmitBtn");
     const msg  = document.getElementById("ba-msg");
-
     if (form) {
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -543,12 +540,16 @@
         btn.textContent = "Submitting…";
         const fd   = new FormData(form);
         const data = Object.fromEntries(fd.entries());
+        // Honeypot check — bots fill hidden field, humans don't
+        if (data._honey) { btn.disabled = false; btn.textContent = "Get Free Expert Guidance →"; return; }
+        delete data._honey;
         data.software  = "Biz Analyst";
         data.timestamp = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
         data.status    = "New Lead";
         data.source    = window.location.href;
         try {
           await saveToFirestore(data);
+          pingEmail(data);
           showMsg(msg, "success", "✅ Details received! Our expert will contact you within 24 hours.");
           form.reset();
         } catch (err) {
@@ -560,7 +561,6 @@
         }
       });
     }
-
     // FAQ accordion
     document.querySelectorAll('.faq-q').forEach(q => {
       q.addEventListener('click', () => {
@@ -570,7 +570,6 @@
         if (!wasOpen) item.classList.add('open');
       });
     });
-
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
