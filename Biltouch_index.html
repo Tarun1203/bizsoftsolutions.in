@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="google-site-verification" content="7RKCFyhzo0VL0hE_Fd_IDniE33JRVrlgqsohvh3AAu8"/>
   <title>Bill Touch — Restaurant POS &amp; Liquor Management Software India 2026</title>
   <meta name="description" content="Bill Touch is India's complete Restaurant POS and Liquor Management Software. Zomato/Swiggy integration, KDS, table billing, liquor shop billing — free demo 2026."/>
   <meta name="keywords" content="bill touch restaurant pos, restaurant billing software india, liquor management software india, zomato swiggy pos integration, kds software india, restaurant pos system, liquor shop billing software"/>
@@ -178,12 +179,15 @@
 <body>
 
 <nav>
-  <a href="index.html" class="logo">BizSoft<span>Solutions</span></a>
+  <a href="../" class="logo">BizSoft<span>Solutions</span></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="Vyapar_index.html">Vyapar</a></li>
     <li><a href="BizAnalyst_index.html">Biz Analyst</a></li>
     <li><a href="Biltouch_index.html" class="active">Bill Touch</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#compare">Compare</a></li>
+    <li><a href="#pricing">Pricing</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Get Free Demo →</a>
@@ -475,6 +479,8 @@
       <h3>📩 Get Free Bill Touch Guidance</h3>
       <form id="btLeadForm">
         <input type="hidden" name="software" value="Bill Touch"/>
+        <!-- Honeypot: hidden from humans, bots fill it → submission rejected -->
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
         <div class="form-row">
           <div class="fg"><label>Name *</label><input type="text" name="name" placeholder="Ramesh Kumar" required/></div>
           <div class="fg"><label>Mobile *</label><input type="tel" name="phone" placeholder="9876543210" required/></div>
@@ -535,7 +541,7 @@
     <a href="Biltouch_index.html">Bill Touch</a>
     <a href="#contact">Contact</a>
   </div>
-  <p>© 2026 BizSoft Solutions — Not affiliated with Bill Touch.</p>
+  <p>© 2026 BizSoft Solutions — Not affiliated with Bill Touch / Softechfirm.</p>
 </footer>
 <div class="toast" id="toast"></div>
 
@@ -543,7 +549,8 @@
 // ── Firebase Firestore (inline — no external dependency) ──
 const FB_API_KEY  = "AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4";
 const FB_PROJECT  = "bizsoftsolutions-8846b";
-const APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbxTth1KmROkse9uY4wQ5N5RipEXxmQNxlYMBeeeNinduR9f00JX6w8ktIbnk_KOBcfMVw/exec";
+const APPS_SCRIPT  = "https://script.google.com/macros/s/AKfycbyd18400nxsS1JvSSl17hlx6ImC0tu5W1HINXT2Q_WQ6Q5NqtQo89dmdCKT6Tn_f3SR_Q/exec";
+const SECRET_TOKEN = "bsft_alert_9x2k";
 
 async function saveToFirestore(data) {
   const url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents/leads?key=${FB_API_KEY}`;
@@ -559,8 +566,9 @@ async function saveToFirestore(data) {
 }
 
 function pingEmail(data) {
+  const payload = Object.assign({}, data, { _token: SECRET_TOKEN });
   fetch(APPS_SCRIPT, { method:"POST", mode:"no-cors",
-    headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)
+    headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)
   }).catch(()=>{});
 }
 
@@ -586,6 +594,9 @@ if (btForm) {
     btn.textContent = "Submitting…";
     const fd = new FormData(btForm);
     const data = Object.fromEntries(fd.entries());
+    // Honeypot check
+    if (data._honey) { btBtn.disabled = false; btBtn.textContent = "Get Free Expert Guidance →"; return; }
+    delete data._honey;
     data.software  = "Bill Touch";
     data.timestamp = new Date().toLocaleString("en-IN", { timeZone:"Asia/Kolkata" });
     data.status    = "New Lead";
