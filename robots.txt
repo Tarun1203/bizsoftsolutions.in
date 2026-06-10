@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-
-# Admin dashboard — do not index
-Disallow: /bsm-admin-7k2x/
-Disallow: /dashboard/
-
-Sitemap: https://bizsoftsolutions.in/sitemap.xml
