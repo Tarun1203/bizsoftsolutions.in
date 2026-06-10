@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>BizSoft Solutions — Leads Dashboard</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --primary:#1565c0;--dark:#0d1b2a;--text:#2c3e50;--muted:#607d8b;
+      --border:#dde3ec;--light:#f4f7fb;--white:#fff;
+      --new:#1565c0;--attended:#f57f17;--review:#6a1b9a;--closed:#2e7d32;
+      --needtime:#e65100;--notint:#b71c1c;--waitpay:#0277bd;--done:#2e7d32;
+    }
+    body{font-family:'Segoe UI',Arial,sans-serif;background:var(--light);color:var(--text);min-height:100vh}
+
+    /* ── LOGIN GATE ── */
+    #gate{position:fixed;inset:0;background:var(--dark);display:flex;align-items:center;justify-content:center;z-index:9999}
+    .gate-box{background:var(--white);border-radius:16px;padding:2.5rem 2rem;width:100%;max-width:360px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+    .gate-logo{font-size:1.4rem;font-weight:800;color:var(--primary);margin-bottom:.3rem}
+    .gate-logo span{color:#00897b}
+    .gate-sub{font-size:.85rem;color:var(--muted);margin-bottom:1.8rem}
+    .gate-input{width:100%;padding:.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;text-align:center;letter-spacing:.15rem;margin-bottom:1rem;font-family:inherit}
+    .gate-input:focus{outline:none;border-color:var(--primary)}
+    .gate-btn{width:100%;padding:.8rem;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit}
+    .gate-btn:hover{background:#1976d2}
+    .gate-err{color:#c62828;font-size:.83rem;margin-top:.6rem;display:none}
+
+    /* ── MAIN APP ── */
+    #app{display:none}
+    header{background:var(--white);border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+    .hdr-logo{font-size:1.15rem;font-weight:800;color:var(--primary)}
+    .hdr-logo span{color:#00897b}
+    .hdr-right{display:flex;align-items:center;gap:1rem}
+    .hdr-right small{color:var(--muted);font-size:.82rem}
+    .btn-reload{background:var(--primary);color:#fff;border:none;padding:.45rem 1rem;border-radius:6px;font-size:.83rem;font-weight:700;cursor:pointer;font-family:inherit}
+    .btn-reload:hover{background:#1976d2}
+    .btn-logout{background:none;border:1px solid var(--border);color:var(--muted);padding:.4rem .9rem;border-radius:6px;font-size:.8rem;cursor:pointer;font-family:inherit}
+
+    main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto}
+    @media(max-width:680px){main{padding:1rem}}
+
+    /* ── STATS ── */
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;margin-bottom:1.8rem}
+    .stat-card{background:var(--white);border-radius:12px;padding:1.2rem 1rem;text-align:center;border:2px solid var(--border);position:relative;overflow:hidden}
+    .stat-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+    .stat-card.total::before{background:var(--primary)}
+    .stat-card.s-new::before{background:var(--new)}
+    .stat-card.s-attended::before{background:var(--attended)}
+    .stat-card.s-review::before{background:var(--review)}
+    .stat-card.s-closed::before{background:var(--closed)}
+    .stat-num{font-size:2rem;font-weight:800;color:var(--dark)}
+    .stat-lbl{font-size:.75rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-top:.2rem}
+
+    /* ── FILTERS ── */
+    .filters{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:1.4rem;align-items:center}
+    .filters select,.filters input{padding:.5rem .85rem;border:1.5px solid var(--border);border-radius:8px;font-size:.87rem;color:var(--text);background:var(--white);font-family:inherit}
+    .filters select:focus,.filters input:focus{outline:none;border-color:var(--primary)}
+    .filter-clear{background:none;border:1.5px solid var(--border);color:var(--muted);padding:.47rem .9rem;border-radius:8px;font-size:.83rem;cursor:pointer;font-family:inherit}
+    .filter-clear:hover{background:var(--light)}
+    .filter-count{margin-left:auto;font-size:.82rem;color:var(--muted)}
+
+    /* ── TABLE ── */
+    .tbl-wrap{overflow-x:auto;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    table{width:100%;border-collapse:collapse;background:var(--white);font-size:.86rem}
+    thead th{background:var(--dark);color:#fff;padding:.75rem .85rem;text-align:left;font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+    tbody tr{border-bottom:1px solid #f0f4f8;transition:background .15s}
+    tbody tr:hover{background:#f8faff}
+    tbody td{padding:.7rem .85rem;vertical-align:middle}
+    .td-name{font-weight:700;color:var(--dark)}
+    .td-phone a{color:var(--primary);text-decoration:none;font-weight:600}
+    .td-phone a:hover{text-decoration:underline}
+    .td-time{color:var(--muted);font-size:.78rem;white-space:nowrap}
+    .td-src{color:var(--muted);font-size:.75rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+    /* Inline dropdowns */
+    .sel-status,.sel-decision{padding:.35rem .55rem;border-radius:6px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;border:none;appearance:none;-webkit-appearance:none;padding-right:1.6rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23fff' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .5rem center;min-width:110px}
+    .sel-status{background-color:var(--new);color:#fff}
+    .sel-status.s-new{background-color:var(--new)}
+    .sel-status.s-attended{background-color:var(--attended)}
+    .sel-status.s-review{background-color:var(--review)}
+    .sel-status.s-closed{background-color:var(--closed)}
+    .sel-decision{background-color:#546e7a;color:#fff}
+    .sel-decision.d-needtime{background-color:var(--needtime)}
+    .sel-decision.d-notint{background-color:var(--notint)}
+    .sel-decision.d-waitpay{background-color:var(--waitpay)}
+    .sel-decision.d-done{background-color:var(--done)}
+    .sel-decision.d-none{background-color:#90a4ae}
+    .saving{opacity:.5;pointer-events:none}
+
+    .badge-sw{display:inline-block;padding:.18rem .65rem;border-radius:12px;font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+    .sw-vyapar{background:#e3f2fd;color:#1565c0}
+    .sw-biz{background:#e8f5e9;color:#1b5e20}
+    .sw-bill{background:#fff3e0;color:#bf360c}
+
+    .td-msg{max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:.8rem;cursor:help}
+
+    /* ── EMPTY / LOADING ── */
+    .state-box{text-align:center;padding:4rem 2rem;color:var(--muted)}
+    .state-box .ico{font-size:3rem;margin-bottom:.8rem}
+    .state-box p{font-size:1rem}
+    .spinner{display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;margin-bottom:.8rem}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ── TOAST ── */
+    #toast{position:fixed;bottom:1.5rem;right:1.5rem;padding:.75rem 1.2rem;border-radius:10px;font-size:.88rem;font-weight:700;color:#fff;box-shadow:0 4px 20px rgba(0,0,0,.25);transform:translateY(120px);opacity:0;transition:all .35s cubic-bezier(.175,.885,.32,1.275);z-index:9999}
+    #toast.show{transform:translateY(0);opacity:1}
+  </style>
+</head>
+<body>
+
+<!-- ── ACCESS GATE ── -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">BizSoft<span>Solutions</span></div>
+    <div class="gate-sub">Leads Dashboard — Owner Access</div>
+    <input id="passInput" class="gate-input" type="password" placeholder="Enter access code" autocomplete="off"/>
+    <button class="gate-btn" onclick="checkPass()">Enter Dashboard →</button>
+    <div class="gate-err" id="gateErr">❌ Incorrect access code</div>
+    <p style="margin-top:1.2rem;font-size:.75rem;color:#b0bec5">Default code: <strong>bizsft2026</strong></p>
+  </div>
+</div>
+
+<!-- ── MAIN APP ── -->
+<div id="app">
+  <header>
+    <div class="hdr-logo">BizSoft<span>Solutions</span> &nbsp;<span style="font-size:.78rem;font-weight:500;color:var(--muted)">Leads Dashboard</span></div>
+    <div class="hdr-right">
+      <small id="lastRefresh"></small>
+      <button class="btn-reload" onclick="loadLeads()">⟳ Refresh</button>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Stats -->
+    <div class="stats" id="statsRow">
+      <div class="stat-card total"><div class="stat-num" id="cTotal">—</div><div class="stat-lbl">Total Leads</div></div>
+      <div class="stat-card s-new"><div class="stat-num" id="cNew">—</div><div class="stat-lbl">New</div></div>
+      <div class="stat-card s-attended"><div class="stat-num" id="cAttended">—</div><div class="stat-lbl">Attended</div></div>
+      <div class="stat-card s-review"><div class="stat-num" id="cReview">—</div><div class="stat-lbl">In Review</div></div>
+      <div class="stat-card s-closed"><div class="stat-num" id="cClosed">—</div><div class="stat-lbl">Closed</div></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <select id="fStatus" onchange="renderTable()">
+        <option value="">All Status</option>
+        <option>New</option>
+        <option>Attended</option>
+        <option>In Review</option>
+        <option>Closed</option>
+      </select>
+      <select id="fDecision" onchange="renderTable()">
+        <option value="">All Decisions</option>
+        <option>Need Time</option>
+        <option>Not Interested</option>
+        <option>Waiting for payment</option>
+        <option>Completed</option>
+      </select>
+      <select id="fSoftware" onchange="renderTable()">
+        <option value="">All Software</option>
+        <option>Vyapar</option>
+        <option>Biz Analyst</option>
+        <option>Bill Touch</option>
+      </select>
+      <input id="fSearch" type="text" placeholder="Search name / phone / city…" oninput="renderTable()" style="min-width:200px"/>
+      <button class="filter-clear" onclick="clearFilters()">✕ Clear</button>
+      <span class="filter-count" id="filterCount"></span>
+    </div>
+
+    <!-- Table -->
+    <div class="tbl-wrap">
+      <table id="leadsTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Software</th>
+            <th>Business Type</th>
+            <th>City</th>
+            <th>Message</th>
+            <th>Submitted</th>
+            <th>Status</th>
+            <th>Decision</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr><td colspan="10"><div class="state-box"><div class="spinner"></div><p>Loading leads…</p></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────
+const ACCESS_CODE  = "bizsft2026";           // Change this if needed
+const FB_API_KEY   = "AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4";
+const FB_PROJECT   = "bizsoftsolutions-8846b";
+const BASE_URL     = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents`;
+
+// ── STATUS OPTIONS ───────────────────────────────────────────────
+const STATUS_OPTIONS   = ["New", "Attended", "In Review", "Closed"];
+const DECISION_OPTIONS = ["—", "Need Time", "Not Interested", "Waiting for payment", "Completed"];
+
+// Status → CSS class
+const statusClass  = { "New":"s-new","Attended":"s-attended","In Review":"s-review","Closed":"s-closed" };
+const decisionClass = { "Need Time":"d-needtime","Not Interested":"d-notint","Waiting for payment":"d-waitpay","Completed":"d-done" };
+const swClass       = { "Vyapar":"sw-vyapar","Biz Analyst":"sw-biz","Bill Touch":"sw-bill" };
+
+let allLeads = [];
+
+// ── GATE ─────────────────────────────────────────────────────────
+function checkPass() {
+  const v = document.getElementById("passInput").value.trim();
+  if (v === ACCESS_CODE) {
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("app").style.display  = "block";
+    loadLeads();
+  } else {
+    document.getElementById("gateErr").style.display = "block";
+    document.getElementById("passInput").value = "";
+  }
+}
+document.getElementById("passInput").addEventListener("keydown", e => { if(e.key==="Enter") checkPass(); });
+
+function logout() {
+  document.getElementById("app").style.display  = "none";
+  document.getElementById("gate").style.display = "flex";
+  document.getElementById("passInput").value    = "";
+}
+
+// ── LOAD LEADS ───────────────────────────────────────────────────
+async function loadLeads() {
+  document.getElementById("tableBody").innerHTML =
+    `<tr><td colspan="10"><div class="state-box"><div class="spinner"></div><p>Loading leads…</p></div></td></tr>`;
+  try {
+    allLeads = await fetchAllLeads();
+    // Sort newest first (by timestamp string, fallback to name)
+    allLeads.sort((a,b) => (b.timestamp||"").localeCompare(a.timestamp||""));
+    updateStats();
+    renderTable();
+    document.getElementById("lastRefresh").textContent =
+      "Last updated: " + new Date().toLocaleTimeString("en-IN");
+  } catch(err) {
+    console.error(err);
+    document.getElementById("tableBody").innerHTML =
+      `<tr><td colspan="10"><div class="state-box"><div class="ico">⚠️</div>
+       <p><strong>Could not load leads.</strong><br>
+       Please update Firestore rules: <code>allow read: if true</code><br>
+       <small style="color:#b0bec5">${err.message}</small></p>
+       </div></td></tr>`;
+  }
+}
+
+async function fetchAllLeads() {
+  let docs = [], nextPage = null;
+  do {
+    let url = `${BASE_URL}/leads?key=${FB_API_KEY}&pageSize=300`;
+    if (nextPage) url += `&pageToken=${nextPage}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      const txt = await res.text();
+      throw new Error(txt);
+    }
+    const json = await res.json();
+    if (json.documents) {
+      json.documents.forEach(doc => {
+        const id = doc.name.split("/").pop();
+        const f  = doc.fields || {};
+        docs.push({
+          id,
+          name         : f.name?.stringValue         || "",
+          phone        : f.phone?.stringValue        || "",
+          software     : f.software?.stringValue     || "",
+          businessType : f.businessType?.stringValue || "",
+          city         : f.city?.stringValue         || "",
+          message      : f.message?.stringValue      || "",
+          timestamp    : f.timestamp?.stringValue    || "",
+          status       : f.status?.stringValue       || "New",
+          decision     : f.decision?.stringValue     || "",
+          source       : f.source?.stringValue       || ""
+        });
+      });
+    }
+    nextPage = json.nextPageToken || null;
+  } while (nextPage);
+  return docs;
+}
+
+// ── STATS ─────────────────────────────────────────────────────────
+function updateStats() {
+  const byStatus = s => allLeads.filter(l => l.status === s).length;
+  document.getElementById("cTotal").textContent    = allLeads.length;
+  document.getElementById("cNew").textContent      = byStatus("New");
+  document.getElementById("cAttended").textContent = byStatus("Attended");
+  document.getElementById("cReview").textContent   = byStatus("In Review");
+  document.getElementById("cClosed").textContent   = byStatus("Closed");
+}
+
+// ── RENDER TABLE ─────────────────────────────────────────────────
+function renderTable() {
+  const fStatus   = document.getElementById("fStatus").value;
+  const fDecision = document.getElementById("fDecision").value;
+  const fSoftware = document.getElementById("fSoftware").value;
+  const fSearch   = document.getElementById("fSearch").value.toLowerCase().trim();
+
+  let filtered = allLeads.filter(l => {
+    if (fStatus   && l.status   !== fStatus)   return false;
+    if (fDecision && (l.decision || "") !== fDecision) return false;
+    if (fSoftware && l.software !== fSoftware) return false;
+    if (fSearch && ![l.name, l.phone, l.city, l.businessType, l.message]
+        .join(" ").toLowerCase().includes(fSearch)) return false;
+    return true;
+  });
+
+  document.getElementById("filterCount").textContent =
+    filtered.length < allLeads.length
+      ? `Showing ${filtered.length} of ${allLeads.length}`
+      : `${allLeads.length} leads`;
+
+  if (filtered.length === 0) {
+    document.getElementById("tableBody").innerHTML =
+      `<tr><td colspan="10"><div class="state-box"><div class="ico">🔍</div><p>No leads match your filters.</p></div></td></tr>`;
+    return;
+  }
+
+  let rows = "";
+  filtered.forEach((lead, idx) => {
+    const sc  = statusClass[lead.status]   || "s-new";
+    const dc  = decisionClass[lead.decision] || "d-none";
+    const swc = swClass[lead.software]     || "";
+    const dec = lead.decision || "—";
+
+    // Status dropdown
+    const sSel = STATUS_OPTIONS.map(s =>
+      `<option value="${s}" ${lead.status===s?"selected":""}>${s}</option>`
+    ).join("");
+
+    // Decision dropdown
+    const dSel = DECISION_OPTIONS.map(d =>
+      `<option value="${d}" ${dec===d?"selected":""}>${d}</option>`
+    ).join("");
+
+    rows += `
+    <tr id="row-${lead.id}">
+      <td style="color:var(--muted);font-size:.78rem">${idx+1}</td>
+      <td class="td-name">${esc(lead.name)}</td>
+      <td class="td-phone"><a href="tel:${esc(lead.phone)}">${esc(lead.phone)}</a></td>
+      <td><span class="badge-sw ${swc}">${esc(lead.software)||"—"}</span></td>
+      <td style="font-size:.82rem">${esc(lead.businessType)}</td>
+      <td style="font-size:.82rem">${esc(lead.city)}</td>
+      <td><div class="td-msg" title="${esc(lead.message)}">${esc(lead.message)||"—"}</div></td>
+      <td class="td-time">${esc(lead.timestamp)}</td>
+      <td>
+        <select class="sel-status ${sc}" id="st-${lead.id}"
+          onchange="updateLead('${lead.id}','status',this.value)">
+          ${sSel}
+        </select>
+      </td>
+      <td>
+        <select class="sel-decision ${dc}" id="dc-${lead.id}"
+          onchange="updateLead('${lead.id}','decision',this.value)">
+          ${dSel}
+        </select>
+      </td>
+    </tr>`;
+  });
+
+  document.getElementById("tableBody").innerHTML = rows;
+}
+
+// ── UPDATE LEAD ───────────────────────────────────────────────────
+async function updateLead(id, field, value) {
+  const stEl = document.getElementById(`st-${id}`);
+  const dcEl = document.getElementById(`dc-${id}`);
+  [stEl, dcEl].forEach(el => el && el.classList.add("saving"));
+
+  // Update local cache
+  const lead = allLeads.find(l => l.id === id);
+  if (lead) lead[field] = value;
+
+  try {
+    const url = `${BASE_URL}/leads/${id}?updateMask.fieldPaths=${field}&key=${FB_API_KEY}`;
+    const res = await fetch(url, {
+      method : "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body   : JSON.stringify({ fields: { [field]: { stringValue: value } } })
+    });
+    if (!res.ok) throw new Error(await res.text());
+
+    // Update dropdown colour class
+    if (field === "status" && stEl) {
+      stEl.className = `sel-status ${statusClass[value]||"s-new"}`;
+    }
+    if (field === "decision" && dcEl) {
+      dcEl.className = `sel-decision ${decisionClass[value]||"d-none"}`;
+    }
+    updateStats();
+    toast("✅ Saved", "#2e7d32");
+  } catch(err) {
+    console.error(err);
+    toast("⚠️ Save failed — retry", "#c62828");
+  } finally {
+    [stEl, dcEl].forEach(el => el && el.classList.remove("saving"));
+  }
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────
+function clearFilters() {
+  ["fStatus","fDecision","fSoftware"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("fSearch").value = "";
+  renderTable();
+}
+
+function esc(s) {
+  return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+let toastTimer;
+function toast(msg, bg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.style.background = bg || "#1565c0";
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2500);
+}
+</script>
+</body>
+</html>

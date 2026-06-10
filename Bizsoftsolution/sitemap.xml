@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://bizsoftsolutions.in/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Vyapar -->
+  <url>
+    <loc>https://bizsoftsolutions.in/Vyapar_index.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Biz Analyst -->
+  <url>
+    <loc>https://bizsoftsolutions.in/BizAnalyst_index.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Bill Touch -->
+  <url>
+    <loc>https://bizsoftsolutions.in/Biltouch_index.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Blog: Vyapar vs Tally vs My BillBook vs Zoho -->
+  <url>
+    <loc>https://bizsoftsolutions.in/blog/vyapar-vs-tally-vs-mybillbook-vs-zoho.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Tally vs Vyapar -->
+  <url>
+    <loc>https://bizsoftsolutions.in/blog/Blog_tally-vs-vyapar.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Best GST Billing Software India -->
+  <url>
+    <loc>https://bizsoftsolutions.in/blog/Blog_best-gst-billing-software-india.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Best Restaurant POS Software -->
+  <url>
+    <loc>https://bizsoftsolutions.in/blog/Blog_best-restaurant-pos-software.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Billing Software for Small Business -->
+  <url>
+    <loc>https://bizsoftsolutions.in/blog/Blog_billing-software-for-small-business.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Biz Analyst vs Credflow vs LiveKeeping -->
+  <url>
+    <loc>https://bizsoftsolutions.in/blog/biz-analyst-vs-credflow-vs-livekeeping.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
