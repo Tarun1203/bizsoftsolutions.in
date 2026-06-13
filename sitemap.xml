@@ -1,70 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Homepage -->
-  <url>
-    <loc>https://bizsoftsolutions.in/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <!-- Product Pages -->
-  <url>
-    <loc>https://bizsoftsolutions.in/Vyapar_index.html</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://bizsoftsolutions.in/BizAnalyst_index.html</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://bizsoftsolutions.in/Biltouch_index.html</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Blog Pages -->
-  <url>
-    <loc>https://bizsoftsolutions.in/blog/Blog_tally-vs-vyapar.html</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bizsoftsolutions.in/blog/vyapar-vs-tally-vs-mybillbook-vs-zoho.html</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bizsoftsolutions.in/blog/Blog_best-gst-billing-software-india.html</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bizsoftsolutions.in/blog/Blog_best-restaurant-pos-software.html</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bizsoftsolutions.in/blog/Blog_billing-software-for-small-business.html</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bizsoftsolutions.in/blog/biz-analyst-vs-credflow-vs-livekeeping.html</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
+  <url><loc>https://bizsoftsolutions.in/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://bizsoftsolutions.in/vyapar.html</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://bizsoftsolutions.in/bizanalyst.html</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://bizsoftsolutions.in/billtouch-pos.html</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://bizsoftsolutions.in/billtouch-liquor.html</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://bizsoftsolutions.in/compare-vyapar-tally-mybillbook-zoho.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://bizsoftsolutions.in/compare-bizanalyst-credflow-livekeeping.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://bizsoftsolutions.in/blog-best-gst-billing-software-india.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://bizsoftsolutions.in/blog-billing-software-for-small-business.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://bizsoftsolutions.in/blog-best-restaurant-pos-software.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://bizsoftsolutions.in/blog-tally-vs-vyapar.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
 </urlset>

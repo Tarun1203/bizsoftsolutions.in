@@ -1,106 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="robots" content="noindex, follow"/>
-  <title>404 — Page Not Found | BizSoft Solutions</title>
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--primary:#1565c0;--accent:#ff6f00;--bg:#0d1b2a;--card:#162436}
-    body{min-height:100vh;background:var(--bg);color:#fff;font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;position:relative}
-    /* Particles */
-    .particles{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
-    .particle{position:absolute;width:4px;height:4px;background:rgba(255,255,255,.15);border-radius:50%;animation:float linear infinite}
-    @keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:.5}100%{transform:translateY(-10vh) scale(1.2);opacity:0}}
-    /* Main */
-    .content{position:relative;z-index:1;text-align:center;max-width:600px;width:100%}
-    .glow-404{font-size:clamp(6rem,20vw,10rem);font-weight:900;line-height:1;letter-spacing:-.02em;
-      background:linear-gradient(135deg,#1565c0,#42a5f5,#1565c0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      filter:drop-shadow(0 0 40px rgba(21,101,192,.6));animation:pulse 2.5s ease-in-out infinite}
-    @keyframes pulse{0%,100%{filter:drop-shadow(0 0 30px rgba(21,101,192,.5))} 50%{filter:drop-shadow(0 0 60px rgba(21,101,192,.9))}}
-    .icon{font-size:3rem;margin:1rem 0;animation:bounce 1.5s ease-in-out infinite}
-    @keyframes bounce{0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)}}
-    h1{font-size:1.5rem;font-weight:700;margin-bottom:.5rem}
-    .subtitle{color:#90a4ae;margin-bottom:2rem;font-size:.95rem}
-    /* Search */
-    .search-box{display:flex;gap:.5rem;margin-bottom:2rem;max-width:400px;margin-left:auto;margin-right:auto}
-    .search-box input{flex:1;padding:.75rem 1rem;border-radius:8px;border:2px solid #1e3a5f;background:#162436;color:#fff;font-size:.95rem;font-family:inherit}
-    .search-box input:focus{outline:none;border-color:var(--primary)}
-    .search-box input::placeholder{color:#607d8b}
-    .search-box button{padding:.75rem 1.2rem;background:var(--primary);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;white-space:nowrap;transition:background .2s}
-    .search-box button:hover{background:#0d47a1}
-    /* Quick links */
-    .links{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:2.5rem}
-    .link-btn{padding:.55rem 1.2rem;background:#162436;border:1px solid #1e3a5f;border-radius:20px;color:#90a4ae;font-size:.85rem;transition:.2s;cursor:pointer}
-    .link-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
-    /* Countdown */
-    .countdown{color:#607d8b;font-size:.82rem;margin-bottom:.5rem}
-    .countdown span{color:#42a5f5;font-weight:700}
-    .progress-bar{width:100%;max-width:320px;height:3px;background:#1e3a5f;border-radius:2px;overflow:hidden;margin:0 auto}
-    .progress-inner{height:100%;background:linear-gradient(90deg,var(--primary),#42a5f5);border-radius:2px;width:100%;animation:drain 10s linear forwards}
-    @keyframes drain{from{width:100%}to{width:0%}}
-  </style>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Page Not Found — BizSoft Solutions</title>
+<meta name="robots" content="noindex"/>
+<link rel="stylesheet" href="assets/style.css"/>
 </head>
 <body>
-
-<div class="particles" id="particles"></div>
-
-<div class="content">
-  <div class="glow-404">404</div>
-  <div class="icon">🔍</div>
-  <h1>Page Not Found</h1>
-  <p class="subtitle">The page you're looking for doesn't exist or was moved.<br/>Let us help you find what you need.</p>
-
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search Vyapar, Biz Analyst, Bill Touch…" onkeydown="if(event.key==='Enter')doSearch()"/>
-    <button onclick="doSearch()">Search</button>
+<header class="hero" style="min-height:70vh;display:flex;align-items:center">
+  <div class="container">
+    <h1 style="font-size:4rem">4<em>0</em>4</h1>
+    <p>This page doesn't exist — but the right billing software for your business does.</p>
+    <div class="hero-btns">
+      <a class="btn btn-primary" href="index.html">Go to Homepage</a>
+      <a class="btn btn-ghost" href="index.html#lead-form">Get Free Demo</a>
+    </div>
   </div>
-
-  <div class="links">
-    <div class="link-btn" onclick="window.location.href='/'">🏠 Home</div>
-    <div class="link-btn" onclick="window.location.href='/Vyapar_index.html'">💼 Vyapar</div>
-    <div class="link-btn" onclick="window.location.href='/BizAnalyst_index.html'">📊 Biz Analyst</div>
-    <div class="link-btn" onclick="window.location.href='/Biltouch_index.html'">🍽️ Bill Touch</div>
-    <div class="link-btn" onclick="window.location.href='/#contact'">📞 Contact</div>
-  </div>
-
-  <p class="countdown">Auto-redirect to homepage in <span id="timer">10</span>s…</p>
-  <div class="progress-bar"><div class="progress-inner"></div></div>
-</div>
-
-<script>
-  /* Particles */
-  (function(){
-    var c=document.getElementById('particles');
-    for(var i=0;i<30;i++){
-      var p=document.createElement('div');
-      p.className='particle';
-      p.style.left=Math.random()*100+'%';
-      p.style.animationDuration=(8+Math.random()*12)+'s';
-      p.style.animationDelay=(Math.random()*10)+'s';
-      p.style.width=p.style.height=(2+Math.random()*4)+'px';
-      c.appendChild(p);
-    }
-  })();
-
-  /* Countdown */
-  var t=10;
-  var interval=setInterval(function(){
-    t--;
-    document.getElementById('timer').textContent=t;
-    if(t<=0){clearInterval(interval);window.location.href='/';}
-  },1000);
-
-  /* Smart search routing */
-  function doSearch(){
-    var q=(document.getElementById('searchInput').value||'').toLowerCase().trim();
-    if(!q)return;
-    if(/vyapar|billing|invoice|gst|invoice/i.test(q)){window.location.href='/Vyapar_index.html';}
-    else if(/biz analyst|tally|mobile|sales team|gps/i.test(q)){window.location.href='/BizAnalyst_index.html';}
-    else if(/bill touch|restaurant|pos|liquor|hotel|food|swiggy|zomato|kds/i.test(q)){window.location.href='/Biltouch_index.html';}
-    else{window.location.href='/';}
-  }
-</script>
+</header>
 </body>
 </html>

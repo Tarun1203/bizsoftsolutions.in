@@ -1,8 +1,9 @@
 User-agent: *
 Allow: /
 
-# Admin dashboard — do not index
-Disallow: /bsm-admin-7k2x/
-Disallow: /dashboard/
-
 Sitemap: https://bizsoftsolutions.in/sitemap.xml
+
+# Note: the admin console (bsf-console.html) is deliberately NOT
+# listed here. Listing it under "Disallow" would reveal its URL.
+# It is protected by: no links anywhere on the site, a noindex
+# meta tag, and Firebase Authentication for all data access.

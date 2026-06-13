@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BSF Console</title>
+<meta name="robots" content="noindex, nofollow, noarchive"/>
+<style>
+:root{--navy:#0f1f3d;--blue:#2563eb;--ink:#1e293b;--mut:#64748b;--line:#e2e8f0;--bg:#f1f5f9;--green:#16a34a;--red:#dc2626;--amber:#d97706}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+button{cursor:pointer;font-family:inherit}
+input,select,textarea{font-family:inherit;font-size:13px;padding:8px 10px;border:1.5px solid var(--line);border-radius:8px;background:#fff}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue)}
+.hide{display:none!important}
+
+/* login */
+#loginView{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f1f3d,#1e3a6e)}
+.login-box{background:#fff;border-radius:16px;padding:38px;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.login-box h1{font-size:1.3rem;color:var(--navy);margin-bottom:4px}
+.login-box p{color:var(--mut);font-size:.85rem;margin-bottom:22px}
+.login-box input{width:100%;margin-bottom:12px;padding:11px 12px}
+.login-box button{width:100%;background:var(--blue);color:#fff;border:0;border-radius:9px;padding:12px;font-weight:700;font-size:14px}
+#loginErr{color:var(--red);font-size:.83rem;margin-top:10px;display:none}
+
+/* shell */
+.topbar{background:var(--navy);color:#fff;padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:50}
+.topbar b span{color:#f59e0b}
+.tabs{display:flex;gap:6px}
+.tabs button{background:transparent;border:0;color:#cbd5e1;padding:8px 16px;border-radius:8px;font-weight:600;font-size:13px}
+.tabs button.on{background:rgba(255,255,255,.15);color:#fff}
+#logoutBtn{background:rgba(255,255,255,.12);border:0;color:#fff;padding:8px 14px;border-radius:8px;font-size:12.5px}
+.wrap{max-width:1280px;margin:0 auto;padding:20px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:18px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat b{font-size:1.5rem;color:var(--navy);display:block}
+.stat span{color:var(--mut);font-size:.8rem}
+
+/* toolbar */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.toolbar input[type=search]{flex:1;min-width:200px}
+.btn{border:0;border-radius:8px;padding:9px 16px;font-weight:600;font-size:13px}
+.btn-b{background:var(--blue);color:#fff}.btn-g{background:#e2e8f0;color:var(--ink)}
+.btn-r{background:#fee2e2;color:var(--red)}
+
+/* table */
+.tblbox{background:#fff;border:1px solid var(--line);border-radius:12px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:980px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:13px;vertical-align:top}
+th{background:#f8fafc;color:var(--mut);font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;position:sticky;top:0}
+tr:hover td{background:#f8fafc}
+td select{padding:5px 7px;font-size:12.5px;border-radius:7px}
+.pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:11.5px;font-weight:700}
+.p-New{background:#dbeafe;color:#1d4ed8}.p-Attended{background:#fef3c7;color:#b45309}
+.p-Closed{background:#dcfce7;color:#15803d}.p-Notintrested{background:#fee2e2;color:#b91c1c}
+.muted{color:var(--mut);font-size:12px}
+.tick{font-weight:700;color:var(--navy);white-space:nowrap}
+td .note{width:160px;font-size:12px;padding:5px 7px}
+.del{background:none;border:0;color:var(--red);font-size:15px}
+.empty{text-align:center;color:var(--mut);padding:38px}
+
+/* plans */
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.plan-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}
+.plan-card h3{font-size:1rem;color:var(--navy)}
+.plan-card .sw{display:inline-block;background:#eff6ff;color:var(--blue);font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;margin-bottom:8px}
+.plan-card .pr{font-size:1.3rem;font-weight:800;color:var(--navy);margin:6px 0}
+.plan-card .pr small{color:var(--mut);font-weight:500;font-size:.8rem}
+.plan-card ul{margin:8px 0 12px 18px;color:var(--mut);font-size:12.5px}
+.plan-card .row{display:flex;gap:8px}
+.off{opacity:.45}
+
+/* modal */
+#modal{position:fixed;inset:0;background:rgba(15,31,61,.55);display:flex;align-items:center;justify-content:center;z-index:99;padding:16px}
+.mbox{background:#fff;border-radius:14px;padding:26px;width:480px;max-height:92vh;overflow:auto}
+.mbox h2{font-size:1.05rem;color:var(--navy);margin-bottom:16px}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.mrow.one{grid-template-columns:1fr}
+.mrow label{font-size:11.5px;font-weight:700;color:var(--mut);display:block;margin-bottom:4px}
+.mrow input,.mrow select,.mrow textarea{width:100%}
+.macts{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 22px;border-radius:99px;font-size:13px;opacity:0;transition:.3s;pointer-events:none;z-index:120}
+#toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="loginView">
+  <div class="login-box">
+    <h1>BizSoft<span style="color:#f59e0b">Solutions</span> Console</h1>
+    <p>Restricted area — authorized staff only.</p>
+    <input id="email" type="email" placeholder="Email" autocomplete="username"/>
+    <input id="pass" type="password" placeholder="Password" autocomplete="current-password"/>
+    <button id="loginBtn">Sign In</button>
+    <div id="loginErr"></div>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div id="appView" class="hide">
+  <div class="topbar">
+    <b>BizSoft<span>Solutions</span> · Console</b>
+    <div class="tabs">
+      <button id="tabLeads" class="on">📋 Leads</button>
+      <button id="tabPlans">💰 Plans &amp; Pricing</button>
+    </div>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <!-- Leads -->
+  <div class="wrap" id="leadsView">
+    <div class="stats" id="statRow"></div>
+    <div class="toolbar">
+      <input type="search" id="leadSearch" placeholder="Search name / phone / ticket / software…"/>
+      <select id="leadStatusFilter">
+        <option value="">All statuses</option><option>New</option><option>Attended</option>
+        <option>Closed</option><option>Notintrested</option>
+      </select>
+      <select id="leadDiscFilter">
+        <option value="">All discussions</option><option>Intersted</option><option>Time Nedded</option>
+        <option>Demo</option><option>Payment</option><option>Dicussion</option><option>Purchased</option>
+      </select>
+      <button class="btn btn-g" id="leadRefresh">↻ Refresh</button>
+      <button class="btn btn-g" id="leadExport">⬇ Export CSV</button>
+    </div>
+    <div class="tblbox">
+      <table>
+        <thead><tr>
+          <th>Ticket</th><th>Date</th><th>Name</th><th>Phone</th><th>Software</th>
+          <th>Message</th><th>Status</th><th>Discussion</th><th>Notes</th><th></th>
+        </tr></thead>
+        <tbody id="leadRows"><tr><td colspan="10" class="empty">Loading…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Plans -->
+  <div class="wrap hide" id="plansView">
+    <div class="toolbar">
+      <select id="planSwFilter">
+        <option value="">All software</option>
+        <option value="vyapar">Vyapar</option><option value="bizanalyst">Biz Analyst</option>
+        <option value="billtouch-pos">BillTouch POS</option><option value="billtouch-liquor">BillTouch Liquor</option>
+      </select>
+      <button class="btn btn-b" id="planAdd">＋ Add Plan</button>
+      <button class="btn btn-g" id="planRefresh">↻ Refresh</button>
+      <button class="btn btn-g" id="planSeed">🌱 Seed Default Plans</button>
+      <span class="muted">Changes go live on the website instantly.</span>
+    </div>
+    <div class="plan-grid" id="planGrid"></div>
+  </div>
+</div>
+
+<!-- Plan modal -->
+<div id="modal" class="hide">
+  <div class="mbox">
+    <h2 id="mTitle">Add Plan</h2>
+    <div class="mrow">
+      <div><label>Software</label>
+        <select id="mSw">
+          <option value="vyapar">Vyapar</option><option value="bizanalyst">Biz Analyst</option>
+          <option value="billtouch-pos">BillTouch POS</option><option value="billtouch-liquor">BillTouch Liquor</option>
+        </select></div>
+      <div><label>Plan Name</label><input id="mName" placeholder="e.g. Silver"/></div>
+    </div>
+    <div class="mrow">
+      <div><label>Price (₹, numbers only)</label><input id="mPrice" placeholder="3399"/></div>
+      <div><label>Period</label><input id="mPeriod" placeholder="/year" value="/year"/></div>
+    </div>
+    <div class="mrow">
+      <div><label>MRP (optional, strike-through)</label><input id="mMrp" placeholder="3999"/></div>
+      <div><label>Badge (optional)</label><input id="mBadge" placeholder="Most Popular"/></div>
+    </div>
+    <div class="mrow">
+      <div><label>Sort Order</label><input id="mOrder" type="number" value="1"/></div>
+      <div><label>Visible on site?</label><select id="mActive"><option value="true">Yes</option><option value="false">No (hidden)</option></select></div>
+    </div>
+    <div class="mrow one">
+      <div><label>Features — one per line</label><textarea id="mFeat" rows="6" placeholder="Single device&#10;All GST reports&#10;Free setup by BizSoft"></textarea></div>
+    </div>
+    <div class="macts">
+      <button class="btn btn-g" id="mCancel">Cancel</button>
+      <button class="btn btn-b" id="mSave">Save Plan</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+const KEY="AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4";
+const PROJ="bizsoftsolutions-8846b";
+const BASE=`https://firestore.googleapis.com/v1/projects/${PROJ}/databases/(default)/documents`;
+const $=id=>document.getElementById(id);
+let TOKEN=null, REFRESH=null, LEADS=[], PLANS=[];
+
+const STATUSES=["New","Attended","Closed","Notintrested"];
+const DISCUSSIONS=["","Intersted","Time Nedded","Demo","Payment","Dicussion","Purchased"];
+
+/* ── helpers ── */
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2200);}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function fv(f){if(!f)return"";if("stringValue"in f)return f.stringValue;if("integerValue"in f)return Number(f.integerValue);
+  if("doubleValue"in f)return Number(f.doubleValue);if("booleanValue"in f)return f.booleanValue;return"";}
+function sv(v){return{stringValue:String(v)};}
+
+/* ── auth (REST) ── */
+async function login(email,pass){
+  const r=await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${KEY}`,{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email,password:pass,returnSecureToken:true})});
+  const j=await r.json();
+  if(!r.ok)throw new Error((j.error&&j.error.message)||"LOGIN_FAILED");
+  TOKEN=j.idToken;REFRESH=j.refreshToken;
+  sessionStorage.setItem("bsf_rt",REFRESH);
+}
+async function refreshToken(){
+  const rt=REFRESH||sessionStorage.getItem("bsf_rt");
+  if(!rt)return false;
+  const r=await fetch(`https://securetoken.googleapis.com/v1/token?key=${KEY}`,{
+    method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},
+    body:`grant_type=refresh_token&refresh_token=${encodeURIComponent(rt)}`});
+  if(!r.ok)return false;
+  const j=await r.json();TOKEN=j.id_token;REFRESH=j.refresh_token;
+  sessionStorage.setItem("bsf_rt",REFRESH);return true;
+}
+async function api(path,opts={},retry=true){
+  opts.headers=Object.assign({"Content-Type":"application/json"},opts.headers,{Authorization:"Bearer "+TOKEN});
+  const r=await fetch(BASE+path,opts);
+  if(r.status===401&&retry&&await refreshToken())return api(path,opts,false);
+  if(!r.ok){const t=await r.text();throw new Error("API "+r.status+": "+t.slice(0,200));}
+  return r.status===200?r.json():null;
+}
+
+/* ── LEADS ── */
+async function loadLeads(){
+  $("leadRows").innerHTML=`<tr><td colspan="10" class="empty">Loading…</td></tr>`;
+  let docs=[],pageToken="";
+  try{
+    do{
+      const j=await api(`/leads?pageSize=300${pageToken?"&pageToken="+pageToken:""}`);
+      docs=docs.concat(j.documents||[]);pageToken=j.nextPageToken||"";
+    }while(pageToken&&docs.length<3000);
+  }catch(e){$("leadRows").innerHTML=`<tr><td colspan="10" class="empty">⚠ ${esc(e.message)}<br><span class="muted">Check Firestore rules allow authenticated reads (see SETUP.md).</span></td></tr>`;return;}
+  LEADS=docs.map(d=>{const f=d.fields||{};return{
+    id:d.name.split("/").pop(),
+    ticketId:fv(f.ticketId),name:fv(f.name),phone:fv(f.phone),
+    software:fv(f.software)||fv(f.businessType)||"",message:fv(f.message)||"",
+    source:fv(f.source)||"",timestamp:fv(f.timestamp)||d.createTime||"",
+    status:fv(f.status)||"New",discussion:fv(f.discussion)||"",notes:fv(f.notes)||""};});
+  LEADS.sort((a,b)=>String(b.timestamp).localeCompare(String(a.timestamp)));
+  renderLeads();
+}
+function renderStats(list){
+  const c=s=>LEADS.filter(l=>l.status===s).length;
+  $("statRow").innerHTML=`
+    <div class="stat"><b>${LEADS.length}</b><span>Total leads</span></div>
+    <div class="stat"><b>${c("New")}</b><span>🔵 New</span></div>
+    <div class="stat"><b>${c("Attended")}</b><span>🟡 Attended</span></div>
+    <div class="stat"><b>${c("Closed")}</b><span>🟢 Closed</span></div>
+    <div class="stat"><b>${c("Notintrested")}</b><span>🔴 Not interested</span></div>
+    <div class="stat"><b>${LEADS.filter(l=>l.discussion==="Purchased").length}</b><span>💰 Purchased</span></div>`;
+}
+function renderLeads(){
+  renderStats(LEADS);
+  const q=$("leadSearch").value.toLowerCase(),sf=$("leadStatusFilter").value,df=$("leadDiscFilter").value;
+  const list=LEADS.filter(l=>
+    (!sf||l.status===sf)&&(!df||l.discussion===df)&&
+    (!q||[l.name,l.phone,l.ticketId,l.software,l.message].join(" ").toLowerCase().includes(q)));
+  if(!list.length){$("leadRows").innerHTML=`<tr><td colspan="10" class="empty">No leads match.</td></tr>`;return;}
+  $("leadRows").innerHTML=list.map(l=>{
+    const d=l.timestamp?new Date(l.timestamp):null;
+    const dt=d&&!isNaN(d)?d.toLocaleDateString("en-IN",{day:"2-digit",month:"short"})+" "+d.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"}):"—";
+    return`<tr data-id="${l.id}">
+      <td class="tick">${esc(l.ticketId)||"—"}<br><span class="pill p-${esc(l.status)}">${esc(l.status)}</span></td>
+      <td class="muted">${dt}</td>
+      <td><b>${esc(l.name)}</b></td>
+      <td><a href="tel:${esc(l.phone)}">${esc(l.phone)}</a><br>
+          <a class="muted" target="_blank" href="https://wa.me/91${esc(String(l.phone).replace(/\D/g,"").slice(-10))}">WhatsApp ↗</a></td>
+      <td>${esc(l.software)||"<span class='muted'>—</span>"}</td>
+      <td class="muted" style="max-width:200px">${esc(l.message).slice(0,140)||"—"}</td>
+      <td><select data-f="status">${STATUSES.map(s=>`<option ${s===l.status?"selected":""}>${s}</option>`).join("")}</select></td>
+      <td><select data-f="discussion">${DISCUSSIONS.map(s=>`<option value="${s}" ${s===l.discussion?"selected":""}>${s||"—"}</option>`).join("")}</select></td>
+      <td><input class="note" data-f="notes" value="${esc(l.notes)}" placeholder="notes…"/></td>
+      <td><button class="del" title="Delete lead">🗑</button></td>
+    </tr>`;}).join("");
+}
+async function patchLead(id,field,val){
+  await api(`/leads/${id}?updateMask.fieldPaths=${field}`,{method:"PATCH",
+    body:JSON.stringify({fields:{[field]:sv(val)}})});
+  const l=LEADS.find(x=>x.id===id);if(l)l[field]=val;
+  renderStats(LEADS);toast("Saved ✓");
+}
+$("leadRows").addEventListener("change",e=>{
+  const tr=e.target.closest("tr"),f=e.target.dataset.f;
+  if(tr&&f&&e.target.tagName==="SELECT")patchLead(tr.dataset.id,f,e.target.value).catch(err=>toast("⚠ "+err.message));
+});
+$("leadRows").addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&e.target.dataset.f==="notes"){e.target.blur();}
+});
+$("leadRows").addEventListener("focusout",e=>{
+  const tr=e.target.closest("tr");
+  if(tr&&e.target.dataset.f==="notes"){
+    const l=LEADS.find(x=>x.id===tr.dataset.id);
+    if(l&&l.notes!==e.target.value)patchLead(tr.dataset.id,"notes",e.target.value).catch(err=>toast("⚠ "+err.message));
+  }
+});
+$("leadRows").addEventListener("click",async e=>{
+  if(!e.target.classList.contains("del"))return;
+  const tr=e.target.closest("tr");
+  if(!confirm("Delete this lead permanently?"))return;
+  try{await api(`/leads/${tr.dataset.id}`,{method:"DELETE"});
+    LEADS=LEADS.filter(x=>x.id!==tr.dataset.id);renderLeads();toast("Lead deleted");}
+  catch(err){toast("⚠ "+err.message);}
+});
+$("leadSearch").addEventListener("input",renderLeads);
+$("leadStatusFilter").addEventListener("change",renderLeads);
+$("leadDiscFilter").addEventListener("change",renderLeads);
+$("leadRefresh").addEventListener("click",loadLeads);
+$("leadExport").addEventListener("click",()=>{
+  const rows=[["Ticket","Date","Name","Phone","Software","Message","Status","Discussion","Notes","Source"]];
+  LEADS.forEach(l=>rows.push([l.ticketId,l.timestamp,l.name,l.phone,l.software,l.message,l.status,l.discussion,l.notes,l.source]));
+  const csv=rows.map(r=>r.map(c=>`"${String(c==null?"":c).replace(/"/g,'""')}"`).join(",")).join("\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["﻿"+csv],{type:"text/csv"}));
+  a.download="bizsoft-leads.csv";a.click();
+});
+
+/* ── PLANS ── */
+const SW_LABEL={"vyapar":"Vyapar","bizanalyst":"Biz Analyst","billtouch-pos":"BillTouch POS","billtouch-liquor":"BillTouch Liquor"};
+async function loadPlans(){
+  $("planGrid").innerHTML=`<div class="muted">Loading…</div>`;
+  try{
+    const j=await api(`/plans?pageSize=200`);
+    PLANS=(j.documents||[]).map(d=>{const f=d.fields||{};return{
+      id:d.name.split("/").pop(),software:String(fv(f.software)).toLowerCase(),name:fv(f.name),
+      price:fv(f.price),period:fv(f.period)||"/year",mrp:fv(f.mrp),badge:fv(f.badge),
+      features:String(fv(f.features)||""),order:Number(fv(f.order))||1,
+      active:String(fv(f.active))!=="false"};});
+    PLANS.sort((a,b)=>a.software.localeCompare(b.software)||a.order-b.order);
+  }catch(e){$("planGrid").innerHTML=`<div class="muted">⚠ ${esc(e.message)}</div>`;return;}
+  renderPlans();
+}
+function renderPlans(){
+  const f=$("planSwFilter").value;
+  const list=PLANS.filter(p=>!f||p.software===f);
+  $("planGrid").innerHTML=list.length?list.map(p=>`
+    <div class="plan-card ${p.active?"":"off"}">
+      <span class="sw">${esc(SW_LABEL[p.software]||p.software)}</span>${p.badge?` <span class="sw" style="background:#fef3c7;color:#b45309">${esc(p.badge)}</span>`:""}${p.active?"":` <span class="sw" style="background:#fee2e2;color:#b91c1c">Hidden</span>`}
+      <h3>${esc(p.name)}</h3>
+      <div class="pr">₹${esc(p.price)}<small>${esc(p.period)}</small>${p.mrp?` <small style="text-decoration:line-through">₹${esc(p.mrp)}</small>`:""}</div>
+      <ul>${p.features.split("|").filter(Boolean).map(x=>`<li>${esc(x.trim())}</li>`).join("")}</ul>
+      <div class="row">
+        <button class="btn btn-g" data-act="edit" data-id="${p.id}">✏️ Edit</button>
+        <button class="btn btn-r" data-act="del" data-id="${p.id}">Delete</button>
+      </div>
+    </div>`).join(""):`<div class="muted">No plans yet — click "＋ Add Plan" or "🌱 Seed Default Plans".</div>`;
+}
+let EDIT_ID=null;
+function openModal(p){
+  EDIT_ID=p?p.id:null;
+  $("mTitle").textContent=p?"Edit Plan":"Add Plan";
+  $("mSw").value=p?p.software:"vyapar";$("mName").value=p?p.name:"";
+  $("mPrice").value=p?p.price:"";$("mPeriod").value=p?p.period:"/year";
+  $("mMrp").value=p?p.mrp:"";$("mBadge").value=p?p.badge:"";
+  $("mOrder").value=p?p.order:1;$("mActive").value=p?String(p.active):"true";
+  $("mFeat").value=p?p.features.split("|").map(s=>s.trim()).filter(Boolean).join("\n"):"";
+  $("modal").classList.remove("hide");
+}
+$("planAdd").addEventListener("click",()=>openModal(null));
+$("mCancel").addEventListener("click",()=>$("modal").classList.add("hide"));
+$("modal").addEventListener("click",e=>{if(e.target.id==="modal")$("modal").classList.add("hide");});
+$("mSave").addEventListener("click",async()=>{
+  const name=$("mName").value.trim(),price=$("mPrice").value.trim();
+  if(!name||!price){toast("Name and price are required");return;}
+  const fields={
+    software:sv($("mSw").value),name:sv(name),price:sv(price),
+    period:sv($("mPeriod").value.trim()||"/year"),mrp:sv($("mMrp").value.trim()),
+    badge:sv($("mBadge").value.trim()),order:{integerValue:String(parseInt($("mOrder").value)||1)},
+    active:sv($("mActive").value),
+    features:sv($("mFeat").value.split("\n").map(s=>s.trim()).filter(Boolean).join("|"))};
+  try{
+    if(EDIT_ID){
+      const mask=Object.keys(fields).map(k=>"updateMask.fieldPaths="+k).join("&");
+      await api(`/plans/${EDIT_ID}?${mask}`,{method:"PATCH",body:JSON.stringify({fields})});
+    }else{
+      await api(`/plans`,{method:"POST",body:JSON.stringify({fields})});
+    }
+    $("modal").classList.add("hide");toast("Plan saved ✓ — live on site");loadPlans();
+  }catch(err){toast("⚠ "+err.message);}
+});
+$("planGrid").addEventListener("click",async e=>{
+  const b=e.target.closest("button");if(!b)return;
+  const p=PLANS.find(x=>x.id===b.dataset.id);
+  if(b.dataset.act==="edit")openModal(p);
+  if(b.dataset.act==="del"&&confirm(`Delete plan "${p.name}"? It disappears from the website immediately.`)){
+    try{await api(`/plans/${p.id}`,{method:"DELETE"});toast("Plan deleted");loadPlans();}
+    catch(err){toast("⚠ "+err.message);}
+  }
+});
+$("planSwFilter").addEventListener("change",renderPlans);
+$("planRefresh").addEventListener("click",loadPlans);
+$("planSeed").addEventListener("click",async()=>{
+  if(!confirm("Create the default starter plans for all 4 softwares? (You can edit prices after.)"))return;
+  const seed=[
+    ["vyapar","Silver — 1 Device","3399","3999","","1",["Desktop OR mobile (1 device)","Unlimited GST invoices","Inventory with low-stock alerts","40+ reports, GSTR exports","Free setup & training by BizSoft"]],
+    ["vyapar","Gold — Desktop + Mobile","3999","4799","Most Popular","2",["Desktop + mobile with sync","Multi-user role access","Online store & premium features","All Silver features","Free setup & training by BizSoft"]],
+    ["bizanalyst","Standard — Per User","3000","3600","","1",["Live Tally dashboard on mobile","Auto payment reminders","All analysis reports","Works with ERP 9 & TallyPrime","Free sync setup by BizSoft"]],
+    ["bizanalyst","Premium — Per User","4200","5000","Best Value","2",["Everything in Standard","Data entry → Tally vouchers","Sales team tracking & check-ins","Granular role permissions","Priority support"]],
+    ["billtouch-pos","Starter — Single Outlet","9999","12999","","1",["Billing + KOT printing","Table management","GST & day-end reports","Owner mobile app","Installation & menu setup free"]],
+    ["billtouch-pos","Pro — Single Outlet","15999","19999","Most Popular","2",["Everything in Starter","Zomato/Swiggy integration","Recipe-level inventory","Captain app + KDS","CRM & loyalty"]],
+    ["billtouch-liquor","Retail — Wine Shop","11999","14999","","1",["Brand/size/batch stock","Barcode billing with MRP lock","Excise-ready registers","Day-end reconciliation","Brand master setup free"]],
+    ["billtouch-liquor","Retail + Bar","17999","21999","For Permit Rooms","2",["Everything in Retail","Peg-wise bar sales (30/60ml)","Permit-room reporting","Owner mobile reports","Priority support"]]];
+  try{
+    for(const[sw,name,price,mrp,badge,order,feats]of seed){
+      await api(`/plans`,{method:"POST",body:JSON.stringify({fields:{
+        software:sv(sw),name:sv(name),price:sv(price),mrp:sv(mrp),badge:sv(badge),
+        period:sv("/year"),order:{integerValue:order},active:sv("true"),features:sv(feats.join("|"))}})});
+    }
+    toast("Default plans created ✓");loadPlans();
+  }catch(err){toast("⚠ "+err.message);}
+});
+
+/* ── tabs / login / boot ── */
+function showTab(t){
+  $("tabLeads").classList.toggle("on",t==="leads");$("tabPlans").classList.toggle("on",t==="plans");
+  $("leadsView").classList.toggle("hide",t!=="leads");$("plansView").classList.toggle("hide",t!=="plans");
+}
+$("tabLeads").addEventListener("click",()=>showTab("leads"));
+$("tabPlans").addEventListener("click",()=>{showTab("plans");if(!PLANS.length)loadPlans();});
+$("logoutBtn").addEventListener("click",()=>{sessionStorage.removeItem("bsf_rt");location.reload();});
+
+async function enter(){
+  $("loginView").classList.add("hide");$("appView").classList.remove("hide");
+  loadLeads();
+}
+$("loginBtn").addEventListener("click",async()=>{
+  const err=$("loginErr");err.style.display="none";
+  $("loginBtn").textContent="Signing in…";$("loginBtn").disabled=true;
+  try{await login($("email").value.trim(),$("pass").value);enter();}
+  catch(e){
+    const m={EMAIL_NOT_FOUND:"No such admin user.",INVALID_PASSWORD:"Wrong password.",INVALID_LOGIN_CREDENTIALS:"Wrong email or password.",TOO_MANY_ATTEMPTS_TRY_LATER:"Too many attempts — wait a few minutes."}[e.message]||e.message;
+    err.textContent="⚠ "+m;err.style.display="block";
+  }finally{$("loginBtn").textContent="Sign In";$("loginBtn").disabled=false;}
+});
+$("pass").addEventListener("keydown",e=>{if(e.key==="Enter")$("loginBtn").click();});
+
+/* auto-login from stored refresh token */
+(async()=>{if(await refreshToken())enter();})();
+})();
+</script>
+</body>
+</html>
