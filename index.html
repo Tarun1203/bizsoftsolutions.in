@@ -136,6 +136,12 @@
 </head>
 <body>
 
+<div id="offerBanner" style="display:none;overflow:hidden;padding:.45rem 0;text-align:center;font-size:.85rem;font-weight:600;letter-spacing:.01em">
+  <span class="ticker-inner" style="display:inline-block;white-space:nowrap;animation:bsfTicker 35s linear infinite"></span>
+</div>
+<style>@keyframes bsfTicker{from{transform:translateX(100vw)}to{transform:translateX(-100%)}}</style>
+<script src="/settings.js"></script>
+
 <nav>
   <a href="/index.html" class="logo">BizSoft<span>Solutions</span></a>
   <button class="hamburger" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">

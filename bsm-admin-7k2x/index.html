@@ -96,9 +96,32 @@
     .empty{text-align:center;padding:3rem;color:var(--muted);font-size:.95rem}
     .err-row{text-align:center;padding:2rem;color:var(--red)}
 
+    /* TABS */
+    .tab-bar{display:flex;gap:.5rem;margin-bottom:1.5rem}
+    .tab-btn{padding:.55rem 1.3rem;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-size:.88rem;font-weight:700;cursor:pointer;color:var(--muted)}
+    .tab-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+    /* SETTINGS */
+    .settings-section{margin-bottom:2rem}
+    .settings-card{background:var(--card);border-radius:10px;padding:1.5rem;margin-bottom:1.2rem;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+    .settings-card h3{font-size:1rem;font-weight:700;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+    .sf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.75rem;margin-bottom:1rem}
+    .sf-group{display:flex;flex-direction:column;gap:.25rem}
+    .sf-group label{font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+    .sf-group input,.sf-group textarea,.sf-group select{padding:.5rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-size:.88rem;outline:none;transition:border .2s;background:#fff}
+    .sf-group input:focus,.sf-group textarea:focus,.sf-group select:focus{border-color:var(--primary)}
+    .sf-group textarea{resize:vertical;min-height:64px}
+    .save-btn{background:var(--green);color:#fff;border:none;padding:.6rem 1.5rem;border-radius:8px;font-size:.88rem;font-weight:700;cursor:pointer}
+    .save-btn:hover{background:#1b5e20}
+    .save-msg{font-size:.82rem;margin-left:.75rem;font-weight:600}
+    .save-msg.ok{color:var(--green)}
+    .save-msg.err{color:var(--red)}
+    .sf-section-title{font-size:.8rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin:.9rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px dashed var(--border)}
+
     @media(max-width:640px){
       .stats{grid-template-columns:1fr 1fr}
       .controls input{min-width:150px}
+      .sf-grid{grid-template-columns:1fr 1fr}
     }
   </style>
 </head>
@@ -128,6 +151,15 @@
     </div>
   </header>
   <div class="dash-body">
+
+    <!-- TAB BAR -->
+    <div class="tab-bar">
+      <button class="tab-btn active" id="tabLeadsBtn" onclick="switchTab('leads')">📋 Leads</button>
+      <button class="tab-btn" id="tabSettingsBtn" onclick="switchTab('settings')">⚙️ Settings</button>
+    </div>
+
+    <!-- LEADS PANEL -->
+    <div id="tabLeads">
 
     <!-- STATS -->
     <div class="stats">
@@ -191,8 +223,105 @@
         </tbody>
       </table>
     </div>
-  </div>
-</div>
+    </div><!-- /tabLeads -->
+
+    <!-- SETTINGS PANEL -->
+    <div id="tabSettings" style="display:none">
+
+      <!-- OFFER BANNER -->
+      <div class="settings-card">
+        <h3>🎉 Offer / Announcement Banner</h3>
+        <div class="sf-grid" style="grid-template-columns:1fr">
+          <div class="sf-group">
+            <label>Message (scrolls across all pages)</label>
+            <textarea id="s_offer_msg" placeholder="e.g. 🎉 Special Offer: Get Vyapar at 20% OFF this month! Call 98765 43210"></textarea>
+          </div>
+        </div>
+        <div class="sf-grid">
+          <div class="sf-group">
+            <label>Active</label>
+            <select id="s_offer_active">
+              <option value="true">✅ Show banner on all pages</option>
+              <option value="false">❌ Hide banner</option>
+            </select>
+          </div>
+          <div class="sf-group">
+            <label>Background Color</label>
+            <input type="color" id="s_offer_bg" value="#c62828" style="height:38px;padding:.2rem .4rem;cursor:pointer"/>
+          </div>
+          <div class="sf-group">
+            <label>Text Color</label>
+            <input type="color" id="s_offer_color" value="#ffffff" style="height:38px;padding:.2rem .4rem;cursor:pointer"/>
+          </div>
+        </div>
+        <button class="save-btn" onclick="saveSection('offer')">Save Banner</button>
+        <span class="save-msg" id="msg_offer"></span>
+      </div>
+
+      <!-- VYAPAR PRICES -->
+      <div class="settings-card">
+        <h3>💼 Vyapar Plan Prices (enter numbers only, + GST auto-shown)</h3>
+
+        <div class="sf-section-title">1 Year — Desktop Only</div>
+        <div class="sf-grid">
+          <div class="sf-group"><label>Silver</label><input type="number" id="s_v_s_1d" placeholder="3399"/></div>
+          <div class="sf-group"><label>Gold</label><input type="number" id="s_v_g_1d" placeholder="3699"/></div>
+          <div class="sf-group"><label>Retail Pro</label><input type="number" id="s_v_r_1d" placeholder="8999"/></div>
+          <div class="sf-group"><label>Distributor Pro</label><input type="number" id="s_v_d_1d" placeholder="8999"/></div>
+          <div class="sf-group"><label>Mfg Pro</label><input type="number" id="s_v_m_1d" placeholder="8999"/></div>
+          <div class="sf-group"><label>Platinum</label><input type="number" id="s_v_p_1d" placeholder="9999"/></div>
+        </div>
+
+        <div class="sf-section-title">1 Year — Desktop + Mobile</div>
+        <div class="sf-grid">
+          <div class="sf-group"><label>Silver</label><input type="number" id="s_v_s_1dm" placeholder="3999"/></div>
+          <div class="sf-group"><label>Gold</label><input type="number" id="s_v_g_1dm" placeholder="4299"/></div>
+          <div class="sf-group"><label>Retail Pro</label><input type="number" id="s_v_r_1dm" placeholder="9999"/></div>
+          <div class="sf-group"><label>Distributor Pro</label><input type="number" id="s_v_d_1dm" placeholder="9999"/></div>
+          <div class="sf-group"><label>Mfg Pro</label><input type="number" id="s_v_m_1dm" placeholder="9999"/></div>
+          <div class="sf-group"><label>Platinum</label><input type="number" id="s_v_p_1dm" placeholder="11999"/></div>
+        </div>
+
+        <div class="sf-section-title">3 Year — Desktop Only</div>
+        <div class="sf-grid">
+          <div class="sf-group"><label>Silver</label><input type="number" id="s_v_s_3d" placeholder="7799"/></div>
+          <div class="sf-group"><label>Gold</label><input type="number" id="s_v_g_3d" placeholder="8199"/></div>
+          <div class="sf-group"><label>Retail Pro</label><input type="number" id="s_v_r_3d" placeholder="19799"/></div>
+          <div class="sf-group"><label>Distributor Pro</label><input type="number" id="s_v_d_3d" placeholder="19799"/></div>
+          <div class="sf-group"><label>Mfg Pro</label><input type="number" id="s_v_m_3d" placeholder="19799"/></div>
+          <div class="sf-group"><label>Platinum</label><input type="number" id="s_v_p_3d" placeholder="21999"/></div>
+        </div>
+
+        <div class="sf-section-title">3 Year — Desktop + Mobile</div>
+        <div class="sf-grid">
+          <div class="sf-group"><label>Silver</label><input type="number" id="s_v_s_3dm" placeholder="8699"/></div>
+          <div class="sf-group"><label>Gold</label><input type="number" id="s_v_g_3dm" placeholder="8999"/></div>
+          <div class="sf-group"><label>Retail Pro</label><input type="number" id="s_v_r_3dm" placeholder="21999"/></div>
+          <div class="sf-group"><label>Distributor Pro</label><input type="number" id="s_v_d_3dm" placeholder="21999"/></div>
+          <div class="sf-group"><label>Mfg Pro</label><input type="number" id="s_v_m_3dm" placeholder="21999"/></div>
+          <div class="sf-group"><label>Platinum</label><input type="number" id="s_v_p_3dm" placeholder="25999"/></div>
+        </div>
+
+        <button class="save-btn" onclick="saveSection('vyapar')">Save Vyapar Prices</button>
+        <span class="save-msg" id="msg_vyapar"></span>
+      </div>
+
+      <!-- BIZ ANALYST PRICES -->
+      <div class="settings-card">
+        <h3>📊 Biz Analyst Plan Prices</h3>
+        <div class="sf-grid">
+          <div class="sf-group"><label>One Year</label><input type="number" id="s_ba_1yr" placeholder="3300"/></div>
+          <div class="sf-group"><label>Business Plan (2 Years)</label><input type="number" id="s_ba_2yr" placeholder="6600"/></div>
+          <div class="sf-group"><label>Five Years</label><input type="number" id="s_ba_5yr" placeholder="9900"/></div>
+        </div>
+        <button class="save-btn" onclick="saveSection('biz')">Save Biz Analyst Prices</button>
+        <span class="save-msg" id="msg_biz"></span>
+      </div>
+
+    </div><!-- /tabSettings -->
+
+  </div><!-- /dash-body -->
+</div><!-- /dashScreen -->
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
@@ -428,6 +557,97 @@
   function setBody(html){ document.getElementById("leadsBody").innerHTML = html; }
   function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 })();
+
+// ── TAB SWITCHING ─────────────────────────────────────────────
+function switchTab(tab){
+  document.getElementById("tabLeads").style.display    = tab==="leads"    ? "block" : "none";
+  document.getElementById("tabSettings").style.display = tab==="settings" ? "block" : "none";
+  document.getElementById("tabLeadsBtn").classList.toggle("active",    tab==="leads");
+  document.getElementById("tabSettingsBtn").classList.toggle("active", tab==="settings");
+  if(tab==="settings") loadSettingsForm();
+}
+
+// ── SETTINGS LOAD & SAVE ──────────────────────────────────────
+const FB_API_KEY_S  = "AIzaSyBVq7cI62VX-fGfQj32-mdyu30JygMFwWQ";
+const FB_PROJECT_S  = "bizsoftsolutions-7a47d";
+const FS_SETTINGS   = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT_S}/databases/(default)/documents/settings/config`;
+
+const PRICE_KEYS = [
+  "v_s_1d","v_g_1d","v_r_1d","v_d_1d","v_m_1d","v_p_1d",
+  "v_s_1dm","v_g_1dm","v_r_1dm","v_d_1dm","v_m_1dm","v_p_1dm",
+  "v_s_3d","v_g_3d","v_r_3d","v_d_3d","v_m_3d","v_p_3d",
+  "v_s_3dm","v_g_3dm","v_r_3dm","v_d_3dm","v_m_3dm","v_p_3dm",
+  "ba_1yr","ba_2yr","ba_5yr"
+];
+
+async function getToken(){
+  const user = firebase.auth().currentUser;
+  return user ? await user.getIdToken() : "";
+}
+
+async function loadSettingsForm(){
+  try {
+    const token = await getToken();
+    const res = await fetch(FS_SETTINGS, { headers:{ Authorization:`Bearer ${token}` }});
+    if(!res.ok && res.status !== 404) return;
+    if(res.status === 404) return; // no settings yet — form stays empty
+    const data = await res.json();
+    const f = data.fields || {};
+    const get = k => (f[k]?.stringValue) || "";
+
+    // Offer
+    document.getElementById("s_offer_msg").value    = get("offer_msg");
+    document.getElementById("s_offer_active").value = get("offer_active") || "false";
+    if(get("offer_bg"))    document.getElementById("s_offer_bg").value    = get("offer_bg");
+    if(get("offer_color")) document.getElementById("s_offer_color").value = get("offer_color");
+
+    // Prices
+    PRICE_KEYS.forEach(k => {
+      const el = document.getElementById("s_" + k);
+      if(el && get(k)) el.value = get(k);
+    });
+  } catch(e){ console.error("loadSettingsForm:", e); }
+}
+
+async function saveSection(section){
+  const msgEl = document.getElementById("msg_" + section);
+  msgEl.textContent = "Saving…"; msgEl.className = "save-msg";
+  try {
+    const token = await getToken();
+    const fields = {};
+
+    if(section === "offer"){
+      fields.offer_msg    = { stringValue: document.getElementById("s_offer_msg").value.trim() };
+      fields.offer_active = { stringValue: document.getElementById("s_offer_active").value };
+      fields.offer_bg     = { stringValue: document.getElementById("s_offer_bg").value };
+      fields.offer_color  = { stringValue: document.getElementById("s_offer_color").value };
+    } else if(section === "vyapar"){
+      const keys = PRICE_KEYS.filter(k => k.startsWith("v_"));
+      keys.forEach(k => {
+        const el = document.getElementById("s_" + k);
+        if(el && el.value) fields[k] = { stringValue: el.value };
+      });
+    } else if(section === "biz"){
+      ["ba_1yr","ba_2yr","ba_5yr"].forEach(k => {
+        const el = document.getElementById("s_" + k);
+        if(el && el.value) fields[k] = { stringValue: el.value };
+      });
+    }
+
+    // Build updateMask from fields
+    const mask = Object.keys(fields).map(k => "updateMask.fieldPaths=" + k).join("&");
+    const res = await fetch(`${FS_SETTINGS}?${mask}`, {
+      method: "PATCH",
+      headers: { Authorization:`Bearer ${token}`, "Content-Type":"application/json" },
+      body: JSON.stringify({ fields })
+    });
+    if(!res.ok) throw new Error(res.status);
+    msgEl.textContent = "✅ Saved!"; msgEl.className = "save-msg ok";
+    setTimeout(() => { msgEl.textContent = ""; }, 3000);
+  } catch(e){
+    msgEl.textContent = "❌ Error: " + e.message; msgEl.className = "save-msg err";
+  }
+}
 </script>
 </body>
 </html>
