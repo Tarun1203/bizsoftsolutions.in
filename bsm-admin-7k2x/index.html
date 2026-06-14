@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — BizSoft Solutions</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{--primary:#1565c0;--accent:#ff6f00;--green:#2e7d32;--red:#c62828;--bg:#f0f2f5;--card:#fff;--border:#e0e0e0;--text:#1a1a2e;--muted:#607d8b}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+    /* LOGIN */
+    #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:1.5rem}
+    .login-card{background:var(--card);border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,.12);padding:2.5rem;width:100%;max-width:380px}
+    .login-logo{font-size:1.3rem;font-weight:800;color:var(--primary);margin-bottom:.25rem}
+    .login-logo span{color:var(--accent)}
+    .login-sub{font-size:.82rem;color:var(--muted);margin-bottom:2rem}
+    .login-card label{display:block;font-size:.82rem;font-weight:600;margin-bottom:.35rem;color:var(--text)}
+    .login-card input{width:100%;padding:.7rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;margin-bottom:1rem;outline:none;transition:border .2s}
+    .login-card input:focus{border-color:var(--primary)}
+    #loginBtn{width:100%;background:var(--primary);color:#fff;border:none;padding:.8rem;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:.25rem}
+    #loginBtn:hover{background:#0d47a1}
+    #loginBtn:disabled{opacity:.6;cursor:not-allowed}
+    #loginErr{color:var(--red);font-size:.82rem;margin-top:.75rem;display:none}
+
+    /* DASHBOARD */
+    #dashScreen{display:none}
+    header{background:var(--primary);color:#fff;padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    .h-logo{font-size:1rem;font-weight:800}
+    .h-logo span{color:#ffcc02}
+    .h-right{display:flex;align-items:center;gap:1rem}
+    #userEmail{font-size:.8rem;opacity:.8}
+    #logoutBtn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);padding:.4rem .9rem;border-radius:6px;cursor:pointer;font-size:.8rem;font-weight:600}
+    #logoutBtn:hover{background:rgba(255,255,255,.25)}
+
+    .dash-body{max-width:1100px;margin:0 auto;padding:1.5rem}
+
+    /* STAT CARDS */
+    .stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:1.5rem}
+    .stat{background:var(--card);border-radius:10px;padding:1.2rem 1.5rem;border-left:4px solid var(--primary)}
+    .stat.green{border-color:var(--green)}
+    .stat.orange{border-color:var(--accent)}
+    .stat-label{font-size:.75rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem}
+    .stat-val{font-size:2rem;font-weight:800;color:var(--text)}
+
+    /* CONTROLS */
+    .controls{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
+    .controls input{padding:.55rem .9rem;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;min-width:220px;outline:none}
+    .controls input:focus{border-color:var(--primary)}
+    .controls select{padding:.55rem .75rem;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;background:#fff;outline:none;cursor:pointer}
+    #refreshBtn{background:var(--primary);color:#fff;border:none;padding:.55rem 1.2rem;border-radius:8px;font-size:.88rem;font-weight:700;cursor:pointer}
+    #refreshBtn:hover{background:#0d47a1}
+    #exportBtn{background:#fff;color:var(--text);border:1.5px solid var(--border);padding:.55rem 1.2rem;border-radius:8px;font-size:.88rem;font-weight:600;cursor:pointer}
+    #exportBtn:hover{border-color:var(--primary);color:var(--primary)}
+
+    /* TABLE */
+    .table-wrap{background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+    table{width:100%;border-collapse:collapse;font-size:.85rem}
+    thead{background:var(--primary);color:#fff;position:sticky;top:56px}
+    th{padding:.75rem 1rem;text-align:left;font-weight:600;white-space:nowrap}
+    td{padding:.7rem 1rem;border-bottom:1px solid var(--border);vertical-align:middle}
+    tr:last-child td{border-bottom:none}
+    tr:hover td{background:#f5f8ff}
+    .badge{display:inline-block;font-size:.72rem;font-weight:700;padding:.15rem .55rem;border-radius:6px;white-space:nowrap}
+    .badge-vyapar{background:#e3f2fd;color:#1565c0}
+    .badge-biz{background:#e8f5e9;color:#2e7d32}
+    .badge-bill{background:#fce4ec;color:#c62828}
+    .badge-other{background:#f3e5f5;color:#6a1b9a}
+    .ticket{font-family:monospace;font-size:.78rem;color:var(--muted)}
+    .empty{text-align:center;padding:3rem;color:var(--muted);font-size:.95rem}
+    #loadingRow{text-align:center;padding:2rem;color:var(--muted)}
+
+    @media(max-width:640px){
+      .stats{grid-template-columns:1fr 1fr}
+      th:nth-child(4),td:nth-child(4),th:nth-child(5),td:nth-child(5){display:none}
+      .controls input{min-width:160px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">BizSoft<span>Solutions</span></div>
+    <div class="login-sub">Admin Dashboard — Leads Database</div>
+    <label>Email</label>
+    <input type="email" id="loginEmail" placeholder="admin@example.com" autocomplete="username"/>
+    <label>Password</label>
+    <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"/>
+    <button id="loginBtn">Sign In</button>
+    <div id="loginErr">❌ Invalid email or password. Try again.</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashScreen">
+  <header>
+    <span class="h-logo">BizSoft<span>Solutions</span> Admin</span>
+    <div class="h-right">
+      <span id="userEmail"></span>
+      <button id="logoutBtn">Sign Out</button>
+    </div>
+  </header>
+  <div class="dash-body">
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Total Leads</div><div class="stat-val" id="statTotal">—</div></div>
+      <div class="stat"><div class="stat-label">Vyapar</div><div class="stat-val" id="statVyapar">—</div></div>
+      <div class="stat green"><div class="stat-label">Biz Analyst</div><div class="stat-val" id="statBiz">—</div></div>
+      <div class="stat orange"><div class="stat-label">Bill Touch</div><div class="stat-val" id="statBill">—</div></div>
+    </div>
+    <div class="controls">
+      <input type="text" id="searchBox" placeholder="🔍 Search name, phone, city…"/>
+      <select id="filterSw">
+        <option value="">All Software</option>
+        <option value="Vyapar">Vyapar</option>
+        <option value="Biz Analyst">Biz Analyst</option>
+        <option value="Bill Touch">Bill Touch</option>
+      </select>
+      <button id="refreshBtn">↻ Refresh</button>
+      <button id="exportBtn">⬇ Export CSV</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date & Time</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>Software</th>
+            <th>Plan</th>
+            <th>Ticket ID</th>
+          </tr>
+        </thead>
+        <tbody id="leadsBody">
+          <tr><td colspan="8" id="loadingRow">Loading leads…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+(function(){
+  const FB_API_KEY  = "AIzaSyBVq7cI62VX-fGfQj32-mdyu30JygMFwWQ";
+  const FB_PROJECT  = "bizsoftsolutions-7a47d";
+  const AUTH_DOMAIN = "bizsoftsolutions-7a47d.firebaseapp.com";
+
+  firebase.initializeApp({ apiKey:FB_API_KEY, authDomain:AUTH_DOMAIN, projectId:FB_PROJECT });
+  const auth = firebase.auth();
+
+  let allLeads = [];
+
+  // ── AUTH STATE ──────────────────────────────────────────
+  auth.onAuthStateChanged(user => {
+    if(user){
+      document.getElementById("loginScreen").style.display = "none";
+      document.getElementById("dashScreen").style.display  = "block";
+      document.getElementById("userEmail").textContent = user.email;
+      loadLeads(user);
+    } else {
+      document.getElementById("loginScreen").style.display = "flex";
+      document.getElementById("dashScreen").style.display  = "none";
+    }
+  });
+
+  // ── LOGIN ───────────────────────────────────────────────
+  document.getElementById("loginBtn").addEventListener("click", async () => {
+    const email = document.getElementById("loginEmail").value.trim();
+    const pass  = document.getElementById("loginPass").value;
+    const btn   = document.getElementById("loginBtn");
+    const err   = document.getElementById("loginErr");
+    err.style.display = "none";
+    btn.disabled = true; btn.textContent = "Signing in…";
+    try {
+      await auth.signInWithEmailAndPassword(email, pass);
+    } catch(e) {
+      err.style.display = "block";
+      btn.disabled = false; btn.textContent = "Sign In";
+    }
+  });
+
+  document.getElementById("loginPass").addEventListener("keydown", e => {
+    if(e.key === "Enter") document.getElementById("loginBtn").click();
+  });
+
+  // ── LOGOUT ──────────────────────────────────────────────
+  document.getElementById("logoutBtn").addEventListener("click", () => auth.signOut());
+
+  // ── LOAD LEADS ──────────────────────────────────────────
+  async function loadLeads(user){
+    document.getElementById("loadingRow").textContent = "Loading leads…";
+    try {
+      const token = await user.getIdToken(true);
+      let url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents/leads?pageSize=300`;
+      const res = await fetch(url, { headers:{ Authorization:`Bearer ${token}` }});
+      if(!res.ok) throw new Error("HTTP "+res.status);
+      const data = await res.json();
+      allLeads = (data.documents || []).map(parseDoc).sort((a,b)=>b.ts-a.ts);
+      renderTable(allLeads);
+      updateStats(allLeads);
+    } catch(e){
+      document.getElementById("loadingRow").textContent = "⚠️ Error loading leads: "+e.message;
+    }
+  }
+
+  function parseDoc(doc){
+    const f = doc.fields || {};
+    const get = k => (f[k]?.stringValue || f[k]?.integerValue || "");
+    const ts = f.timestamp?.timestampValue ? new Date(f.timestamp.timestampValue) : new Date(0);
+    return {
+      ts,
+      dateStr: ts.toLocaleString("en-IN",{timeZone:"Asia/Kolkata",day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}),
+      name:     get("name"),
+      phone:    get("phone"),
+      city:     get("city"),
+      software: get("software"),
+      plan:     get("plan"),
+      ticketId: get("ticketId"),
+      source:   get("source"),
+    };
+  }
+
+  function renderTable(leads){
+    const tbody = document.getElementById("leadsBody");
+    if(!leads.length){
+      tbody.innerHTML = '<tr><td colspan="8" class="empty">No leads found.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = leads.map((l,i) => {
+      const sw = l.software||"";
+      const badgeCls = sw.toLowerCase().includes("vyapar") ? "badge-vyapar"
+                     : sw.toLowerCase().includes("biz")    ? "badge-biz"
+                     : sw.toLowerCase().includes("bill")   ? "badge-bill"
+                     : "badge-other";
+      return `<tr>
+        <td>${i+1}</td>
+        <td style="white-space:nowrap">${l.dateStr}</td>
+        <td><strong>${esc(l.name)}</strong></td>
+        <td>${esc(l.phone)}</td>
+        <td>${esc(l.city)}</td>
+        <td><span class="badge ${badgeCls}">${esc(l.software)}</span></td>
+        <td style="font-size:.8rem">${esc(l.plan)}</td>
+        <td class="ticket">${esc(l.ticketId)}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  function updateStats(leads){
+    document.getElementById("statTotal").textContent = leads.length;
+    document.getElementById("statVyapar").textContent = leads.filter(l=>l.software?.toLowerCase().includes("vyapar")).length;
+    document.getElementById("statBiz").textContent    = leads.filter(l=>l.software?.toLowerCase().includes("biz")).length;
+    document.getElementById("statBill").textContent   = leads.filter(l=>l.software?.toLowerCase().includes("bill")).length;
+  }
+
+  // ── SEARCH & FILTER ─────────────────────────────────────
+  function applyFilter(){
+    const q  = document.getElementById("searchBox").value.toLowerCase();
+    const sw = document.getElementById("filterSw").value.toLowerCase();
+    const filtered = allLeads.filter(l => {
+      const matchQ  = !q  || [l.name,l.phone,l.city,l.ticketId].join(" ").toLowerCase().includes(q);
+      const matchSw = !sw || (l.software||"").toLowerCase().includes(sw);
+      return matchQ && matchSw;
+    });
+    renderTable(filtered);
+  }
+
+  document.getElementById("searchBox").addEventListener("input", applyFilter);
+  document.getElementById("filterSw").addEventListener("change", applyFilter);
+
+  // ── REFRESH ─────────────────────────────────────────────
+  document.getElementById("refreshBtn").addEventListener("click", () => {
+    auth.currentUser && loadLeads(auth.currentUser);
+  });
+
+  // ── EXPORT CSV ──────────────────────────────────────────
+  document.getElementById("exportBtn").addEventListener("click", () => {
+    if(!allLeads.length) return;
+    const header = ["Date","Name","Phone","City","Software","Plan","Ticket ID"];
+    const rows = allLeads.map(l=>[l.dateStr,l.name,l.phone,l.city,l.software,l.plan,l.ticketId].map(v=>`"${(v||"").replace(/"/g,'""')}"`).join(","));
+    const csv = [header.join(","),...rows].join("\n");
+    const blob = new Blob([csv],{type:"text/csv"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `bizsoftsolutions-leads-${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+  });
+
+  function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+})();
+</script>
+</body>
+</html>
