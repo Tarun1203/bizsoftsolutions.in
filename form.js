@@ -1,8 +1,8 @@
 (function () {
   "use strict";
 
-  const FB_API_KEY   = "AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4";
-  const FB_PROJECT   = "bizsoftsolutions-8846b";
+  const FB_API_KEY   = "AIzaSyBVq7cI62VX-fGfQj32-mdyu30JygMFwWQ";
+  const FB_PROJECT   = "bizsoftsolutions-7a47d";
   const APPS_SCRIPT  = "https://script.google.com/macros/s/AKfycbyd18400nxsS1JvSSl17hlx6ImC0tu5W1HINXT2Q_WQ6Q5NqtQo89dmdCKT6Tn_f3SR_Q/exec";
   const SECRET_TOKEN = "bsft_alert_9x2k";
 
