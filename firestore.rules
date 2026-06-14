@@ -1,0 +1,50 @@
+// ─── BizSoft Solutions — Firestore Security Rules v2 ─────────
+// Paste these in Firebase Console → Firestore Database → Rules tab
+//
+//  leads : public can CREATE only (website forms, with validation)
+//          signed-in admin (console) can read / update / delete
+//
+//  plans : public can READ only (live pricing on product pages)
+//          signed-in admin can create / update / delete
+//
+//  everything else : denied
+// ─────────────────────────────────────────────────────────────
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── leads ─────────────────────────────────────────────────
+    match /leads/{leadId} {
+
+      // Website forms can create a lead (validated fields only)
+      allow create: if
+        request.resource.data.keys().hasAll(['name', 'phone', 'ticketId']) &&
+        request.resource.data.name  is string && request.resource.data.name.size()  > 0 && request.resource.data.name.size()  < 120 &&
+        request.resource.data.phone is string && request.resource.data.phone.size() > 4 && request.resource.data.phone.size() < 20 &&
+        request.resource.data.ticketId is string &&
+        request.resource.data.keys().size() <= 20;
+
+      // Admin console (Firebase Auth) can read, update, delete
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // ── plans (live pricing) ───────────────────────────────────
+    match /plans/{planId} {
+      allow read: if true;                          // public — website renders prices
+      allow create, update, delete: if request.auth != null;  // admin only
+    }
+
+    // ── settings (offer banner + prices) ──────────────────────
+    match /settings/{doc} {
+      allow read: if true;                          // public — website reads prices + offer
+      allow write: if request.auth != null;         // admin only
+    }
+
+    // ── all other collections: deny ────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
