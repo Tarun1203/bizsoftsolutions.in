@@ -531,8 +531,9 @@
         <input type="hidden" name="software" value="Vyapar"/>
         <div class="form-row">
           <div class="fg"><label>Name *</label><input type="text" name="name" placeholder="Your Name" required/></div>
-          <div class="fg"><label>Phone *</label><input type="tel" name="phone" placeholder="98765 43210" required/></div>
+          <div class="fg"><label>Phone *</label><input type="tel" name="phone" placeholder="10-digit mobile number" maxlength="10" pattern="[6-9][0-9]{9}" inputmode="numeric" required/><span class="ph-err" style="display:none;color:#c62828;font-size:.78rem">Enter a valid 10-digit Indian mobile number</span></div>
         </div>
+        <div class="fg"><label>City / Place *</label><input type="text" name="city" placeholder="Your city or town" required/></div>
         <div class="fg"><label>Business Type *</label>
           <select name="businessType" required>
             <option value="">Select your business…</option>
@@ -596,14 +597,31 @@
     if(!res.ok) throw new Error("Firestore error "+res.status);
   }
 
+  function validatePhone(phoneEl){
+    var val=phoneEl.value.replace(/\D/g,"");
+    var err=phoneEl.parentElement.querySelector(".ph-err");
+    var valid=/^[6-9]\d{9}$/.test(val);
+    if(err) err.style.display=(valid||!val)?"none":"block";
+    return valid;
+  }
+
   var form=document.getElementById("vyaparLeadForm");
   var btn=document.getElementById("vyaparSubmitBtn");
   var msg=document.getElementById("vyapar-msg");
   if(form&&btn&&msg){
+    var phoneEl=form.querySelector('[name="phone"]');
+    if(phoneEl){
+      phoneEl.addEventListener("input",function(){
+        phoneEl.value=phoneEl.value.replace(/\D/g,"").slice(0,10);
+        validatePhone(phoneEl);
+      });
+      phoneEl.addEventListener("blur",function(){validatePhone(phoneEl);});
+    }
     form.addEventListener("submit",async function(e){
       e.preventDefault();
       var honey=form.querySelector('[name="_honey"]');
       if(honey&&honey.value)return;
+      if(phoneEl&&!validatePhone(phoneEl)){phoneEl.focus();return;}
       var data={};
       new FormData(form).forEach(function(v,k){data[k]=v.trim();});
       delete data._honey;

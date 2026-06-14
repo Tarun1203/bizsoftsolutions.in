@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Firebase Setup Guide — BizSoft Solutions</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.6}
+a{color:#2563eb}
+code{font-family:'Cascadia Code','Fira Code',monospace;font-size:.87em;background:#0f172a;color:#7dd3fc;padding:2px 7px;border-radius:5px}
+pre{background:#0f172a;color:#e2e8f0;padding:18px 20px;border-radius:10px;overflow-x:auto;font-family:'Cascadia Code','Fira Code',monospace;font-size:.84rem;line-height:1.7}
+pre .k{color:#c084fc} pre .s{color:#86efac} pre .c{color:#64748b}
+
+/* header */
+.hdr{background:linear-gradient(135deg,#0f1f3d,#1e3a6e);color:#fff;padding:36px 24px;text-align:center}
+.hdr h1{font-size:1.6rem;font-weight:800}
+.hdr p{color:#94a3b8;margin-top:6px;font-size:.95rem}
+.hdr .project{display:inline-block;margin-top:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px 18px;font-size:.88rem}
+.hdr .project span{color:#f59e0b;font-weight:700}
+
+/* progress */
+.progress-bar{background:#fff;border-bottom:1px solid #e2e8f0;padding:14px 24px;position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px}
+.prog-track{flex:1;height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:99px;transition:.4s;width:0%}
+.prog-label{font-size:.83rem;font-weight:700;color:#64748b;white-space:nowrap}
+
+/* main */
+.main{max-width:860px;margin:28px auto;padding:0 20px 60px}
+
+/* sections */
+.phase{margin-bottom:10px}
+.phase-hdr{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px 20px;cursor:pointer;user-select:none}
+.phase-num{width:34px;height:34px;border-radius:50%;background:#e0e7ff;color:#3730a3;font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.phase-hdr h2{flex:1;font-size:1.05rem;font-weight:700}
+.phase-status{font-size:.78rem;padding:3px 10px;border-radius:99px;font-weight:700;background:#f1f5f9;color:#64748b}
+.phase-status.done{background:#dcfce7;color:#15803d}
+.phase-body{background:#fff;border:1px solid #e2e8f0;border-top:0;border-radius:0 0 12px 12px;padding:0 20px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s}
+.phase.open .phase-body{max-height:3000px;padding:20px}
+.phase.open .phase-hdr{border-radius:12px 12px 0 0}
+
+/* steps */
+.step{display:flex;gap:14px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #f1f5f9}
+.step:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.step-check{width:26px;height:26px;border:2px solid #cbd5e1;border-radius:7px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;transition:.15s;margin-top:2px}
+.step-check.checked{background:#2563eb;border-color:#2563eb;color:#fff}
+.step-body h3{font-size:.97rem;font-weight:700;color:#0f172a;margin-bottom:4px}
+.step-body p{font-size:.9rem;color:#475569;margin-bottom:8px}
+.step-body ul{margin-left:18px;color:#475569;font-size:.88rem}
+.step-body li{margin-bottom:4px}
+
+/* links */
+.go-btn{display:inline-block;margin-top:8px;background:#2563eb;color:#fff;padding:8px 16px;border-radius:8px;font-size:.86rem;font-weight:700;text-decoration:none}
+.go-btn:hover{background:#1d4ed8}
+.go-btn.amber{background:#d97706}.go-btn.amber:hover{background:#b45309}
+.go-btn.green{background:#16a34a}.go-btn.green:hover{background:#15803d}
+
+/* copy block */
+.copy-block{position:relative;margin:10px 0}
+.copy-btn{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#94a3b8;border-radius:6px;padding:4px 10px;font-size:.75rem;cursor:pointer}
+.copy-btn:hover{background:rgba(255,255,255,.15);color:#fff}
+.copy-btn.copied{color:#86efac}
+
+/* callout */
+.info{background:#eff6ff;border-left:4px solid #2563eb;border-radius:0 8px 8px 0;padding:12px 14px;font-size:.87rem;color:#1d4ed8;margin:10px 0}
+.warn{background:#fffbeb;border-left:4px solid #f59e0b;border-radius:0 8px 8px 0;padding:12px 14px;font-size:.87rem;color:#92400e;margin:10px 0}
+.success{background:#f0fdf4;border-left:4px solid #16a34a;border-radius:0 8px 8px 0;padding:12px 14px;font-size:.87rem;color:#15803d;margin:10px 0}
+
+/* img mockup boxes */
+.nav-path{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;font-size:.84rem;color:#334155;margin:8px 0;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.arrow{color:#94a3b8}
+.nav-path b{background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:5px;font-size:.8rem}
+
+/* done banner */
+.done-banner{background:linear-gradient(135deg,#15803d,#065f46);color:#fff;border-radius:14px;padding:28px;text-align:center;margin-top:28px;display:none}
+.done-banner h2{font-size:1.4rem;margin-bottom:6px}
+.done-banner p{opacity:.85;margin-bottom:18px}
+
+/* footer */
+.ft{text-align:center;color:#94a3b8;font-size:.8rem;margin-top:18px}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <h1>🔥 Firebase Setup Guide</h1>
+  <p>Complete checklist to activate the BizSoft Solutions backend from scratch</p>
+  <div class="project">Project: <span>bizsoftsolutions-8846b</span> · <span>bizsoftsolutions.in</span></div>
+</div>
+
+<div class="progress-bar">
+  <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+  <div class="prog-label" id="progLabel">0 / 14 steps</div>
+</div>
+
+<div class="main">
+
+  <!-- ── PHASE 1 ── -->
+  <div class="phase open" id="ph1">
+    <div class="phase-hdr" onclick="toggle('ph1')">
+      <div class="phase-num">1</div>
+      <h2>Firebase Project &amp; Console Access</h2>
+      <span class="phase-status" id="ph1s">0/2</span>
+    </div>
+    <div class="phase-body">
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Open your Firebase project</h3>
+          <p>Your project is already created. Go directly to the console:</p>
+          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-8846b/overview" target="_blank">Open Firebase Console ↗</a>
+          <div class="info" style="margin-top:10px">Project ID: <code>bizsoftsolutions-8846b</code> · API Key: <code>AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4</code></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Confirm Firestore Database exists</h3>
+          <p>Check that the Firestore database is already created (it is, since lead forms work). Verify:</p>
+          <div class="nav-path"><b>Firestore Database</b> <span class="arrow">→</span> Data tab <span class="arrow">→</span> should show the <b>leads</b> collection</div>
+          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-8846b/firestore" target="_blank">Open Firestore ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PHASE 2 ── -->
+  <div class="phase" id="ph2">
+    <div class="phase-hdr" onclick="toggle('ph2')">
+      <div class="phase-num">2</div>
+      <h2>Enable Firebase Authentication</h2>
+      <span class="phase-status" id="ph2s">0/3</span>
+    </div>
+    <div class="phase-body">
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Enable the Email/Password sign-in provider</h3>
+          <div class="nav-path"><b>Authentication</b> <span class="arrow">→</span> <b>Sign-in method</b> <span class="arrow">→</span> <b>Email/Password</b> <span class="arrow">→</span> toggle ON → Save</div>
+          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-8846b/authentication/providers" target="_blank">Open Sign-in Providers ↗</a>
+          <div class="info">Only enable "Email/Password". You do NOT need "Email link (passwordless)" or any other provider.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Create your admin user</h3>
+          <div class="nav-path"><b>Authentication</b> <span class="arrow">→</span> <b>Users</b> tab <span class="arrow">→</span> <b>Add user</b> button</div>
+          <p>Enter your admin email and a strong password (12+ chars, mix of letters/numbers/symbols). This is the only login that works in the BSF Console.</p>
+          <a class="go-btn amber" href="https://console.firebase.google.com/project/bizsoftsolutions-8846b/authentication/users" target="_blank">Open Users ↗</a>
+          <div class="warn">Write down this password securely. There is no "forgot password" in the console — you'd have to reset it from Firebase.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Verify the user was created</h3>
+          <p>After adding, you should see the user listed in the Users table with a UID, your email, and "Email/Password" as provider. No extra setup needed.</p>
+          <div class="success">✔ One admin user is all you need. Do not create multiple users unless you want multiple people accessing the console.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PHASE 3 ── -->
+  <div class="phase" id="ph3">
+    <div class="phase-hdr" onclick="toggle('ph3')">
+      <div class="phase-num">3</div>
+      <h2>Update Firestore Security Rules</h2>
+      <span class="phase-status" id="ph3s">0/3</span>
+    </div>
+    <div class="phase-body">
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Open the Rules editor</h3>
+          <div class="nav-path"><b>Firestore Database</b> <span class="arrow">→</span> <b>Rules</b> tab</div>
+          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-8846b/firestore/rules" target="_blank">Open Rules Editor ↗</a>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Replace the rules with the correct version</h3>
+          <p>Select all existing text in the editor and replace with this (also saved as <code>firestore.rules</code> in your project folder):</p>
+          <div class="copy-block">
+            <pre id="rulesCode"><span class="c">// BizSoft Solutions — Firestore Security Rules v2</span>
+<span class="k">rules_version</span> = <span class="s">'2'</span>;
+
+<span class="k">service</span> cloud.firestore {
+  <span class="k">match</span> /databases/{database}/documents {
+
+    <span class="c">// leads — public CREATE (forms), auth READ/UPDATE/DELETE (console)</span>
+    <span class="k">match</span> /leads/{leadId} {
+      <span class="k">allow</span> create: <span class="k">if</span>
+        request.resource.data.keys().hasAll([<span class="s">'name'</span>, <span class="s">'phone'</span>, <span class="s">'ticketId'</span>]) &&
+        request.resource.data.name  <span class="k">is</span> string && request.resource.data.name.size()  > 0 && request.resource.data.name.size()  < 120 &&
+        request.resource.data.phone <span class="k">is</span> string && request.resource.data.phone.size() > 4 && request.resource.data.phone.size() < 20 &&
+        request.resource.data.ticketId <span class="k">is</span> string &&
+        request.resource.data.keys().size() <= 20;
+
+      <span class="k">allow</span> read, update, delete: <span class="k">if</span> request.auth != null;
+    }
+
+    <span class="c">// plans — public READ (live pricing), auth write (console)</span>
+    <span class="k">match</span> /plans/{planId} {
+      <span class="k">allow</span> read: <span class="k">if</span> true;
+      <span class="k">allow</span> create, update, delete: <span class="k">if</span> request.auth != null;
+    }
+
+    <span class="c">// everything else — deny</span>
+    <span class="k">match</span> /{document=**} {
+      <span class="k">allow</span> read, write: <span class="k">if</span> false;
+    }
+  }
+}</pre>
+            <button class="copy-btn" onclick="copyRules(this)">Copy</button>
+          </div>
+          <div class="warn">⚠ The old rules block the admin console from reading leads. You MUST update them or the console will show "⚠ API 403" when loading leads.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Publish the rules</h3>
+          <p>Click the <strong>Publish</strong> button in the Firebase rules editor. Changes take effect within ~30 seconds.</p>
+          <div class="success">✔ After publishing: website forms can still submit leads, the website shows live pricing, and the console can read/manage everything — but nobody else can.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PHASE 4 ── -->
+  <div class="phase" id="ph4">
+    <div class="phase-hdr" onclick="toggle('ph4')">
+      <div class="phase-num">4</div>
+      <h2>First Login to BSF Console &amp; Add Pricing</h2>
+      <span class="phase-status" id="ph4s">0/3</span>
+    </div>
+    <div class="phase-body">
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Open the hidden admin console</h3>
+          <p>The console is at <code>bsf-console.html</code> on your site. It has no links, <code>noindex</code>, and is not in the sitemap — only you know the URL. Bookmark it.</p>
+          <a class="go-btn green" href="bsf-console.html" target="_blank">Open BSF Console ↗</a>
+          <div class="info">Sign in with the email + password you created in Phase 2. Your session is remembered for ~1 hour, then auto-refreshes silently for 30 days.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Seed default pricing plans</h3>
+          <p>In the console, click the <strong>💰 Plans &amp; Pricing</strong> tab, then click <strong>🌱 Seed Default Plans</strong>. This creates starter plans for all 4 softwares that immediately appear on the product pages.</p>
+          <div class="info">After seeding, click <strong>✏️ Edit</strong> on each plan and set your real partner prices. Changes are live on the website within seconds.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Verify a test lead comes through</h3>
+          <p>Open <code>index.html</code>, fill the form (use a test name like "Test Lead"), and submit. Then go to the console Leads tab and refresh — it should appear with ticket number, status <strong>New</strong>, and a WhatsApp link.</p>
+          <div class="success">✔ If the lead appears, your entire pipeline is working: form → Firestore → console → email alert.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PHASE 5 ── -->
+  <div class="phase" id="ph5">
+    <div class="phase-hdr" onclick="toggle('ph5')">
+      <div class="phase-num">5</div>
+      <h2>Firebase Hosting (Deploy the Site)</h2>
+      <span class="phase-status" id="ph5s">0/3</span>
+    </div>
+    <div class="phase-body">
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Install Firebase CLI (one-time)</h3>
+          <p>Open a terminal / command prompt on your PC and run:</p>
+          <div class="copy-block">
+            <pre id="installCmd">npm install -g firebase-tools</pre>
+            <button class="copy-btn" onclick="copyId('installCmd',this)">Copy</button>
+          </div>
+          <div class="info">Requires Node.js. Download from <a href="https://nodejs.org" target="_blank">nodejs.org</a> if not installed (LTS version).</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Login and initialise hosting</h3>
+          <p>In a terminal, <code>cd</code> into your project folder and run these commands one by one:</p>
+          <div class="copy-block">
+            <pre id="initCmd">firebase login
+firebase use bizsoftsolutions-8846b
+firebase init hosting</pre>
+            <button class="copy-btn" onclick="copyId('initCmd',this)">Copy</button>
+          </div>
+          <p>When init asks questions, answer:</p>
+          <ul style="margin:8px 0 0 18px;font-size:.88rem;color:#475569">
+            <li><strong>Public directory?</strong> → type <code>.</code> (dot — the current folder)</li>
+            <li><strong>Single-page app?</strong> → <code>No</code></li>
+            <li><strong>Overwrite index.html?</strong> → <code>No</code></li>
+          </ul>
+          <div class="warn">A <code>firebase.json</code> and <code>.firebaserc</code> file will be created — that's normal, don't delete them.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Deploy the site</h3>
+          <p>Every time you want to push updates live, run:</p>
+          <div class="copy-block">
+            <pre id="deployCmd">firebase deploy --only hosting</pre>
+            <button class="copy-btn" onclick="copyId('deployCmd',this)">Copy</button>
+          </div>
+          <p>Firebase gives you a live URL like <code>https://bizsoftsolutions-8846b.web.app</code>. You can also connect your custom domain <code>bizsoftsolutions.in</code>:</p>
+          <div class="nav-path"><b>Hosting</b> <span class="arrow">→</span> <b>Add custom domain</b> <span class="arrow">→</span> enter <b>bizsoftsolutions.in</b> → follow DNS steps</div>
+          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-8846b/hosting/sites" target="_blank">Open Hosting ↗</a>
+          <div class="success">✔ Firebase Hosting includes free SSL, CDN, and 10 GB bandwidth/month — plenty for this site.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PHASE 6 (Bonus) ── -->
+  <div class="phase" id="ph6">
+    <div class="phase-hdr" onclick="toggle('ph6')">
+      <div class="phase-num">6</div>
+      <h2>Final Checks Before Going Live</h2>
+      <span class="phase-status" id="ph6s">0/2</span>
+    </div>
+    <div class="phase-body">
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Replace placeholder phone number</h3>
+          <p>The floating WhatsApp and Call buttons on <code>index.html</code> use a placeholder number. Find and replace <code>919999999999</code> with your real number (country code + 10 digits, no spaces or +).</p>
+          <div class="info">Search all HTML files for <code>919999999999</code> and <code>9999999999</code> and replace with your actual number.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-check" onclick="check(this)"></div>
+        <div class="step-body">
+          <h3>Set up the Google Apps Script email alert (optional)</h3>
+          <p>Your <code>form.js</code> already sends a POST to a Google Apps Script URL that can email/Telegram you on each new lead. The script URL is already configured. To verify it works:</p>
+          <ul>
+            <li>Submit a test form → check your email for the alert within 30 seconds</li>
+            <li>If no email arrives, open the Apps Script at the URL in <code>form.js</code> and check Executions for errors</li>
+          </ul>
+          <div class="success">✔ Everything is wired. Lead → Firestore (for the console) + Apps Script (for instant email/Telegram alert). Dual notification, zero missed leads.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="done-banner" id="doneBanner">
+    <h2>🎉 Firebase Setup Complete!</h2>
+    <p>Your site is live, leads flow to the console, and pricing updates in real time.</p>
+    <a class="go-btn green" href="bsf-console.html" target="_blank">Open BSF Console</a>
+  </div>
+
+  <div class="ft">BizSoft Solutions Internal — Not linked from the public site</div>
+</div>
+
+<script>
+const TOTAL=14;
+let checked=0;
+
+function check(el){
+  const on=el.classList.toggle('checked');
+  el.textContent=on?'✓':'';
+  checked=document.querySelectorAll('.step-check.checked').length;
+  document.getElementById('progFill').style.width=(checked/TOTAL*100)+'%';
+  document.getElementById('progLabel').textContent=checked+' / '+TOTAL+' steps';
+  updatePhases();
+  document.getElementById('doneBanner').style.display=(checked===TOTAL?'block':'none');
+  save();
+}
+
+function updatePhases(){
+  ['ph1','ph2','ph3','ph4','ph5','ph6'].forEach(id=>{
+    const ph=document.getElementById(id);
+    const checks=ph.querySelectorAll('.step-check');
+    const done=[...checks].filter(c=>c.classList.contains('checked')).length;
+    const st=document.getElementById(id+'s');
+    st.textContent=done+'/'+checks.length;
+    st.className='phase-status'+(done===checks.length?' done':'');
+  });
+}
+
+function toggle(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+function copyRules(btn){
+  const text=`rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /leads/{leadId} {
+      allow create: if
+        request.resource.data.keys().hasAll(['name', 'phone', 'ticketId']) &&
+        request.resource.data.name  is string && request.resource.data.name.size()  > 0 && request.resource.data.name.size()  < 120 &&
+        request.resource.data.phone is string && request.resource.data.phone.size() > 4 && request.resource.data.phone.size() < 20 &&
+        request.resource.data.ticketId is string &&
+        request.resource.data.keys().size() <= 20;
+      allow read, update, delete: if request.auth != null;
+    }
+    match /plans/{planId} {
+      allow read: if true;
+      allow create, update, delete: if request.auth != null;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}`;
+  navigator.clipboard.writeText(text).then(()=>{btn.textContent='Copied ✓';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied')},2000);});
+}
+
+function copyId(id,btn){
+  const t=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(t).then(()=>{btn.textContent='Copied ✓';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied')},2000);});
+}
+
+/* persist checked state in localStorage */
+function save(){
+  const state=[...document.querySelectorAll('.step-check')].map(c=>c.classList.contains('checked')?1:0);
+  localStorage.setItem('bsf_setup',JSON.stringify(state));
+}
+function restore(){
+  try{
+    const s=JSON.parse(localStorage.getItem('bsf_setup')||'[]');
+    const els=document.querySelectorAll('.step-check');
+    s.forEach((v,i)=>{if(v&&els[i]){els[i].classList.add('checked');els[i].textContent='✓';}});
+    checked=document.querySelectorAll('.step-check.checked').length;
+    document.getElementById('progFill').style.width=(checked/TOTAL*100)+'%';
+    document.getElementById('progLabel').textContent=checked+' / '+TOTAL+' steps';
+    if(checked===TOTAL)document.getElementById('doneBanner').style.display='block';
+    updatePhases();
+  }catch(e){}
+}
+restore();
+</script>
+</body>
+</html>

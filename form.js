@@ -41,6 +41,14 @@
     if (!res.ok) throw new Error("Firestore error " + res.status);
   }
 
+  function validatePhone(phoneEl) {
+    const val = phoneEl.value.replace(/\D/g, "");
+    const err = phoneEl.parentElement.querySelector(".ph-err");
+    const valid = /^[6-9]\d{9}$/.test(val);
+    if (err) err.style.display = valid || !val ? "none" : "block";
+    return valid;
+  }
+
   window.BIZSFT = {
     wire({ formId, btnId, msgId, softwareOverride }) {
       const form = document.getElementById(formId);
@@ -48,10 +56,26 @@
       const msg  = document.getElementById(msgId);
       if (!form || !btn || !msg) return;
 
+      // Phone: digits only, live validation
+      const phoneEl = form.querySelector('[name="phone"]');
+      if (phoneEl) {
+        phoneEl.addEventListener("input", () => {
+          phoneEl.value = phoneEl.value.replace(/\D/g, "").slice(0, 10);
+          validatePhone(phoneEl);
+        });
+        phoneEl.addEventListener("blur", () => validatePhone(phoneEl));
+      }
+
       form.addEventListener("submit", async function (e) {
         e.preventDefault();
         const honey = form.querySelector('[name="_honey"]');
         if (honey && honey.value) return;
+
+        // Phone validation gate
+        if (phoneEl && !validatePhone(phoneEl)) {
+          phoneEl.focus();
+          return;
+        }
 
         const data = {};
         new FormData(form).forEach((v, k) => { data[k] = v.trim(); });
