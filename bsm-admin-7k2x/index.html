@@ -16,65 +16,89 @@
     .login-logo{font-size:1.3rem;font-weight:800;color:var(--primary);margin-bottom:.25rem}
     .login-logo span{color:var(--accent)}
     .login-sub{font-size:.82rem;color:var(--muted);margin-bottom:2rem}
-    .login-card label{display:block;font-size:.82rem;font-weight:600;margin-bottom:.35rem;color:var(--text)}
+    .login-card label{display:block;font-size:.82rem;font-weight:600;margin-bottom:.35rem}
     .login-card input{width:100%;padding:.7rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;margin-bottom:1rem;outline:none;transition:border .2s}
     .login-card input:focus{border-color:var(--primary)}
-    #loginBtn{width:100%;background:var(--primary);color:#fff;border:none;padding:.8rem;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:.25rem}
+    #loginBtn{width:100%;background:var(--primary);color:#fff;border:none;padding:.8rem;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer}
     #loginBtn:hover{background:#0d47a1}
     #loginBtn:disabled{opacity:.6;cursor:not-allowed}
     #loginErr{color:var(--red);font-size:.82rem;margin-top:.75rem;display:none}
 
     /* DASHBOARD */
     #dashScreen{display:none}
-    header{background:var(--primary);color:#fff;padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    header{background:var(--primary);color:#fff;padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.2)}
     .h-logo{font-size:1rem;font-weight:800}
     .h-logo span{color:#ffcc02}
     .h-right{display:flex;align-items:center;gap:1rem}
-    #userEmail{font-size:.8rem;opacity:.8}
+    #userEmail{font-size:.78rem;opacity:.75}
     #logoutBtn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);padding:.4rem .9rem;border-radius:6px;cursor:pointer;font-size:.8rem;font-weight:600}
     #logoutBtn:hover{background:rgba(255,255,255,.25)}
 
-    .dash-body{max-width:1100px;margin:0 auto;padding:1.5rem}
+    .dash-body{max-width:1280px;margin:0 auto;padding:1.5rem}
 
-    /* STAT CARDS */
-    .stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:1.5rem}
-    .stat{background:var(--card);border-radius:10px;padding:1.2rem 1.5rem;border-left:4px solid var(--primary)}
+    /* STATS */
+    .stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-bottom:1.5rem}
+    .stat{background:var(--card);border-radius:10px;padding:1.1rem 1.4rem;border-left:4px solid var(--primary);box-shadow:0 1px 4px rgba(0,0,0,.05)}
     .stat.green{border-color:var(--green)}
     .stat.orange{border-color:var(--accent)}
-    .stat-label{font-size:.75rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem}
-    .stat-val{font-size:2rem;font-weight:800;color:var(--text)}
+    .stat.purple{border-color:#7b1fa2}
+    .stat.teal{border-color:#00695c}
+    .stat-label{font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
+    .stat-val{font-size:1.9rem;font-weight:800;color:var(--text)}
 
     /* CONTROLS */
-    .controls{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
-    .controls input{padding:.55rem .9rem;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;min-width:220px;outline:none}
-    .controls input:focus{border-color:var(--primary)}
-    .controls select{padding:.55rem .75rem;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;background:#fff;outline:none;cursor:pointer}
-    #refreshBtn{background:var(--primary);color:#fff;border:none;padding:.55rem 1.2rem;border-radius:8px;font-size:.88rem;font-weight:700;cursor:pointer}
+    .controls{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
+    .controls input,.controls select{padding:.5rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-size:.85rem;background:#fff;outline:none;cursor:pointer}
+    .controls input{min-width:200px}
+    .controls input:focus,.controls select:focus{border-color:var(--primary)}
+    .ctrl-btn{padding:.5rem 1.1rem;border-radius:8px;font-size:.85rem;font-weight:700;cursor:pointer;border:none}
+    #refreshBtn{background:var(--primary);color:#fff}
     #refreshBtn:hover{background:#0d47a1}
-    #exportBtn{background:#fff;color:var(--text);border:1.5px solid var(--border);padding:.55rem 1.2rem;border-radius:8px;font-size:.88rem;font-weight:600;cursor:pointer}
+    #exportBtn{background:#fff;color:var(--text);border:1.5px solid var(--border)}
     #exportBtn:hover{border-color:var(--primary);color:var(--primary)}
 
     /* TABLE */
-    .table-wrap{background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-    table{width:100%;border-collapse:collapse;font-size:.85rem}
-    thead{background:var(--primary);color:#fff;position:sticky;top:56px}
-    th{padding:.75rem 1rem;text-align:left;font-weight:600;white-space:nowrap}
-    td{padding:.7rem 1rem;border-bottom:1px solid var(--border);vertical-align:middle}
-    tr:last-child td{border-bottom:none}
-    tr:hover td{background:#f5f8ff}
+    .table-wrap{background:var(--card);border-radius:10px;overflow-x:auto;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+    table{width:100%;border-collapse:collapse;font-size:.83rem;min-width:900px}
+    thead tr{background:var(--primary);color:#fff}
+    th{padding:.7rem .9rem;text-align:left;font-weight:600;white-space:nowrap}
+    td{padding:.65rem .9rem;border-bottom:1px solid var(--border);vertical-align:middle}
+    tbody tr:last-child td{border-bottom:none}
+    tbody tr:hover td{background:#f5f8ff}
+
     .badge{display:inline-block;font-size:.72rem;font-weight:700;padding:.15rem .55rem;border-radius:6px;white-space:nowrap}
     .badge-vyapar{background:#e3f2fd;color:#1565c0}
     .badge-biz{background:#e8f5e9;color:#2e7d32}
     .badge-bill{background:#fce4ec;color:#c62828}
     .badge-other{background:#f3e5f5;color:#6a1b9a}
-    .ticket{font-family:monospace;font-size:.78rem;color:var(--muted)}
+
+    /* STATUS & DECISION DROPDOWNS */
+    .sel-status,.sel-decision{padding:.3rem .5rem;border-radius:6px;font-size:.78rem;font-weight:600;border:1.5px solid var(--border);cursor:pointer;outline:none;width:100%;min-width:110px}
+    .sel-status:focus,.sel-decision:focus{border-color:var(--primary)}
+
+    /* Status colour coding */
+    .s-new       {background:#e3f2fd;color:#1565c0;border-color:#90caf9}
+    .s-called    {background:#fff8e1;color:#f57f17;border-color:#ffe082}
+    .s-interested{background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}
+    .s-demo      {background:#f3e5f5;color:#6a1b9a;border-color:#ce93d8}
+    .s-converted {background:#e0f2f1;color:#00695c;border-color:#80cbc4}
+    .s-lost      {background:#ffebee;color:#c62828;border-color:#ef9a9a}
+
+    /* Decision colour coding */
+    .d-pending   {background:#f5f5f5;color:#607d8b;border-color:#cfd8dc}
+    .d-buy       {background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}
+    .d-followup  {background:#fff8e1;color:#f57f17;border-color:#ffe082}
+    .d-demo      {background:#e3f2fd;color:#1565c0;border-color:#90caf9}
+    .d-notrel    {background:#ffebee;color:#c62828;border-color:#ef9a9a}
+
+    .ticket{font-family:monospace;font-size:.76rem;color:var(--muted)}
+    .saving{opacity:.5;pointer-events:none}
     .empty{text-align:center;padding:3rem;color:var(--muted);font-size:.95rem}
-    #loadingRow{text-align:center;padding:2rem;color:var(--muted)}
+    .err-row{text-align:center;padding:2rem;color:var(--red)}
 
     @media(max-width:640px){
       .stats{grid-template-columns:1fr 1fr}
-      th:nth-child(4),td:nth-child(4),th:nth-child(5),td:nth-child(5){display:none}
-      .controls input{min-width:160px}
+      .controls input{min-width:150px}
     }
   </style>
 </head>
@@ -89,7 +113,7 @@
     <input type="email" id="loginEmail" placeholder="admin@example.com" autocomplete="username"/>
     <label>Password</label>
     <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"/>
-    <button id="loginBtn">Sign In</button>
+    <button id="loginBtn">Sign In →</button>
     <div id="loginErr">❌ Invalid email or password. Try again.</div>
   </div>
 </div>
@@ -97,80 +121,108 @@
 <!-- DASHBOARD -->
 <div id="dashScreen">
   <header>
-    <span class="h-logo">BizSoft<span>Solutions</span> Admin</span>
+    <span class="h-logo">BizSoft<span>Solutions</span> · Admin</span>
     <div class="h-right">
       <span id="userEmail"></span>
       <button id="logoutBtn">Sign Out</button>
     </div>
   </header>
   <div class="dash-body">
+
+    <!-- STATS -->
     <div class="stats">
       <div class="stat"><div class="stat-label">Total Leads</div><div class="stat-val" id="statTotal">—</div></div>
+      <div class="stat"><div class="stat-label">Today</div><div class="stat-val" id="statToday">—</div></div>
       <div class="stat"><div class="stat-label">Vyapar</div><div class="stat-val" id="statVyapar">—</div></div>
       <div class="stat green"><div class="stat-label">Biz Analyst</div><div class="stat-val" id="statBiz">—</div></div>
       <div class="stat orange"><div class="stat-label">Bill Touch</div><div class="stat-val" id="statBill">—</div></div>
+      <div class="stat teal"><div class="stat-label">Converted</div><div class="stat-val" id="statConverted">—</div></div>
     </div>
+
+    <!-- CONTROLS -->
     <div class="controls">
-      <input type="text" id="searchBox" placeholder="🔍 Search name, phone, city…"/>
+      <input type="text" id="searchBox" placeholder="🔍 Search name, phone, city, ticket…"/>
       <select id="filterSw">
         <option value="">All Software</option>
         <option value="Vyapar">Vyapar</option>
         <option value="Biz Analyst">Biz Analyst</option>
         <option value="Bill Touch">Bill Touch</option>
       </select>
-      <button id="refreshBtn">↻ Refresh</button>
-      <button id="exportBtn">⬇ Export CSV</button>
+      <select id="filterStatus">
+        <option value="">All Status</option>
+        <option value="New">New</option>
+        <option value="Called">Called</option>
+        <option value="Interested">Interested</option>
+        <option value="Demo Scheduled">Demo Scheduled</option>
+        <option value="Converted">Converted</option>
+        <option value="Not Interested">Not Interested</option>
+      </select>
+      <select id="filterDecision">
+        <option value="">All Decisions</option>
+        <option value="Will Buy">Will Buy</option>
+        <option value="Follow Up">Follow Up</option>
+        <option value="Demo Needed">Demo Needed</option>
+        <option value="Not Relevant">Not Relevant</option>
+        <option value="Pending">Pending</option>
+      </select>
+      <button class="ctrl-btn" id="refreshBtn">↻ Refresh</button>
+      <button class="ctrl-btn" id="exportBtn">⬇ Export CSV</button>
     </div>
+
+    <!-- TABLE -->
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
             <th>#</th>
-            <th>Date & Time</th>
+            <th>Date &amp; Time</th>
             <th>Name</th>
             <th>Phone</th>
             <th>City</th>
             <th>Software</th>
-            <th>Plan</th>
+            <th>Status</th>
+            <th>Decision</th>
+            <th>Plan / Type</th>
             <th>Ticket ID</th>
           </tr>
         </thead>
         <tbody id="leadsBody">
-          <tr><td colspan="8" id="loadingRow">Loading leads…</td></tr>
+          <tr><td colspan="10" style="text-align:center;padding:2rem;color:var(--muted)">Loading leads…</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
 
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script>
 (function(){
+  "use strict";
   const FB_API_KEY  = "AIzaSyBVq7cI62VX-fGfQj32-mdyu30JygMFwWQ";
   const FB_PROJECT  = "bizsoftsolutions-7a47d";
   const AUTH_DOMAIN = "bizsoftsolutions-7a47d.firebaseapp.com";
+  const FS_BASE     = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)`;
 
   firebase.initializeApp({ apiKey:FB_API_KEY, authDomain:AUTH_DOMAIN, projectId:FB_PROJECT });
   const auth = firebase.auth();
 
   let allLeads = [];
+  let currentToken = "";
 
-  // ── AUTH STATE ──────────────────────────────────────────
-  auth.onAuthStateChanged(user => {
+  // ── AUTH STATE ──────────────────────────────────────────────
+  auth.onAuthStateChanged(async user => {
     if(user){
-      document.getElementById("loginScreen").style.display = "none";
-      document.getElementById("dashScreen").style.display  = "block";
+      currentToken = await user.getIdToken(true);
+      show("dashScreen"); hide("loginScreen");
       document.getElementById("userEmail").textContent = user.email;
-      loadLeads(user);
+      loadLeads();
     } else {
-      document.getElementById("loginScreen").style.display = "flex";
-      document.getElementById("dashScreen").style.display  = "none";
+      show("loginScreen"); hide("dashScreen");
     }
   });
 
-  // ── LOGIN ───────────────────────────────────────────────
+  // ── LOGIN ───────────────────────────────────────────────────
   document.getElementById("loginBtn").addEventListener("click", async () => {
     const email = document.getElementById("loginEmail").value.trim();
     const pass  = document.getElementById("loginPass").value;
@@ -182,116 +234,198 @@
       await auth.signInWithEmailAndPassword(email, pass);
     } catch(e) {
       err.style.display = "block";
-      btn.disabled = false; btn.textContent = "Sign In";
+      btn.disabled = false; btn.textContent = "Sign In →";
     }
   });
-
-  document.getElementById("loginPass").addEventListener("keydown", e => {
-    if(e.key === "Enter") document.getElementById("loginBtn").click();
-  });
-
-  // ── LOGOUT ──────────────────────────────────────────────
+  document.getElementById("loginPass").addEventListener("keydown", e => { if(e.key==="Enter") document.getElementById("loginBtn").click(); });
   document.getElementById("logoutBtn").addEventListener("click", () => auth.signOut());
 
-  // ── LOAD LEADS ──────────────────────────────────────────
-  async function loadLeads(user){
-    document.getElementById("loadingRow").textContent = "Loading leads…";
+  // ── LOAD LEADS via runQuery ─────────────────────────────────
+  async function loadLeads(){
+    setBody('<tr><td colspan="10" style="text-align:center;padding:2rem;color:var(--muted)">Loading leads…</td></tr>');
     try {
-      const token = await user.getIdToken(true);
-      let url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents/leads?pageSize=300`;
-      const res = await fetch(url, { headers:{ Authorization:`Bearer ${token}` }});
-      if(!res.ok) throw new Error("HTTP "+res.status);
-      const data = await res.json();
-      allLeads = (data.documents || []).map(parseDoc).sort((a,b)=>b.ts-a.ts);
+      // refresh token before fetch
+      if(auth.currentUser) currentToken = await auth.currentUser.getIdToken(true);
+
+      const res = await fetch(`${FS_BASE}/documents:runQuery`, {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${currentToken}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          structuredQuery: {
+            from: [{ collectionId: "leads" }],
+            orderBy: [{ field:{ fieldPath:"timestamp" }, direction:"DESCENDING" }],
+            limit: 500
+          }
+        })
+      });
+      if(!res.ok){ const t=await res.text(); throw new Error(res.status+" "+t.slice(0,200)); }
+      const rows = await res.json();
+      // runQuery returns array; each item has {document:{...}} or just {readTime} for empty
+      allLeads = rows
+        .filter(r => r.document)
+        .map(r => parseDoc(r.document));
       renderTable(allLeads);
       updateStats(allLeads);
     } catch(e){
-      document.getElementById("loadingRow").textContent = "⚠️ Error loading leads: "+e.message;
+      setBody(`<tr><td colspan="10" class="err-row">⚠️ ${esc(e.message)}</td></tr>`);
+      console.error("loadLeads error:", e);
     }
   }
 
+  // ── PARSE FIRESTORE DOCUMENT ────────────────────────────────
   function parseDoc(doc){
-    const f = doc.fields || {};
-    const get = k => (f[k]?.stringValue || f[k]?.integerValue || "");
-    const ts = f.timestamp?.timestampValue ? new Date(f.timestamp.timestampValue) : new Date(0);
+    const f   = doc.fields || {};
+    const str = k => f[k]?.stringValue || "";
+    // timestamp stored as stringValue ISO string
+    const tsRaw = str("timestamp");
+    const ts  = tsRaw ? new Date(tsRaw) : new Date(0);
+    const isValidDate = !isNaN(ts.getTime()) && ts.getFullYear() > 2000;
     return {
+      docName:   doc.name,   // full path for PATCH
       ts,
-      dateStr: ts.toLocaleString("en-IN",{timeZone:"Asia/Kolkata",day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}),
-      name:     get("name"),
-      phone:    get("phone"),
-      city:     get("city"),
-      software: get("software"),
-      plan:     get("plan"),
-      ticketId: get("ticketId"),
-      source:   get("source"),
+      dateStr: isValidDate
+        ? ts.toLocaleString("en-IN",{timeZone:"Asia/Kolkata",day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})
+        : "—",
+      name:      str("name"),
+      phone:     str("phone"),
+      city:      str("city"),
+      software:  str("software"),
+      plan:      str("plan") || str("businessType"),
+      ticketId:  str("ticketId"),
+      status:    str("status")   || "New",
+      decision:  str("decision") || "Pending",
     };
   }
 
+  // ── RENDER TABLE ────────────────────────────────────────────
   function renderTable(leads){
-    const tbody = document.getElementById("leadsBody");
     if(!leads.length){
-      tbody.innerHTML = '<tr><td colspan="8" class="empty">No leads found.</td></tr>';
+      setBody('<tr><td colspan="10" class="empty">No leads found.</td></tr>');
       return;
     }
-    tbody.innerHTML = leads.map((l,i) => {
-      const sw = l.software||"";
-      const badgeCls = sw.toLowerCase().includes("vyapar") ? "badge-vyapar"
-                     : sw.toLowerCase().includes("biz")    ? "badge-biz"
-                     : sw.toLowerCase().includes("bill")   ? "badge-bill"
-                     : "badge-other";
-      return `<tr>
+    setBody(leads.map((l,i) => {
+      const sw = (l.software||"").toLowerCase();
+      const bCls = sw.includes("vyapar") ? "badge-vyapar"
+                 : sw.includes("biz")    ? "badge-biz"
+                 : sw.includes("bill")   ? "badge-bill"
+                 : "badge-other";
+      return `<tr data-idx="${i}">
         <td>${i+1}</td>
-        <td style="white-space:nowrap">${l.dateStr}</td>
+        <td style="white-space:nowrap;font-size:.8rem">${l.dateStr}</td>
         <td><strong>${esc(l.name)}</strong></td>
         <td>${esc(l.phone)}</td>
         <td>${esc(l.city)}</td>
-        <td><span class="badge ${badgeCls}">${esc(l.software)}</span></td>
-        <td style="font-size:.8rem">${esc(l.plan)}</td>
+        <td><span class="badge ${bCls}">${esc(l.software)}</span></td>
+        <td>${statusSelect(l.status, i)}</td>
+        <td>${decisionSelect(l.decision, i)}</td>
+        <td style="font-size:.78rem;color:var(--muted)">${esc(l.plan)}</td>
         <td class="ticket">${esc(l.ticketId)}</td>
       </tr>`;
-    }).join("");
+    }).join(""));
+
+    // attach change listeners to all dropdowns
+    document.querySelectorAll(".sel-status").forEach(el => {
+      applyStatusClass(el);
+      el.addEventListener("change", () => { applyStatusClass(el); patchLead(+el.dataset.idx, "status", el.value); });
+    });
+    document.querySelectorAll(".sel-decision").forEach(el => {
+      applyDecisionClass(el);
+      el.addEventListener("change", () => { applyDecisionClass(el); patchLead(+el.dataset.idx, "decision", el.value); });
+    });
   }
 
+  function statusSelect(val, idx){
+    const opts = ["New","Called","Interested","Demo Scheduled","Converted","Not Interested"];
+    return `<select class="sel-status" data-idx="${idx}">${opts.map(o=>`<option${o===val?" selected":""}>${esc(o)}</option>`).join("")}</select>`;
+  }
+  function decisionSelect(val, idx){
+    const opts = ["Pending","Will Buy","Follow Up","Demo Needed","Not Relevant"];
+    return `<select class="sel-decision" data-idx="${idx}">${opts.map(o=>`<option${o===val?" selected":""}>${esc(o)}</option>`).join("")}</select>`;
+  }
+
+  function applyStatusClass(el){
+    const map = {"New":"s-new","Called":"s-called","Interested":"s-interested","Demo Scheduled":"s-demo","Converted":"s-converted","Not Interested":"s-lost"};
+    el.className = "sel-status " + (map[el.value]||"s-new");
+  }
+  function applyDecisionClass(el){
+    const map = {"Pending":"d-pending","Will Buy":"d-buy","Follow Up":"d-followup","Demo Needed":"d-demo","Not Relevant":"d-notrel"};
+    el.className = "sel-decision " + (map[el.value]||"d-pending");
+  }
+
+  // ── PATCH FIRESTORE (update status / decision) ──────────────
+  async function patchLead(idx, field, value){
+    // update in-memory
+    const visibleLeads = getFilteredLeads();
+    const lead = visibleLeads[idx];
+    if(!lead || !lead.docName) return;
+    lead[field] = value;
+    // also update in allLeads
+    const master = allLeads.find(l => l.docName === lead.docName);
+    if(master) master[field] = value;
+
+    try {
+      if(auth.currentUser) currentToken = await auth.currentUser.getIdToken();
+      await fetch(`https://firestore.googleapis.com/v1/${lead.docName}?updateMask.fieldPaths=${field}`, {
+        method: "PATCH",
+        headers: { "Authorization": `Bearer ${currentToken}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ fields: { [field]: { stringValue: value } } })
+      });
+    } catch(e){ console.error("patchLead error:", e); }
+    updateStats(allLeads);
+  }
+
+  // ── STATS ───────────────────────────────────────────────────
   function updateStats(leads){
-    document.getElementById("statTotal").textContent = leads.length;
-    document.getElementById("statVyapar").textContent = leads.filter(l=>l.software?.toLowerCase().includes("vyapar")).length;
-    document.getElementById("statBiz").textContent    = leads.filter(l=>l.software?.toLowerCase().includes("biz")).length;
-    document.getElementById("statBill").textContent   = leads.filter(l=>l.software?.toLowerCase().includes("bill")).length;
+    const today = new Date().toISOString().slice(0,10);
+    document.getElementById("statTotal").textContent     = leads.length;
+    document.getElementById("statToday").textContent     = leads.filter(l => l.ts.toISOString().slice(0,10) === today).length;
+    document.getElementById("statVyapar").textContent    = leads.filter(l => l.software?.toLowerCase().includes("vyapar")).length;
+    document.getElementById("statBiz").textContent       = leads.filter(l => l.software?.toLowerCase().includes("biz")).length;
+    document.getElementById("statBill").textContent      = leads.filter(l => l.software?.toLowerCase().includes("bill")).length;
+    document.getElementById("statConverted").textContent = leads.filter(l => l.status === "Converted").length;
   }
 
-  // ── SEARCH & FILTER ─────────────────────────────────────
-  function applyFilter(){
+  // ── FILTER ──────────────────────────────────────────────────
+  function getFilteredLeads(){
     const q  = document.getElementById("searchBox").value.toLowerCase();
     const sw = document.getElementById("filterSw").value.toLowerCase();
-    const filtered = allLeads.filter(l => {
-      const matchQ  = !q  || [l.name,l.phone,l.city,l.ticketId].join(" ").toLowerCase().includes(q);
+    const st = document.getElementById("filterStatus").value.toLowerCase();
+    const dc = document.getElementById("filterDecision").value.toLowerCase();
+    return allLeads.filter(l => {
+      const matchQ  = !q  || [l.name,l.phone,l.city,l.ticketId,l.plan].join(" ").toLowerCase().includes(q);
       const matchSw = !sw || (l.software||"").toLowerCase().includes(sw);
-      return matchQ && matchSw;
+      const matchSt = !st || (l.status||"").toLowerCase() === st;
+      const matchDc = !dc || (l.decision||"").toLowerCase() === dc;
+      return matchQ && matchSw && matchSt && matchDc;
     });
-    renderTable(filtered);
   }
+  function applyFilter(){ renderTable(getFilteredLeads()); }
 
   document.getElementById("searchBox").addEventListener("input", applyFilter);
   document.getElementById("filterSw").addEventListener("change", applyFilter);
+  document.getElementById("filterStatus").addEventListener("change", applyFilter);
+  document.getElementById("filterDecision").addEventListener("change", applyFilter);
 
-  // ── REFRESH ─────────────────────────────────────────────
-  document.getElementById("refreshBtn").addEventListener("click", () => {
-    auth.currentUser && loadLeads(auth.currentUser);
-  });
+  document.getElementById("refreshBtn").addEventListener("click", loadLeads);
 
-  // ── EXPORT CSV ──────────────────────────────────────────
+  // ── EXPORT CSV ──────────────────────────────────────────────
   document.getElementById("exportBtn").addEventListener("click", () => {
     if(!allLeads.length) return;
-    const header = ["Date","Name","Phone","City","Software","Plan","Ticket ID"];
-    const rows = allLeads.map(l=>[l.dateStr,l.name,l.phone,l.city,l.software,l.plan,l.ticketId].map(v=>`"${(v||"").replace(/"/g,'""')}"`).join(","));
-    const csv = [header.join(","),...rows].join("\n");
-    const blob = new Blob([csv],{type:"text/csv"});
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = `bizsoftsolutions-leads-${new Date().toISOString().slice(0,10)}.csv`;
+    const header = ["Date","Name","Phone","City","Software","Status","Decision","Plan","Ticket ID"];
+    const rows = allLeads.map(l => [l.dateStr,l.name,l.phone,l.city,l.software,l.status,l.decision,l.plan,l.ticketId]
+      .map(v => `"${(v||"").replace(/"/g,'""')}"`)
+      .join(","));
+    const csv  = [header.join(","), ...rows].join("\n");
+    const a    = document.createElement("a");
+    a.href     = URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+    a.download = `bsft-leads-${new Date().toISOString().slice(0,10)}.csv`;
     a.click();
   });
 
+  // ── HELPERS ──────────────────────────────────────────────────
+  function show(id){ document.getElementById(id).style.display = id==="loginScreen"?"flex":"block"; }
+  function hide(id){ document.getElementById(id).style.display = "none"; }
+  function setBody(html){ document.getElementById("leadsBody").innerHTML = html; }
   function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 })();
 </script>
