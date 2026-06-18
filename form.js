@@ -33,6 +33,9 @@
     });
     fields.timestamp = { stringValue: new Date().toISOString() };
     fields.source    = { stringValue: window.location.href };
+    // Admin CRM initial values — admin console tracks these
+    if(!fields.status)   fields.status   = { stringValue: "New" };
+    if(!fields.decision) fields.decision = { stringValue: "" };
     const res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -92,6 +95,29 @@
         try {
           await saveToFirestore(data);
           pingEmailAlert(data);
+
+          // ── Google Ads conversion + GA4 lead event ────────────
+          try {
+            if (typeof gtag === "function") {
+              // Google Ads conversion (fires for every product page / home form)
+              gtag("event", "conversion", {
+                send_to: "AW-18238657810/lead_form_submit",
+                value: 1.0,
+                currency: "INR",
+                transaction_id: ticket
+              });
+              // GA4 lead event (visible in GA4 → Events)
+              gtag("event", "generate_lead", {
+                currency: "INR",
+                value: 1.0,
+                ticket_id: ticket,
+                software: data.software || softwareOverride || "unknown",
+                form_id: formId
+              });
+            }
+          } catch (_) {}
+          // ─────────────────────────────────────────────────────
+
           msg.innerHTML = `✅ Thank you! Your ticket is <strong>${ticket}</strong>. Our expert will call you within 2 hours.`;
           msg.style.color   = "#2e7d32";
           msg.style.display = "block";
