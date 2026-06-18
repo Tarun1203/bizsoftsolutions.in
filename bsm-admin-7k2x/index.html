@@ -9,8 +9,6 @@
     *{box-sizing:border-box;margin:0;padding:0}
     :root{--primary:#1565c0;--accent:#ff6f00;--green:#2e7d32;--red:#c62828;--bg:#f0f2f5;--card:#fff;--border:#e0e0e0;--text:#1a1a2e;--muted:#607d8b}
     body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-
-    /* LOGIN */
     #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:1.5rem}
     .login-card{background:var(--card);border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,.12);padding:2.5rem;width:100%;max-width:380px}
     .login-logo{font-size:1.3rem;font-weight:800;color:var(--primary);margin-bottom:.25rem}
@@ -22,9 +20,7 @@
     #loginBtn{width:100%;background:var(--primary);color:#fff;border:none;padding:.8rem;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer}
     #loginBtn:hover{background:#0d47a1}
     #loginBtn:disabled{opacity:.6;cursor:not-allowed}
-    #loginErr{color:var(--red);font-size:.82rem;margin-top:.75rem;display:none}
-
-    /* DASHBOARD */
+    #loginErr{font-size:.82rem;margin-top:.75rem;display:none;color:var(--red)}
     #dashScreen{display:none}
     header{background:var(--primary);color:#fff;padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.2)}
     .h-logo{font-size:1rem;font-weight:800}
@@ -32,32 +28,24 @@
     .h-right{display:flex;align-items:center;gap:1rem}
     #userEmail{font-size:.78rem;opacity:.75}
     #logoutBtn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);padding:.4rem .9rem;border-radius:6px;cursor:pointer;font-size:.8rem;font-weight:600}
-    #logoutBtn:hover{background:rgba(255,255,255,.25)}
-
     .dash-body{max-width:1280px;margin:0 auto;padding:1.5rem}
-
-    /* STATS */
     .stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-bottom:1.5rem}
     .stat{background:var(--card);border-radius:10px;padding:1.1rem 1.4rem;border-left:4px solid var(--primary);box-shadow:0 1px 4px rgba(0,0,0,.05)}
-    .stat.green{border-color:var(--green)}
-    .stat.orange{border-color:var(--accent)}
-    .stat.purple{border-color:#7b1fa2}
-    .stat.teal{border-color:#00695c}
+    .stat.green{border-color:var(--green)} .stat.orange{border-color:var(--accent)} .stat.teal{border-color:#00695c}
     .stat-label{font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
     .stat-val{font-size:1.9rem;font-weight:800;color:var(--text)}
-
-    /* CONTROLS */
+    .status-tabs-bar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+    .stp{padding:.4rem 1rem;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:.8rem;font-weight:700;cursor:pointer;color:var(--muted);white-space:nowrap;transition:all .15s}
+    .stp:hover{border-color:var(--primary);color:var(--primary)}
+    .stp.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .stp .cnt{display:inline-block;background:rgba(0,0,0,.12);border-radius:10px;padding:.05rem .45rem;font-size:.72rem;margin-left:.35rem}
     .controls{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
     .controls input,.controls select{padding:.5rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-size:.85rem;background:#fff;outline:none;cursor:pointer}
     .controls input{min-width:200px}
     .controls input:focus,.controls select:focus{border-color:var(--primary)}
     .ctrl-btn{padding:.5rem 1.1rem;border-radius:8px;font-size:.85rem;font-weight:700;cursor:pointer;border:none}
-    #refreshBtn{background:var(--primary);color:#fff}
-    #refreshBtn:hover{background:#0d47a1}
-    #exportBtn{background:#fff;color:var(--text);border:1.5px solid var(--border)}
-    #exportBtn:hover{border-color:var(--primary);color:var(--primary)}
-
-    /* TABLE */
+    #refreshBtn{background:var(--primary);color:#fff} #refreshBtn:hover{background:#0d47a1}
+    #exportBtn{background:#fff;color:var(--text);border:1.5px solid var(--border)} #exportBtn:hover{border-color:var(--primary);color:var(--primary)}
     .table-wrap{background:var(--card);border-radius:10px;overflow-x:auto;box-shadow:0 1px 4px rgba(0,0,0,.06)}
     table{width:100%;border-collapse:collapse;font-size:.83rem;min-width:900px}
     thead tr{background:var(--primary);color:#fff}
@@ -65,75 +53,46 @@
     td{padding:.65rem .9rem;border-bottom:1px solid var(--border);vertical-align:middle}
     tbody tr:last-child td{border-bottom:none}
     tbody tr:hover td{background:#f5f8ff}
-
     .badge{display:inline-block;font-size:.72rem;font-weight:700;padding:.15rem .55rem;border-radius:6px;white-space:nowrap}
-    .badge-vyapar{background:#e3f2fd;color:#1565c0}
-    .badge-biz{background:#e8f5e9;color:#2e7d32}
-    .badge-bill{background:#fce4ec;color:#c62828}
-    .badge-other{background:#f3e5f5;color:#6a1b9a}
-
-    /* STATUS & DECISION DROPDOWNS */
+    .badge-vyapar{background:#e3f2fd;color:#1565c0} .badge-biz{background:#e8f5e9;color:#2e7d32}
+    .badge-bill{background:#fce4ec;color:#c62828} .badge-other{background:#f3e5f5;color:#6a1b9a}
     .sel-status,.sel-decision{padding:.3rem .5rem;border-radius:6px;font-size:.78rem;font-weight:600;border:1.5px solid var(--border);cursor:pointer;outline:none;width:100%;min-width:120px}
-    .sel-status:focus,.sel-decision:focus{border-color:var(--primary)}
-
-    /* Status colour coding */
-    .s-new       {background:#e3f2fd;color:#1565c0;border-color:#90caf9}
-    .s-called    {background:#fff8e1;color:#f57f17;border-color:#ffe082}
+    .s-new{background:#e3f2fd;color:#1565c0;border-color:#90caf9}
+    .s-called{background:#fff8e1;color:#f57f17;border-color:#ffe082}
     .s-interested{background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}
-    .s-demo      {background:#f3e5f5;color:#6a1b9a;border-color:#ce93d8}
-    .s-converted {background:#e0f2f1;color:#00695c;border-color:#80cbc4}
-    .s-lost      {background:#ffebee;color:#c62828;border-color:#ef9a9a}
-
-    /* Decision colour coding */
-    .d-buy      {background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}
-    .d-time     {background:#fff8e1;color:#f57f17;border-color:#ffe082}
-    .d-payment  {background:#e3f2fd;color:#1565c0;border-color:#90caf9}
-    .d-discount {background:#f3e5f5;color:#6a1b9a;border-color:#ce93d8}
-    .d-lost     {background:#ffebee;color:#c62828;border-color:#ef9a9a}
-    .d-pending  {background:#f5f5f5;color:#607d8b;border-color:#cfd8dc}
-
-    /* STATUS PILLS (inside leads panel) */
-    .status-tabs-bar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
-    .stp{padding:.4rem 1rem;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:.8rem;font-weight:700;cursor:pointer;color:var(--muted);white-space:nowrap;transition:all .15s}
-    .stp:hover{border-color:var(--primary);color:var(--primary)}
-    .stp.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-    .stp .cnt{display:inline-block;background:rgba(0,0,0,.12);border-radius:10px;padding:.05rem .45rem;font-size:.72rem;margin-left:.35rem}
-
+    .s-demo{background:#f3e5f5;color:#6a1b9a;border-color:#ce93d8}
+    .s-converted{background:#e0f2f1;color:#00695c;border-color:#80cbc4}
+    .s-lost{background:#ffebee;color:#c62828;border-color:#ef9a9a}
+    .d-buy{background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}
+    .d-time{background:#fff8e1;color:#f57f17;border-color:#ffe082}
+    .d-payment{background:#e3f2fd;color:#1565c0;border-color:#90caf9}
+    .d-discount{background:#f3e5f5;color:#6a1b9a;border-color:#ce93d8}
+    .d-lost{background:#ffebee;color:#c62828;border-color:#ef9a9a}
+    .d-blank{background:#f5f5f5;color:#607d8b;border-color:#cfd8dc}
     .ticket{font-family:monospace;font-size:.76rem;color:var(--muted)}
     .empty{text-align:center;padding:3rem;color:var(--muted);font-size:.95rem}
     .err-row{text-align:center;padding:2rem;color:var(--red)}
-
-    /* MAIN TABS */
     .tab-bar{display:flex;gap:.5rem;margin-bottom:1.5rem}
     .tab-btn{padding:.55rem 1.3rem;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-size:.88rem;font-weight:700;cursor:pointer;color:var(--muted)}
     .tab-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-
-    /* SETTINGS */
     .settings-card{background:var(--card);border-radius:10px;padding:1.5rem;margin-bottom:1.2rem;box-shadow:0 1px 4px rgba(0,0,0,.06)}
     .settings-card h3{font-size:1rem;font-weight:700;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
     .sf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.75rem;margin-bottom:1rem}
     .sf-group{display:flex;flex-direction:column;gap:.25rem}
     .sf-group label{font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-    .sf-group input,.sf-group textarea,.sf-group select{padding:.5rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-size:.88rem;outline:none;transition:border .2s;background:#fff}
-    .sf-group input:focus,.sf-group textarea:focus,.sf-group select:focus{border-color:var(--primary)}
+    .sf-group input,.sf-group textarea,.sf-group select{padding:.5rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-size:.88rem;outline:none;background:#fff}
+    .sf-group input:focus,.sf-group textarea:focus{border-color:var(--primary)}
     .sf-group textarea{resize:vertical;min-height:64px}
     .save-btn{background:var(--green);color:#fff;border:none;padding:.6rem 1.5rem;border-radius:8px;font-size:.88rem;font-weight:700;cursor:pointer}
     .save-btn:hover{background:#1b5e20}
     .save-msg{font-size:.82rem;margin-left:.75rem;font-weight:600}
-    .save-msg.ok{color:var(--green)}
-    .save-msg.err{color:var(--red)}
+    .save-msg.ok{color:var(--green)} .save-msg.err{color:var(--red)}
     .sf-section-title{font-size:.8rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin:.9rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px dashed var(--border)}
-
-    @media(max-width:640px){
-      .stats{grid-template-columns:1fr 1fr}
-      .controls input{min-width:150px}
-      .sf-grid{grid-template-columns:1fr 1fr}
-    }
+    @media(max-width:640px){.stats{grid-template-columns:1fr 1fr}.controls input{min-width:150px}}
   </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-card">
     <div class="login-logo">BizSoft<span>Solutions</span></div>
@@ -142,619 +101,444 @@
     <input type="email" id="loginEmail" placeholder="admin@example.com" autocomplete="username"/>
     <label>Password</label>
     <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"/>
-    <button id="loginBtn">Sign In →</button>
-    <div id="loginErr">❌ Invalid email or password. Try again.</div>
+    <button id="loginBtn">Sign In &rarr;</button>
+    <div id="loginErr"></div>
   </div>
 </div>
 
-<!-- DASHBOARD -->
 <div id="dashScreen">
   <header>
-    <span class="h-logo">BizSoft<span>Solutions</span> · Admin</span>
+    <span class="h-logo">BizSoft<span>Solutions</span> &middot; Admin</span>
     <div class="h-right">
       <span id="userEmail"></span>
       <button id="logoutBtn">Sign Out</button>
     </div>
   </header>
   <div class="dash-body">
-
-    <!-- MAIN TAB BAR -->
     <div class="tab-bar">
-      <button class="tab-btn active" id="tabLeadsBtn" onclick="switchTab('leads')">📋 Leads</button>
-      <button class="tab-btn" id="tabSettingsBtn" onclick="switchTab('settings')">⚙️ Settings</button>
+      <button class="tab-btn active" id="tabLeadsBtn" onclick="switchTab('leads')">&#128203; Leads</button>
+      <button class="tab-btn" id="tabSettingsBtn" onclick="switchTab('settings')">&#9881;&#65039; Settings</button>
     </div>
 
-    <!-- ══ LEADS PANEL ══════════════════════════════════════════ -->
     <div id="tabLeads">
-
-      <!-- STATS -->
       <div class="stats">
-        <div class="stat"><div class="stat-label">Total Leads</div><div class="stat-val" id="statTotal">—</div></div>
-        <div class="stat"><div class="stat-label">Today</div><div class="stat-val" id="statToday">—</div></div>
-        <div class="stat"><div class="stat-label">Vyapar</div><div class="stat-val" id="statVyapar">—</div></div>
-        <div class="stat green"><div class="stat-label">Biz Analyst</div><div class="stat-val" id="statBiz">—</div></div>
-        <div class="stat orange"><div class="stat-label">Bill Touch</div><div class="stat-val" id="statBill">—</div></div>
-        <div class="stat teal"><div class="stat-label">Converted</div><div class="stat-val" id="statConverted">—</div></div>
+        <div class="stat"><div class="stat-label">Total</div><div class="stat-val" id="statTotal">-</div></div>
+        <div class="stat"><div class="stat-label">Today</div><div class="stat-val" id="statToday">-</div></div>
+        <div class="stat"><div class="stat-label">Vyapar</div><div class="stat-val" id="statVyapar">-</div></div>
+        <div class="stat green"><div class="stat-label">Biz Analyst</div><div class="stat-val" id="statBiz">-</div></div>
+        <div class="stat orange"><div class="stat-label">BillTouch</div><div class="stat-val" id="statBill">-</div></div>
+        <div class="stat teal"><div class="stat-label">Converted</div><div class="stat-val" id="statConverted">-</div></div>
       </div>
-
-      <!-- STATUS PILLS -->
-      <div class="status-tabs-bar" id="statusTabsBar">
-        <button class="stp active" onclick="setStatusTab(this,'')">All <span class="cnt" id="stc-all">0</span></button>
-        <button class="stp" onclick="setStatusTab(this,'New')">🆕 New <span class="cnt" id="stc-new">0</span></button>
-        <button class="stp" onclick="setStatusTab(this,'Called')">📞 Called <span class="cnt" id="stc-called">0</span></button>
-        <button class="stp" onclick="setStatusTab(this,'Intersted')">✅ Intersted <span class="cnt" id="stc-interested">0</span></button>
-        <button class="stp" onclick="setStatusTab(this,'Demo Schedule')">📅 Demo Schedule <span class="cnt" id="stc-demo">0</span></button>
-        <button class="stp" onclick="setStatusTab(this,'Converted')">🎉 Converted <span class="cnt" id="stc-converted">0</span></button>
-        <button class="stp" onclick="setStatusTab(this,'Not Intrested')">❌ Not Intrested <span class="cnt" id="stc-notint">0</span></button>
+      <div class="status-tabs-bar" id="stBar">
+        <button class="stp active" onclick="setTab(this,'')">All <span class="cnt" id="tc-all">0</span></button>
+        <button class="stp" onclick="setTab(this,'New')">New <span class="cnt" id="tc-new">0</span></button>
+        <button class="stp" onclick="setTab(this,'Called')">Called <span class="cnt" id="tc-called">0</span></button>
+        <button class="stp" onclick="setTab(this,'Intersted')">Intersted <span class="cnt" id="tc-int">0</span></button>
+        <button class="stp" onclick="setTab(this,'Demo Schedule')">Demo Schedule <span class="cnt" id="tc-demo">0</span></button>
+        <button class="stp" onclick="setTab(this,'Converted')">Converted <span class="cnt" id="tc-conv">0</span></button>
+        <button class="stp" onclick="setTab(this,'Not Intrested')">Not Intrested <span class="cnt" id="tc-no">0</span></button>
       </div>
-
-      <!-- CONTROLS -->
       <div class="controls">
-        <input type="text" id="searchBox" placeholder="🔍 Search name, phone, city, ticket…"/>
+        <input type="text" id="searchBox" placeholder="Search name, phone, city, ticket..."/>
         <select id="filterSw">
           <option value="">All Software</option>
-          <option value="Vyapar">Vyapar</option>
-          <option value="Biz Analyst">Biz Analyst</option>
-          <option value="Bill Touch">Bill Touch</option>
+          <option>Vyapar</option><option>Biz Analyst</option><option>Bill Touch</option>
         </select>
         <select id="filterStatus">
           <option value="">All Status</option>
-          <option value="New">New</option>
-          <option value="Called">Called</option>
-          <option value="Intersted">Intersted</option>
-          <option value="Demo Schedule">Demo Schedule</option>
-          <option value="Converted">Converted</option>
-          <option value="Not Intrested">Not Intrested</option>
+          <option>New</option><option>Called</option><option>Intersted</option>
+          <option>Demo Schedule</option><option>Converted</option><option>Not Intrested</option>
         </select>
         <select id="filterDecision">
           <option value="">All Decisions</option>
-          <option value="Will Buy">Will Buy</option>
-          <option value="Need Time">Need Time</option>
-          <option value="Payment Processing">Payment Processing</option>
-          <option value="Waiting For Discount">Waiting For Discount</option>
-          <option value="Not Intrested">Not Intrested</option>
+          <option>Will Buy</option><option>Need Time</option>
+          <option>Payment Processing</option><option>Waiting For Discount</option><option>Not Intrested</option>
         </select>
-        <button class="ctrl-btn" id="refreshBtn">↻ Refresh</button>
-        <button class="ctrl-btn" id="exportBtn">⬇ Export CSV</button>
+        <button class="ctrl-btn" id="refreshBtn">Refresh</button>
+        <button class="ctrl-btn" id="exportBtn">Export CSV</button>
       </div>
-
-      <!-- TABLE -->
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Date &amp; Time</th>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>City</th>
-              <th>Software</th>
-              <th>Status</th>
-              <th>Decision</th>
-              <th>Plan / Type</th>
-              <th>Ticket ID</th>
-            </tr>
-          </thead>
-          <tbody id="leadsBody">
-            <tr><td colspan="10" style="text-align:center;padding:2rem;color:var(--muted)">Loading leads…</td></tr>
-          </tbody>
+          <thead><tr><th>#</th><th>Date</th><th>Name</th><th>Phone</th><th>City</th><th>Software</th><th>Status</th><th>Decision</th><th>Plan</th><th>Ticket</th></tr></thead>
+          <tbody id="leadsBody"><tr><td colspan="10" style="text-align:center;padding:2rem;color:var(--muted)">Loading...</td></tr></tbody>
         </table>
       </div>
+    </div>
 
-    </div><!-- /tabLeads -->
-
-    <!-- ══ SETTINGS PANEL ═══════════════════════════════════════ -->
     <div id="tabSettings" style="display:none">
-
-      <!-- OFFER BANNER -->
       <div class="settings-card">
-        <h3>🎉 Offer / Announcement Banner</h3>
+        <h3>Offer / Announcement Banner</h3>
         <div class="sf-grid" style="grid-template-columns:1fr">
-          <div class="sf-group">
-            <label>Message (scrolls across all pages)</label>
-            <textarea id="s_offer_msg" placeholder="e.g. 🎉 Special Offer: Get Vyapar at 20% OFF this month!"></textarea>
-          </div>
+          <div class="sf-group"><label>Message</label><textarea id="s_offer_msg" placeholder="e.g. Special Offer: Get Vyapar at 20% OFF!"></textarea></div>
         </div>
         <div class="sf-grid">
-          <div class="sf-group">
-            <label>Active</label>
-            <select id="s_offer_active">
-              <option value="true">✅ Show banner on all pages</option>
-              <option value="false">❌ Hide banner</option>
-            </select>
+          <div class="sf-group"><label>Active</label>
+            <select id="s_offer_active"><option value="true">Show banner</option><option value="false">Hide banner</option></select>
           </div>
-          <div class="sf-group">
-            <label>Background Color</label>
-            <input type="color" id="s_offer_bg" value="#c62828" style="height:38px;padding:.2rem .4rem;cursor:pointer"/>
-          </div>
-          <div class="sf-group">
-            <label>Text Color</label>
-            <input type="color" id="s_offer_color" value="#ffffff" style="height:38px;padding:.2rem .4rem;cursor:pointer"/>
-          </div>
+          <div class="sf-group"><label>BG Color</label><input type="color" id="s_offer_bg" value="#c62828" style="height:38px;padding:.2rem .4rem;cursor:pointer"/></div>
+          <div class="sf-group"><label>Text Color</label><input type="color" id="s_offer_color" value="#ffffff" style="height:38px;padding:.2rem .4rem;cursor:pointer"/></div>
         </div>
         <button class="save-btn" onclick="saveSection('offer')">Save Banner</button>
         <span class="save-msg" id="msg_offer"></span>
       </div>
-
-      <!-- VYAPAR PRICES -->
       <div class="settings-card">
-        <h3>💼 Vyapar Plan Prices (numbers only, + GST auto-shown)</h3>
-        <div class="sf-section-title">1 Year — Desktop Only</div>
+        <h3>Vyapar Plan Prices</h3>
+        <div class="sf-section-title">1 Year Desktop</div>
         <div class="sf-grid">
           <div class="sf-group"><label>Silver</label><input type="number" id="s_v_s_1d" placeholder="3399"/></div>
           <div class="sf-group"><label>Gold</label><input type="number" id="s_v_g_1d" placeholder="3699"/></div>
           <div class="sf-group"><label>Retail Pro</label><input type="number" id="s_v_r_1d" placeholder="8999"/></div>
-          <div class="sf-group"><label>Distributor Pro</label><input type="number" id="s_v_d_1d" placeholder="8999"/></div>
+          <div class="sf-group"><label>Dist Pro</label><input type="number" id="s_v_d_1d" placeholder="8999"/></div>
           <div class="sf-group"><label>Mfg Pro</label><input type="number" id="s_v_m_1d" placeholder="8999"/></div>
           <div class="sf-group"><label>Platinum</label><input type="number" id="s_v_p_1d" placeholder="9999"/></div>
         </div>
-        <div class="sf-section-title">1 Year — Desktop + Mobile</div>
+        <div class="sf-section-title">1 Year Desktop+Mobile</div>
         <div class="sf-grid">
           <div class="sf-group"><label>Silver</label><input type="number" id="s_v_s_1dm" placeholder="3999"/></div>
           <div class="sf-group"><label>Gold</label><input type="number" id="s_v_g_1dm" placeholder="4299"/></div>
           <div class="sf-group"><label>Retail Pro</label><input type="number" id="s_v_r_1dm" placeholder="9999"/></div>
-          <div class="sf-group"><label>Distributor Pro</label><input type="number" id="s_v_d_1dm" placeholder="9999"/></div>
+          <div class="sf-group"><label>Dist Pro</label><input type="number" id="s_v_d_1dm" placeholder="9999"/></div>
           <div class="sf-group"><label>Mfg Pro</label><input type="number" id="s_v_m_1dm" placeholder="9999"/></div>
           <div class="sf-group"><label>Platinum</label><input type="number" id="s_v_p_1dm" placeholder="11999"/></div>
         </div>
-        <div class="sf-section-title">3 Year — Desktop Only</div>
+        <div class="sf-section-title">3 Year Desktop</div>
         <div class="sf-grid">
           <div class="sf-group"><label>Silver</label><input type="number" id="s_v_s_3d" placeholder="7799"/></div>
           <div class="sf-group"><label>Gold</label><input type="number" id="s_v_g_3d" placeholder="8199"/></div>
           <div class="sf-group"><label>Retail Pro</label><input type="number" id="s_v_r_3d" placeholder="19799"/></div>
-          <div class="sf-group"><label>Distributor Pro</label><input type="number" id="s_v_d_3d" placeholder="19799"/></div>
+          <div class="sf-group"><label>Dist Pro</label><input type="number" id="s_v_d_3d" placeholder="19799"/></div>
           <div class="sf-group"><label>Mfg Pro</label><input type="number" id="s_v_m_3d" placeholder="19799"/></div>
           <div class="sf-group"><label>Platinum</label><input type="number" id="s_v_p_3d" placeholder="21999"/></div>
         </div>
-        <div class="sf-section-title">3 Year — Desktop + Mobile</div>
+        <div class="sf-section-title">3 Year Desktop+Mobile</div>
         <div class="sf-grid">
           <div class="sf-group"><label>Silver</label><input type="number" id="s_v_s_3dm" placeholder="8699"/></div>
           <div class="sf-group"><label>Gold</label><input type="number" id="s_v_g_3dm" placeholder="8999"/></div>
           <div class="sf-group"><label>Retail Pro</label><input type="number" id="s_v_r_3dm" placeholder="21999"/></div>
-          <div class="sf-group"><label>Distributor Pro</label><input type="number" id="s_v_d_3dm" placeholder="21999"/></div>
+          <div class="sf-group"><label>Dist Pro</label><input type="number" id="s_v_d_3dm" placeholder="21999"/></div>
           <div class="sf-group"><label>Mfg Pro</label><input type="number" id="s_v_m_3dm" placeholder="21999"/></div>
           <div class="sf-group"><label>Platinum</label><input type="number" id="s_v_p_3dm" placeholder="25999"/></div>
         </div>
-        <button class="save-btn" onclick="saveSection('vyapar')">Save Vyapar Prices</button>
+        <button class="save-btn" onclick="saveSection('vyapar')">Save Vyapar</button>
         <span class="save-msg" id="msg_vyapar"></span>
       </div>
-
-      <!-- BIZ ANALYST PRICES -->
       <div class="settings-card">
-        <h3>📊 Biz Analyst Plan Prices</h3>
+        <h3>Biz Analyst Prices</h3>
         <div class="sf-grid">
-          <div class="sf-group"><label>One Year</label><input type="number" id="s_ba_1yr" placeholder="3300"/></div>
-          <div class="sf-group"><label>Business Plan (2 Years)</label><input type="number" id="s_ba_2yr" placeholder="6600"/></div>
-          <div class="sf-group"><label>Five Years</label><input type="number" id="s_ba_5yr" placeholder="9900"/></div>
+          <div class="sf-group"><label>1 Year</label><input type="number" id="s_ba_1yr" placeholder="3300"/></div>
+          <div class="sf-group"><label>2 Years</label><input type="number" id="s_ba_2yr" placeholder="6600"/></div>
+          <div class="sf-group"><label>5 Years</label><input type="number" id="s_ba_5yr" placeholder="9900"/></div>
         </div>
-        <button class="save-btn" onclick="saveSection('biz')">Save Biz Analyst Prices</button>
+        <button class="save-btn" onclick="saveSection('biz')">Save Biz Analyst</button>
         <span class="save-msg" id="msg_biz"></span>
       </div>
-
-    </div><!-- /tabSettings -->
-
-  </div><!-- /dash-body -->
-</div><!-- /dashScreen -->
+    </div>
+  </div>
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script>
 (function(){
   "use strict";
+  const FB_KEY  = "AIzaSyBVq7cI62VX-fGfQj32-mdyu30JygMFwWQ";
+  const FB_PROJ = "bizsoftsolutions-7a47d";
+  const FS      = "https://firestore.googleapis.com/v1/projects/" + FB_PROJ + "/databases/(default)";
 
-  const FB_API_KEY  = "AIzaSyBVq7cI62VX-fGfQj32-mdyu30JygMFwWQ";
-  const FB_PROJECT  = "bizsoftsolutions-7a47d";
-  const AUTH_DOMAIN = "bizsoftsolutions-7a47d.firebaseapp.com";
-  const FS_BASE     = "https://firestore.googleapis.com/v1/projects/" + FB_PROJECT + "/databases/(default)";
+  firebase.initializeApp({ apiKey: FB_KEY, authDomain: FB_PROJ + ".firebaseapp.com", projectId: FB_PROJ });
+  const auth = firebase.auth();
 
-  firebase.initializeApp({ apiKey: FB_API_KEY, authDomain: AUTH_DOMAIN, projectId: FB_PROJECT });
-  var auth = firebase.auth();
+  let LEADS = [], TOKEN = "", ACTIVE_TAB = "";
 
-  var allLeads     = [];
-  var currentToken = "";
-  var activeTab    = "";   // active status pill ("" = All)
+  const STATUSES  = ["New","Called","Intersted","Demo Schedule","Converted","Not Intrested"];
+  const DECISIONS = ["","Will Buy","Need Time","Payment Processing","Waiting For Discount","Not Intrested"];
 
-  // ── AUTH STATE ──────────────────────────────────────────────
-  auth.onAuthStateChanged(function(user){
-    if(user){
-      user.getIdToken(true).then(function(tok){
-        currentToken = tok;
-        show("dashScreen"); hide("loginScreen");
-        document.getElementById("userEmail").textContent = user.email;
-        loadLeads();
-      });
+  /* ── AUTH ── */
+  auth.onAuthStateChanged(async user => {
+    if (user) {
+      TOKEN = await user.getIdToken(true);
+      document.getElementById("userEmail").textContent = user.email;
+      show("dashScreen"); hide("loginScreen");
+      loadLeads();
     } else {
       show("loginScreen"); hide("dashScreen");
     }
   });
 
-  // ── LOGIN ───────────────────────────────────────────────────
-  document.getElementById("loginBtn").addEventListener("click", function(){
-    var email = document.getElementById("loginEmail").value.trim();
-    var pass  = document.getElementById("loginPass").value;
-    var btn   = document.getElementById("loginBtn");
-    var err   = document.getElementById("loginErr");
+  document.getElementById("loginBtn").addEventListener("click", async () => {
+    const email = document.getElementById("loginEmail").value.trim();
+    const pass  = document.getElementById("loginPass").value;
+    const btn   = document.getElementById("loginBtn");
+    const err   = document.getElementById("loginErr");
     err.style.display = "none";
-    btn.disabled = true; btn.textContent = "Signing in…";
-    auth.signInWithEmailAndPassword(email, pass).catch(function(e){
-      var msg = e.code === "auth/user-not-found"    ? "No account found with this email."
-              : e.code === "auth/wrong-password"    ? "Incorrect password."
-              : e.code === "auth/invalid-email"     ? "Invalid email address."
-              : e.code === "auth/too-many-requests" ? "Too many attempts. Try again later."
-              : e.code === "auth/invalid-credential"? "Wrong email or password."
-              : e.code === "auth/network-request-failed" ? "Network error. Check connection."
-              : (e.message || "Login failed.");
-      err.textContent = "❌ " + msg;
+    btn.disabled = true; btn.textContent = "Signing in...";
+    try {
+      await auth.signInWithEmailAndPassword(email, pass);
+    } catch(e) {
+      const msg = e.code === "auth/invalid-credential" || e.code === "auth/wrong-password" || e.code === "auth/user-not-found"
+                ? "Wrong email or password."
+                : e.code === "auth/too-many-requests" ? "Too many attempts. Wait and retry."
+                : e.code === "auth/network-request-failed" ? "Network error."
+                : (e.message || "Login failed.");
+      err.textContent = msg;
       err.style.display = "block";
       btn.disabled = false; btn.textContent = "Sign In →";
-    });
+    }
   });
-  document.getElementById("loginPass").addEventListener("keydown", function(e){
-    if(e.key === "Enter") document.getElementById("loginBtn").click();
-  });
-  document.getElementById("logoutBtn").addEventListener("click", function(){ auth.signOut(); });
+  document.getElementById("loginPass").addEventListener("keydown", e => { if(e.key==="Enter") document.getElementById("loginBtn").click(); });
+  document.getElementById("logoutBtn").addEventListener("click", () => auth.signOut());
 
-  // ── LOAD LEADS ──────────────────────────────────────────────
-  function loadLeads(){
-    setBody('<tr><td colspan="10" style="text-align:center;padding:2rem;color:var(--muted)">Loading leads…</td></tr>');
-    auth.currentUser.getIdToken(true).then(function(tok){
-      currentToken = tok;
-      return fetch(FS_BASE + "/documents:runQuery", {
+  /* ── LOAD ── */
+  async function loadLeads() {
+    setBody('<tr><td colspan="10" style="text-align:center;padding:2rem;color:var(--muted)">Loading...</td></tr>');
+    try {
+      TOKEN = await auth.currentUser.getIdToken(true);
+      const res = await fetch(FS + "/documents:runQuery", {
         method: "POST",
-        headers: { "Authorization": "Bearer " + tok, "Content-Type": "application/json" },
-        body: JSON.stringify({
-          structuredQuery: {
-            from: [{ collectionId: "leads" }],
-            orderBy: [{ field: { fieldPath: "timestamp" }, direction: "DESCENDING" }],
-            limit: 500
-          }
-        })
+        headers: { "Authorization": "Bearer " + TOKEN, "Content-Type": "application/json" },
+        body: JSON.stringify({ structuredQuery: {
+          from: [{ collectionId: "leads" }],
+          orderBy: [{ field: { fieldPath: "timestamp" }, direction: "DESCENDING" }],
+          limit: 500
+        }})
       });
-    }).then(function(res){
-      if(!res.ok) return res.text().then(function(t){ throw new Error(res.status + " " + t.slice(0,200)); });
-      return res.json();
-    }).then(function(rows){
-      allLeads = rows.filter(function(r){ return r.document; }).map(function(r){ return parseDoc(r.document); });
-      applyFilter();
-      updateStats(allLeads);
-      updateTabCounts(allLeads);
-    }).catch(function(e){
-      setBody('<tr><td colspan="10" class="err-row">⚠️ ' + esc(e.message) + '</td></tr>');
-    });
+      if (!res.ok) throw new Error(res.status + " " + (await res.text()).slice(0,100));
+      const rows = await res.json();
+      LEADS = rows.filter(r => r.document).map(r => parse(r.document));
+      refresh();
+    } catch(e) {
+      setBody('<tr><td colspan="10" class="err-row">Error: ' + esc(e.message) + '</td></tr>');
+    }
   }
 
-  // ── PARSE DOCUMENT ──────────────────────────────────────────
-  function parseDoc(doc){
-    var f   = doc.fields || {};
-    var str = function(k){ return (f[k] && f[k].stringValue) ? f[k].stringValue : ""; };
-    var tsRaw = str("timestamp");
-    var ts    = tsRaw ? new Date(tsRaw) : new Date(0);
-    var valid = !isNaN(ts.getTime()) && ts.getFullYear() > 2000;
+  function parse(doc) {
+    const f = doc.fields || {}, s = k => (f[k] && f[k].stringValue) || "";
+    const ts = s("timestamp") ? new Date(s("timestamp")) : new Date(0);
+    const ok = !isNaN(ts) && ts.getFullYear() > 2000;
     return {
-      docName:  doc.name,
-      ts:       ts,
-      dateStr:  valid ? ts.toLocaleString("en-IN",{timeZone:"Asia/Kolkata",day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}) : "—",
-      name:     str("name"),
-      phone:    str("phone"),
-      city:     str("city"),
-      software: str("software"),
-      plan:     str("plan") || str("businessType"),
-      ticketId: str("ticketId"),
-      status:   str("status")   || "New",
-      decision: str("decision") || ""
+      docName: doc.name, ts,
+      dateStr: ok ? ts.toLocaleString("en-IN",{timeZone:"Asia/Kolkata",day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}) : "-",
+      name: s("name"), phone: s("phone"), city: s("city"),
+      software: s("software"), plan: s("plan") || s("businessType"),
+      ticketId: s("ticketId"), status: s("status") || "New", decision: s("decision") || ""
     };
   }
 
-  // ── RENDER TABLE ────────────────────────────────────────────
-  function renderTable(leads){
-    if(!leads.length){
-      setBody('<tr><td colspan="10" class="empty">No leads found.</td></tr>');
-      return;
-    }
-    var html = "";
-    for(var i = 0; i < leads.length; i++){
-      var l  = leads[i];
-      var sw = (l.software || "").toLowerCase();
-      var bCls = sw.indexOf("vyapar") >= 0 ? "badge-vyapar"
-               : sw.indexOf("biz")    >= 0 ? "badge-biz"
-               : sw.indexOf("bill")   >= 0 ? "badge-bill"
-               : "badge-other";
-      html += '<tr>' +
-        '<td>' + (i+1) + '</td>' +
-        '<td style="white-space:nowrap;font-size:.8rem">' + l.dateStr + '</td>' +
-        '<td><strong>' + esc(l.name) + '</strong></td>' +
-        '<td>' + esc(l.phone) + '</td>' +
-        '<td>' + esc(l.city) + '</td>' +
-        '<td><span class="badge ' + bCls + '">' + esc(l.software) + '</span></td>' +
-        '<td>' + statusSelect(l.status, i) + '</td>' +
-        '<td>' + decisionSelect(l.decision, i) + '</td>' +
-        '<td style="font-size:.78rem;color:var(--muted)">' + esc(l.plan) + '</td>' +
-        '<td class="ticket">' + esc(l.ticketId) + '</td>' +
-        '</tr>';
-    }
+  /* ── RENDER ── */
+  function render(leads) {
+    if (!leads.length) { setBody('<tr><td colspan="10" class="empty">No leads found.</td></tr>'); return; }
+    let html = "";
+    leads.forEach((l, i) => {
+      const sw = (l.software || "").toLowerCase();
+      const bc = sw.includes("vyapar") ? "badge-vyapar" : sw.includes("biz") ? "badge-biz" : sw.includes("bill") ? "badge-bill" : "badge-other";
+      html += `<tr>
+        <td>${i+1}</td>
+        <td style="white-space:nowrap;font-size:.8rem">${l.dateStr}</td>
+        <td><strong>${esc(l.name)}</strong></td>
+        <td>${esc(l.phone)}</td>
+        <td>${esc(l.city)}</td>
+        <td><span class="badge ${bc}">${esc(l.software)}</span></td>
+        <td>${selStatus(l.status, i)}</td>
+        <td>${selDecision(l.decision, i)}</td>
+        <td style="font-size:.78rem;color:var(--muted)">${esc(l.plan)}</td>
+        <td class="ticket">${esc(l.ticketId)}</td>
+      </tr>`;
+    });
     setBody(html);
-
-    document.querySelectorAll(".sel-status").forEach(function(el){
-      applyStatusClass(el);
-      el.addEventListener("change", function(){
-        applyStatusClass(el);
-        patchLead(+el.dataset.idx, "status", el.value, el);
-      });
+    document.querySelectorAll(".sel-status").forEach(el => {
+      colorStatus(el);
+      el.addEventListener("change", () => { colorStatus(el); patch(+el.dataset.i, "status", el.value, el); });
     });
-    document.querySelectorAll(".sel-decision").forEach(function(el){
-      applyDecisionClass(el);
-      el.addEventListener("change", function(){
-        applyDecisionClass(el);
-        patchLead(+el.dataset.idx, "decision", el.value, el);
-      });
+    document.querySelectorAll(".sel-dec").forEach(el => {
+      colorDec(el);
+      el.addEventListener("change", () => { colorDec(el); patch(+el.dataset.i, "decision", el.value, el); });
     });
   }
 
-  function statusSelect(val, idx){
-    var opts = ["New","Called","Intersted","Demo Schedule","Converted","Not Intrested"];
-    var html = '<select class="sel-status" data-idx="' + idx + '">';
-    for(var i = 0; i < opts.length; i++){
-      html += '<option' + (opts[i] === val ? ' selected' : '') + '>' + esc(opts[i]) + '</option>';
-    }
-    return html + '</select>';
+  function selStatus(v, i) {
+    return '<select class="sel-status" data-i="' + i + '">' +
+      STATUSES.map(o => '<option' + (o===v?' selected':'') + '>' + esc(o) + '</option>').join('') + '</select>';
   }
-  function decisionSelect(val, idx){
-    var opts = ["","Will Buy","Need Time","Payment Processing","Waiting For Discount","Not Intrested"];
-    var html = '<select class="sel-decision" data-idx="' + idx + '">';
-    for(var i = 0; i < opts.length; i++){
-      html += '<option' + (opts[i] === val ? ' selected' : '') + '>' + esc(opts[i]) + '</option>';
-    }
-    return html + '</select>';
+  function selDecision(v, i) {
+    return '<select class="sel-dec" data-i="' + i + '">' +
+      DECISIONS.map(o => '<option' + (o===v?' selected':'') + '>' + esc(o) + '</option>').join('') + '</select>';
   }
-
-  function applyStatusClass(el){
-    var map = {"New":"s-new","Called":"s-called","Intersted":"s-interested","Demo Schedule":"s-demo","Converted":"s-converted","Not Intrested":"s-lost"};
-    el.className = "sel-status " + (map[el.value] || "s-new");
+  function colorStatus(el) {
+    const m = {"New":"s-new","Called":"s-called","Intersted":"s-interested","Demo Schedule":"s-demo","Converted":"s-converted","Not Intrested":"s-lost"};
+    el.className = "sel-status " + (m[el.value] || "s-new");
   }
-  function applyDecisionClass(el){
-    var map = {"Will Buy":"d-buy","Need Time":"d-time","Payment Processing":"d-payment","Waiting For Discount":"d-discount","Not Intrested":"d-lost"};
-    el.className = "sel-decision " + (map[el.value] || "d-pending");
+  function colorDec(el) {
+    const m = {"Will Buy":"d-buy","Need Time":"d-time","Payment Processing":"d-payment","Waiting For Discount":"d-discount","Not Intrested":"d-lost"};
+    el.className = "sel-dec " + (m[el.value] || "d-blank");
   }
 
-  // ── PATCH FIRESTORE ─────────────────────────────────────────
-  function patchLead(idx, field, value, triggerEl){
-    var visible = getFilteredLeads();
-    var lead    = visible[idx];
-    if(!lead || !lead.docName) return;
-
+  /* ── PATCH ── */
+  async function patch(idx, field, value, el) {
+    const visible = filtered();
+    const lead = visible[idx];
+    if (!lead) return;
     lead[field] = value;
-    var master = null;
-    for(var i = 0; i < allLeads.length; i++){
-      if(allLeads[i].docName === lead.docName){ master = allLeads[i]; break; }
-    }
-    if(master) master[field] = value;
-
-    if(triggerEl){ triggerEl.disabled = true; triggerEl.style.opacity = ".5"; }
-
-    auth.currentUser.getIdToken().then(function(tok){
-      currentToken = tok;
-      return fetch("https://firestore.googleapis.com/v1/" + lead.docName + "?updateMask.fieldPaths=" + field, {
+    const master = LEADS.find(l => l.docName === lead.docName);
+    if (master) master[field] = value;
+    if (el) { el.disabled = true; el.style.opacity = ".5"; }
+    try {
+      TOKEN = await auth.currentUser.getIdToken();
+      const body = { fields: {} };
+      body.fields[field] = { stringValue: value };
+      const res = await fetch("https://firestore.googleapis.com/v1/" + lead.docName + "?updateMask.fieldPaths=" + field, {
         method: "PATCH",
-        headers: { "Authorization": "Bearer " + tok, "Content-Type": "application/json" },
-        body: JSON.stringify({ fields: { [field]: { stringValue: value } } })
+        headers: { "Authorization": "Bearer " + TOKEN, "Content-Type": "application/json" },
+        body: JSON.stringify(body)
       });
-    }).then(function(res){
-      if(!res.ok) return res.text().then(function(t){ throw new Error("HTTP " + res.status + ": " + t.slice(0,100)); });
-      showToast((field === "status" ? "Status" : "Decision") + " saved → " + value);
-      var updated = master || lead;
-      if(updated.status === "Not Intrested" && updated.decision === "Not Intrested"){
-        var yes = confirm('Lead "' + updated.name + '" is Not Intrested on both.\n\nDelete permanently?');
-        if(yes){ deleteLead(updated.docName, updated.name); return; }
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      toast((field==="status"?"Status":"Decision") + " saved: " + value);
+      const u = master || lead;
+      if (u.status === "Not Intrested" && u.decision === "Not Intrested") {
+        if (confirm('Both Not Intrested for "' + u.name + '". Delete lead?')) {
+          await deleteLead(u.docName, u.name); return;
+        }
       }
-      updateStats(allLeads);
-      updateTabCounts(allLeads);
-      applyFilter();
-    }).catch(function(e){
-      showToast("❌ Save failed: " + e.message);
-    }).then(function(){
-      if(triggerEl){ triggerEl.disabled = false; triggerEl.style.opacity = ""; }
-    });
+    } catch(e) { toast("Save failed: " + e.message); }
+    finally { if(el){ el.disabled=false; el.style.opacity=""; } }
+    updateStats(); updateCounts(); refresh();
   }
 
-  // ── DELETE LEAD ─────────────────────────────────────────────
-  function deleteLead(docName, nameHint){
-    auth.currentUser.getIdToken().then(function(tok){
-      return fetch("https://firestore.googleapis.com/v1/" + docName, {
-        method: "DELETE",
-        headers: { "Authorization": "Bearer " + tok }
-      });
-    }).then(function(res){
-      if(!res.ok) throw new Error(res.status);
-      allLeads = allLeads.filter(function(l){ return l.docName !== docName; });
-      updateStats(allLeads);
-      updateTabCounts(allLeads);
-      applyFilter();
-      showToast('🗑️ Lead "' + nameHint + '" deleted.');
-    }).catch(function(e){
-      alert("Delete failed: " + e.message);
-    });
+  async function deleteLead(docName, name) {
+    try {
+      TOKEN = await auth.currentUser.getIdToken();
+      const res = await fetch("https://firestore.googleapis.com/v1/" + docName, { method:"DELETE", headers:{"Authorization":"Bearer "+TOKEN} });
+      if (!res.ok) throw new Error(res.status);
+      LEADS = LEADS.filter(l => l.docName !== docName);
+      toast('Deleted: ' + name);
+    } catch(e) { alert("Delete failed: " + e.message); }
+    updateStats(); updateCounts(); refresh();
   }
 
-  // ── STATS ────────────────────────────────────────────────────
-  function updateStats(leads){
-    var today = new Date().toISOString().slice(0,10);
-    document.getElementById("statTotal").textContent     = leads.length;
-    document.getElementById("statToday").textContent     = leads.filter(function(l){ return l.ts.toISOString().slice(0,10) === today; }).length;
-    document.getElementById("statVyapar").textContent    = leads.filter(function(l){ return (l.software||"").toLowerCase().indexOf("vyapar") >= 0; }).length;
-    document.getElementById("statBiz").textContent       = leads.filter(function(l){ return (l.software||"").toLowerCase().indexOf("biz") >= 0; }).length;
-    document.getElementById("statBill").textContent      = leads.filter(function(l){ return (l.software||"").toLowerCase().indexOf("bill") >= 0; }).length;
-    document.getElementById("statConverted").textContent = leads.filter(function(l){ return l.status === "Converted"; }).length;
+  /* ── FILTER / STATS ── */
+  function filtered() {
+    const q  = document.getElementById("searchBox").value.toLowerCase();
+    const sw = document.getElementById("filterSw").value.toLowerCase();
+    const st = document.getElementById("filterStatus").value;
+    const dc = document.getElementById("filterDecision").value;
+    return LEADS.filter(l =>
+      (!ACTIVE_TAB || l.status === ACTIVE_TAB) &&
+      (!q  || [l.name,l.phone,l.city,l.ticketId,l.plan].join(" ").toLowerCase().includes(q)) &&
+      (!sw || (l.software||"").toLowerCase().includes(sw)) &&
+      (!st || l.status === st) &&
+      (!dc || l.decision === dc)
+    );
+  }
+  function refresh() { render(filtered()); }
+
+  function updateStats() {
+    const today = new Date().toISOString().slice(0,10);
+    document.getElementById("statTotal").textContent     = LEADS.length;
+    document.getElementById("statToday").textContent     = LEADS.filter(l => l.ts.toISOString().slice(0,10)===today).length;
+    document.getElementById("statVyapar").textContent    = LEADS.filter(l => (l.software||"").toLowerCase().includes("vyapar")).length;
+    document.getElementById("statBiz").textContent       = LEADS.filter(l => (l.software||"").toLowerCase().includes("biz")).length;
+    document.getElementById("statBill").textContent      = LEADS.filter(l => (l.software||"").toLowerCase().includes("bill")).length;
+    document.getElementById("statConverted").textContent = LEADS.filter(l => l.status==="Converted").length;
+  }
+  function updateCounts() {
+    const c = {};
+    STATUSES.forEach(s => c[s] = 0);
+    LEADS.forEach(l => { if(c[l.status]!==undefined) c[l.status]++; });
+    document.getElementById("tc-all").textContent  = LEADS.length;
+    document.getElementById("tc-new").textContent  = c["New"];
+    document.getElementById("tc-called").textContent = c["Called"];
+    document.getElementById("tc-int").textContent  = c["Intersted"];
+    document.getElementById("tc-demo").textContent = c["Demo Schedule"];
+    document.getElementById("tc-conv").textContent = c["Converted"];
+    document.getElementById("tc-no").textContent   = c["Not Intrested"];
   }
 
-  // ── STATUS TAB COUNTS ────────────────────────────────────────
-  function updateTabCounts(leads){
-    var c = {"New":0,"Called":0,"Intersted":0,"Demo Schedule":0,"Converted":0,"Not Intrested":0};
-    leads.forEach(function(l){ if(c[l.status] !== undefined) c[l.status]++; });
-    var el = function(id){ return document.getElementById(id); };
-    el("stc-all").textContent        = leads.length;
-    el("stc-new").textContent        = c["New"];
-    el("stc-called").textContent     = c["Called"];
-    el("stc-interested").textContent = c["Intersted"];
-    el("stc-demo").textContent       = c["Demo Schedule"];
-    el("stc-converted").textContent  = c["Converted"];
-    el("stc-notint").textContent     = c["Not Intrested"];
-  }
-
-  // ── FILTER ───────────────────────────────────────────────────
-  function getFilteredLeads(){
-    var q  = document.getElementById("searchBox").value.toLowerCase();
-    var sw = document.getElementById("filterSw").value.toLowerCase();
-    var st = document.getElementById("filterStatus").value;
-    var dc = document.getElementById("filterDecision").value;
-    return allLeads.filter(function(l){
-      var matchTab = !activeTab || l.status === activeTab;
-      var matchQ   = !q  || [l.name,l.phone,l.city,l.ticketId,l.plan].join(" ").toLowerCase().indexOf(q) >= 0;
-      var matchSw  = !sw || (l.software||"").toLowerCase().indexOf(sw) >= 0;
-      var matchSt  = !st || l.status === st;
-      var matchDc  = !dc || l.decision === dc;
-      return matchTab && matchQ && matchSw && matchSt && matchDc;
-    });
-  }
-  function applyFilter(){ renderTable(getFilteredLeads()); }
-
-  document.getElementById("searchBox").addEventListener("input", applyFilter);
-  document.getElementById("filterSw").addEventListener("change", applyFilter);
-  document.getElementById("filterStatus").addEventListener("change", applyFilter);
-  document.getElementById("filterDecision").addEventListener("change", applyFilter);
+  document.getElementById("searchBox").addEventListener("input", refresh);
+  document.getElementById("filterSw").addEventListener("change", refresh);
+  document.getElementById("filterStatus").addEventListener("change", refresh);
+  document.getElementById("filterDecision").addEventListener("change", refresh);
   document.getElementById("refreshBtn").addEventListener("click", loadLeads);
-
-  // ── EXPORT CSV ───────────────────────────────────────────────
-  document.getElementById("exportBtn").addEventListener("click", function(){
-    if(!allLeads.length) return;
-    var header = ["Date","Name","Phone","City","Software","Status","Decision","Plan","Ticket ID"];
-    var rows = allLeads.map(function(l){
-      return [l.dateStr,l.name,l.phone,l.city,l.software,l.status,l.decision,l.plan,l.ticketId]
-        .map(function(v){ return '"' + (v||"").replace(/"/g,'""') + '"'; }).join(",");
-    });
-    var csv = [header.join(",")].concat(rows).join("\n");
-    var a   = document.createElement("a");
-    a.href  = URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
-    a.download = "bsft-leads-" + new Date().toISOString().slice(0,10) + ".csv";
+  document.getElementById("exportBtn").addEventListener("click", () => {
+    if (!LEADS.length) return;
+    const hdr = ["Date","Name","Phone","City","Software","Status","Decision","Plan","Ticket"];
+    const rows = LEADS.map(l => [l.dateStr,l.name,l.phone,l.city,l.software,l.status,l.decision,l.plan,l.ticketId].map(v => '"'+(v||"").replace(/"/g,'""')+'"').join(","));
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([[hdr.join(","),...rows].join("\n")],{type:"text/csv"}));
+    a.download = "leads-" + new Date().toISOString().slice(0,10) + ".csv";
     a.click();
   });
 
-  // ── TOAST ────────────────────────────────────────────────────
-  function showToast(msg){
-    var t = document.getElementById("bsf-toast");
-    if(!t){
-      t = document.createElement("div");
-      t.id = "bsf-toast";
+  function toast(msg) {
+    let t = document.getElementById("_toast");
+    if (!t) {
+      t = document.createElement("div"); t.id = "_toast";
       t.style.cssText = "position:fixed;bottom:1.5rem;right:1.5rem;background:#1a1a2e;color:#fff;padding:.7rem 1.2rem;border-radius:10px;font-size:.9rem;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:opacity .4s";
       document.body.appendChild(t);
     }
-    t.textContent = msg;
-    t.style.opacity = "1";
-    clearTimeout(t._timer);
-    t._timer = setTimeout(function(){ t.style.opacity = "0"; }, 3000);
+    t.textContent = msg; t.style.opacity = "1";
+    clearTimeout(t._t); t._t = setTimeout(() => t.style.opacity = "0", 3000);
   }
+  function show(id) { document.getElementById(id).style.display = id==="loginScreen" ? "flex" : "block"; }
+  function hide(id) { document.getElementById(id).style.display = "none"; }
+  function setBody(h) { document.getElementById("leadsBody").innerHTML = h; }
+  function esc(s) { return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
-  // ── HELPERS ──────────────────────────────────────────────────
-  function show(id){ document.getElementById(id).style.display = id === "loginScreen" ? "flex" : "block"; }
-  function hide(id){ document.getElementById(id).style.display = "none"; }
-  function setBody(html){ document.getElementById("leadsBody").innerHTML = html; }
-  function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-
-  // Expose status-tab setter for the global setStatusTab function
-  window._setLeadsTab = function(status){
-    activeTab = status;
-    document.getElementById("filterStatus").value = "";
-    applyFilter();
-  };
-
+  window._setTab = s => { ACTIVE_TAB = s; document.getElementById("filterStatus").value = ""; refresh(); };
 })();
 
-// ── STATUS PILL CLICK ────────────────────────────────────────
-function setStatusTab(btn, status){
-  document.querySelectorAll("#statusTabsBar .stp").forEach(function(b){ b.classList.remove("active"); });
+function setTab(btn, s) {
+  document.querySelectorAll("#stBar .stp").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
-  if(typeof window._setLeadsTab === "function") window._setLeadsTab(status);
+  if (window._setTab) window._setTab(s);
+}
+function switchTab(t) {
+  document.getElementById("tabLeads").style.display    = t==="leads"    ? "block" : "none";
+  document.getElementById("tabSettings").style.display = t==="settings" ? "block" : "none";
+  document.getElementById("tabLeadsBtn").classList.toggle("active",    t==="leads");
+  document.getElementById("tabSettingsBtn").classList.toggle("active", t==="settings");
+  if (t==="settings") loadSettings();
 }
 
-// ── MAIN TAB SWITCH ──────────────────────────────────────────
-function switchTab(tab){
-  document.getElementById("tabLeads").style.display    = tab === "leads"    ? "block" : "none";
-  document.getElementById("tabSettings").style.display = tab === "settings" ? "block" : "none";
-  document.getElementById("tabLeadsBtn").classList.toggle("active",    tab === "leads");
-  document.getElementById("tabSettingsBtn").classList.toggle("active", tab === "settings");
-  if(tab === "settings") loadSettingsForm();
+const FS_CFG = "https://firestore.googleapis.com/v1/projects/bizsoftsolutions-7a47d/databases/(default)/documents/settings/config";
+const PK = ["v_s_1d","v_g_1d","v_r_1d","v_d_1d","v_m_1d","v_p_1d","v_s_1dm","v_g_1dm","v_r_1dm","v_d_1dm","v_m_1dm","v_p_1dm","v_s_3d","v_g_3d","v_r_3d","v_d_3d","v_m_3d","v_p_3d","v_s_3dm","v_g_3dm","v_r_3dm","v_d_3dm","v_m_3dm","v_p_3dm","ba_1yr","ba_2yr","ba_5yr"];
+
+async function getToken() { const u = firebase.auth().currentUser; return u ? await u.getIdToken() : ""; }
+
+async function loadSettings() {
+  try {
+    const res = await fetch(FS_CFG, { headers: { Authorization: "Bearer " + await getToken() } });
+    if (res.status === 404) return;
+    if (!res.ok) throw new Error(res.status);
+    const f = (await res.json()).fields || {};
+    const g = k => (f[k] && f[k].stringValue) || "";
+    document.getElementById("s_offer_msg").value    = g("offer_msg");
+    document.getElementById("s_offer_active").value = g("offer_active") || "false";
+    if (g("offer_bg"))    document.getElementById("s_offer_bg").value    = g("offer_bg");
+    if (g("offer_color")) document.getElementById("s_offer_color").value = g("offer_color");
+    PK.forEach(k => { const el = document.getElementById("s_"+k); if(el && g(k)) el.value = g(k); });
+  } catch(e) { console.error(e); }
 }
 
-// ── SETTINGS ─────────────────────────────────────────────────
-var FS_SETTINGS = "https://firestore.googleapis.com/v1/projects/bizsoftsolutions-7a47d/databases/(default)/documents/settings/config";
-var PRICE_KEYS  = [
-  "v_s_1d","v_g_1d","v_r_1d","v_d_1d","v_m_1d","v_p_1d",
-  "v_s_1dm","v_g_1dm","v_r_1dm","v_d_1dm","v_m_1dm","v_p_1dm",
-  "v_s_3d","v_g_3d","v_r_3d","v_d_3d","v_m_3d","v_p_3d",
-  "v_s_3dm","v_g_3dm","v_r_3dm","v_d_3dm","v_m_3dm","v_p_3dm",
-  "ba_1yr","ba_2yr","ba_5yr"
-];
-
-function getToken(){
-  var user = firebase.auth().currentUser;
-  return user ? user.getIdToken() : Promise.resolve("");
-}
-
-function loadSettingsForm(){
-  getToken().then(function(tok){
-    return fetch(FS_SETTINGS, { headers: { Authorization: "Bearer " + tok } });
-  }).then(function(res){
-    if(res.status === 404) return null;
-    if(!res.ok) throw new Error(res.status);
-    return res.json();
-  }).then(function(data){
-    if(!data) return;
-    var f   = data.fields || {};
-    var get = function(k){ return (f[k] && f[k].stringValue) ? f[k].stringValue : ""; };
-    document.getElementById("s_offer_msg").value    = get("offer_msg");
-    document.getElementById("s_offer_active").value = get("offer_active") || "false";
-    if(get("offer_bg"))    document.getElementById("s_offer_bg").value    = get("offer_bg");
-    if(get("offer_color")) document.getElementById("s_offer_color").value = get("offer_color");
-    PRICE_KEYS.forEach(function(k){
-      var el = document.getElementById("s_" + k);
-      if(el && get(k)) el.value = get(k);
-    });
-  }).catch(function(e){ console.error("loadSettingsForm:", e); });
-}
-
-function saveSection(section){
-  var msgEl = document.getElementById("msg_" + section);
-  msgEl.textContent = "Saving…"; msgEl.className = "save-msg";
-  var fields = {};
-  if(section === "offer"){
-    fields.offer_msg    = { stringValue: document.getElementById("s_offer_msg").value.trim() };
-    fields.offer_active = { stringValue: document.getElementById("s_offer_active").value };
-    fields.offer_bg     = { stringValue: document.getElementById("s_offer_bg").value };
-    fields.offer_color  = { stringValue: document.getElementById("s_offer_color").value };
-  } else if(section === "vyapar"){
-    PRICE_KEYS.filter(function(k){ return k.indexOf("v_") === 0; }).forEach(function(k){
-      var el = document.getElementById("s_" + k);
-      if(el && el.value) fields[k] = { stringValue: el.value };
-    });
-  } else if(section === "biz"){
-    ["ba_1yr","ba_2yr","ba_5yr"].forEach(function(k){
-      var el = document.getElementById("s_" + k);
-      if(el && el      if(el && el.value) fields[k] = { stringValue: el.value };
-    });
-  }
-  var mask = Object.keys(fields).map(function(k){ return "updateMask.fieldPaths=" + k; }).join("&");
-  getToken().then(function(tok){
-    return fetch(FS_SETTINGS + "?" + mask, {
-      method: "PATCH",
-      headers: { Authorization: "Bearer " + tok, "Content-Type": "application/json" },
-      body: JSON.stringify({ fields: fields })
-    });
-  }).then(function(res){
-    if(!res.ok) throw new Error(res.status);
-    msgEl.textContent = "\u2705 Saved!"; msgEl.className = "save-msg ok";
-    setTimeout(function(){ msgEl.textContent = ""; }, 3000);
-  }).catch(function(e){
-    msgEl.textContent = "\u274C Error: " + e.message; msgEl.className = "save-msg err";
-  });
+async function saveSection(sec) {
+  const m = document.getElementById("msg_"+sec);
+  m.textContent = "Saving..."; m.className = "save-msg";
+  try {
+    const fields = {};
+    if (sec==="offer") {
+      fields.offer_msg    = { stringValue: document.getElementById("s_offer_msg").value.trim() };
+      fields.offer_active = { stringValue: document.getElementById("s_offer_active").value };
+      fields.offer_bg     = { stringValue: document.getElementById("s_offer_bg").value };
+      fields.offer_color  = { stringValue: document.getElementById("s_offer_color").value };
+    } else if (sec==="vyapar") {
+      PK.filter(k=>k.startsWith("v_")).forEach(k => { const el=document.getElementById("s_"+k); if(el&&el.value) fields[k]={stringValue:el.value}; });
+    } else if (sec==="biz") {
+      ["ba_1yr","ba_2yr","ba_5yr"].forEach(k => { const el=document.getElementById("s_"+k); if(el&&el.value) fields[k]={stringValue:el.value}; });
+    }
+    const mask = Object.keys(fields).map(k=>"updateMask.fieldPaths="+k).join("&");
+    const res = await fetch(FS_CFG+"?"+mask, { method:"PATCH", headers:{Authorization:"Bearer "+await getToken(),"Content-Type":"application/json"}, body:JSON.stringify({fields}) });
+    if (!res.ok) throw new Error(res.status);
+    m.textContent = "Saved!"; m.className = "save-msg ok";
+    setTimeout(() => m.textContent="", 3000);
+  } catch(e) { m.textContent = "Error: "+e.message; m.className = "save-msg err"; }
 }
 </script>
 </body>
