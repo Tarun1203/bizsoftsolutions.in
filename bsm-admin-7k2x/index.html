@@ -85,11 +85,19 @@
     .s-lost      {background:#ffebee;color:#c62828;border-color:#ef9a9a}
 
     /* Decision colour coding */
-    .d-pending   {background:#f5f5f5;color:#607d8b;border-color:#cfd8dc}
     .d-buy       {background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}
-    .d-followup  {background:#fff8e1;color:#f57f17;border-color:#ffe082}
-    .d-demo      {background:#e3f2fd;color:#1565c0;border-color:#90caf9}
-    .d-notrel    {background:#ffebee;color:#c62828;border-color:#ef9a9a}
+    .d-time      {background:#fff8e1;color:#f57f17;border-color:#ffe082}
+    .d-payment   {background:#e3f2fd;color:#1565c0;border-color:#90caf9}
+    .d-discount  {background:#f3e5f5;color:#6a1b9a;border-color:#ce93d8}
+    .d-lost      {background:#ffebee;color:#c62828;border-color:#ef9a9a}
+    .d-pending   {background:#f5f5f5;color:#607d8b;border-color:#cfd8dc}
+
+    /* STATUS TABS (inside leads panel) */
+    .status-tabs-bar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+    .stp{padding:.4rem 1rem;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:.8rem;font-weight:700;cursor:pointer;color:var(--muted);white-space:nowrap;transition:all .15s}
+    .stp:hover{border-color:var(--primary);color:var(--primary)}
+    .stp.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .stp .cnt{display:inline-block;background:rgba(0,0,0,.12);border-radius:10px;padding:.05rem .45rem;font-size:.72rem;margin-left:.35rem}
 
     .ticket{font-family:monospace;font-size:.76rem;color:var(--muted)}
     .saving{opacity:.5;pointer-events:none}
@@ -171,6 +179,17 @@
       <div class="stat teal"><div class="stat-label">Converted</div><div class="stat-val" id="statConverted">—</div></div>
     </div>
 
+    <!-- STATUS TABS -->
+    <div class="status-tabs-bar" id="statusTabsBar">
+      <button class="stp active" data-st="" onclick="setStatusTab(this,'')">All<span class="cnt" id="stc-all">0</span></button>
+      <button class="stp" data-st="New" onclick="setStatusTab(this,'New')">🆕 New<span class="cnt" id="stc-new">0</span></button>
+      <button class="stp" data-st="Called" onclick="setStatusTab(this,'Called')">📞 Called<span class="cnt" id="stc-called">0</span></button>
+      <button class="stp" data-st="Intersted" onclick="setStatusTab(this,'Intersted')">✅ Intersted<span class="cnt" id="stc-interested">0</span></button>
+      <button class="stp" data-st="Demo Schedule" onclick="setStatusTab(this,'Demo Schedule')">📅 Demo Schedule<span class="cnt" id="stc-demo">0</span></button>
+      <button class="stp" data-st="Converted" onclick="setStatusTab(this,'Converted')">🎉 Converted<span class="cnt" id="stc-converted">0</span></button>
+      <button class="stp" data-st="Not Intrested" onclick="setStatusTab(this,'Not Intrested')">❌ Not Intrested<span class="cnt" id="stc-notint">0</span></button>
+    </div>
+
     <!-- CONTROLS -->
     <div class="controls">
       <input type="text" id="searchBox" placeholder="🔍 Search name, phone, city, ticket…"/>
@@ -184,18 +203,18 @@
         <option value="">All Status</option>
         <option value="New">New</option>
         <option value="Called">Called</option>
-        <option value="Interested">Interested</option>
-        <option value="Demo Scheduled">Demo Scheduled</option>
+        <option value="Intersted">Intersted</option>
+        <option value="Demo Schedule">Demo Schedule</option>
         <option value="Converted">Converted</option>
-        <option value="Not Interested">Not Interested</option>
+        <option value="Not Intrested">Not Intrested</option>
       </select>
       <select id="filterDecision">
         <option value="">All Decisions</option>
         <option value="Will Buy">Will Buy</option>
-        <option value="Follow Up">Follow Up</option>
-        <option value="Demo Needed">Demo Needed</option>
-        <option value="Not Relevant">Not Relevant</option>
-        <option value="Pending">Pending</option>
+        <option value="Need Time">Need Time</option>
+        <option value="Payment Processing">Payment Processing</option>
+        <option value="Waiting For Discount">Waiting For Discount</option>
+        <option value="Not Intrested">Not Intrested</option>
       </select>
       <button class="ctrl-btn" id="refreshBtn">↻ Refresh</button>
       <button class="ctrl-btn" id="exportBtn">⬇ Export CSV</button>
@@ -338,6 +357,7 @@
 
   let allLeads = [];
   let currentToken = "";
+  let activeStatusTab = "";
 
   // ── AUTH STATE ──────────────────────────────────────────────
   auth.onAuthStateChanged(async user => {
@@ -393,8 +413,9 @@
       allLeads = rows
         .filter(r => r.document)
         .map(r => parseDoc(r.document));
-      renderTable(allLeads);
+      renderTable(getFilteredLeads());
       updateStats(allLeads);
+      updateStatusTabCounts(allLeads);
     } catch(e){
       setBody(`<tr><td colspan="10" class="err-row">⚠️ ${esc(e.message)}</td></tr>`);
       console.error("loadLeads error:", e);
@@ -422,7 +443,7 @@
       plan:      str("plan") || str("businessType"),
       ticketId:  str("ticketId"),
       status:    str("status")   || "New",
-      decision:  str("decision") || "Pending",
+      decision:  str("decision") || "",
     };
   }
 
@@ -455,52 +476,106 @@
     // attach change listeners to all dropdowns
     document.querySelectorAll(".sel-status").forEach(el => {
       applyStatusClass(el);
-      el.addEventListener("change", () => { applyStatusClass(el); patchLead(+el.dataset.idx, "status", el.value); });
+      el.addEventListener("change", () => { applyStatusClass(el); patchLead(+el.dataset.idx, "status", el.value, el); });
     });
     document.querySelectorAll(".sel-decision").forEach(el => {
       applyDecisionClass(el);
-      el.addEventListener("change", () => { applyDecisionClass(el); patchLead(+el.dataset.idx, "decision", el.value); });
+      el.addEventListener("change", () => { applyDecisionClass(el); patchLead(+el.dataset.idx, "decision", el.value, el); });
     });
   }
 
   function statusSelect(val, idx){
-    const opts = ["New","Called","Interested","Demo Scheduled","Converted","Not Interested"];
+    const opts = ["New","Called","Intersted","Demo Schedule","Converted","Not Intrested"];
     return `<select class="sel-status" data-idx="${idx}">${opts.map(o=>`<option${o===val?" selected":""}>${esc(o)}</option>`).join("")}</select>`;
   }
   function decisionSelect(val, idx){
-    const opts = ["Pending","Will Buy","Follow Up","Demo Needed","Not Relevant"];
+    const opts = ["","Will Buy","Need Time","Payment Processing","Waiting For Discount","Not Intrested"];
     return `<select class="sel-decision" data-idx="${idx}">${opts.map(o=>`<option${o===val?" selected":""}>${esc(o)}</option>`).join("")}</select>`;
   }
 
   function applyStatusClass(el){
-    const map = {"New":"s-new","Called":"s-called","Interested":"s-interested","Demo Scheduled":"s-demo","Converted":"s-converted","Not Interested":"s-lost"};
+    const map = {"New":"s-new","Called":"s-called","Intersted":"s-interested","Demo Schedule":"s-demo","Converted":"s-converted","Not Intrested":"s-lost"};
     el.className = "sel-status " + (map[el.value]||"s-new");
   }
   function applyDecisionClass(el){
-    const map = {"Pending":"d-pending","Will Buy":"d-buy","Follow Up":"d-followup","Demo Needed":"d-demo","Not Relevant":"d-notrel"};
+    const map = {"Will Buy":"d-buy","Need Time":"d-time","Payment Processing":"d-payment","Waiting For Discount":"d-discount","Not Intrested":"d-lost"};
     el.className = "sel-decision " + (map[el.value]||"d-pending");
   }
 
   // ── PATCH FIRESTORE (update status / decision) ──────────────
-  async function patchLead(idx, field, value){
-    // update in-memory
+  async function patchLead(idx, field, value, triggerEl){
     const visibleLeads = getFilteredLeads();
     const lead = visibleLeads[idx];
     if(!lead || !lead.docName) return;
     lead[field] = value;
-    // also update in allLeads
     const master = allLeads.find(l => l.docName === lead.docName);
     if(master) master[field] = value;
 
+    // Visual feedback: dim the dropdown while saving
+    if(triggerEl){ triggerEl.disabled = true; triggerEl.style.opacity = ".5"; }
+
     try {
       if(auth.currentUser) currentToken = await auth.currentUser.getIdToken();
-      await fetch(`https://firestore.googleapis.com/v1/${lead.docName}?updateMask.fieldPaths=${field}`, {
+      const res = await fetch(`https://firestore.googleapis.com/v1/${lead.docName}?updateMask.fieldPaths=${field}`, {
         method: "PATCH",
         headers: { "Authorization": `Bearer ${currentToken}`, "Content-Type": "application/json" },
         body: JSON.stringify({ fields: { [field]: { stringValue: value } } })
       });
-    } catch(e){ console.error("patchLead error:", e); }
-    updateStats(allLeads);
+      if(!res.ok){
+        const errBody = await res.text();
+        throw new Error(`HTTP ${res.status}: ${errBody.slice(0,120)}`);
+      }
+      showToast(`✅ ${field === "status" ? "Status" : "Decision"} saved → ${value}`);
+    } catch(e){
+      console.error("patchLead error:", e);
+      showToast(`❌ Save failed: ${e.message}`);
+    } finally {
+      if(triggerEl){ triggerEl.disabled = false; triggerEl.style.opacity = ""; }
+    }
+
+    // ── AUTO-DELETE when both Status AND Decision = "Not Intrested" ──
+    const updated = master || lead;
+    if(updated.status === "Not Intrested" && updated.decision === "Not Intrested"){
+      const yes = confirm(`Lead "${updated.name}" is Not Intrested on both status and decision.\n\nDelete this lead permanently?`);
+      if(yes) await deleteLead(updated.docName, updated.name);
+      else { updateStats(allLeads); return; }
+    } else {
+      updateStats(allLeads);
+    }
+    updateStatusTabCounts(allLeads);
+    applyFilter();
+  }
+
+  // ── DELETE LEAD ───────────────────────────────────────────────
+  async function deleteLead(docName, nameHint){
+    try {
+      if(auth.currentUser) currentToken = await auth.currentUser.getIdToken();
+      const res = await fetch(`https://firestore.googleapis.com/v1/${docName}`, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${currentToken}` }
+      });
+      if(!res.ok) throw new Error(res.status);
+      allLeads = allLeads.filter(l => l.docName !== docName);
+      updateStats(allLeads);
+      updateStatusTabCounts(allLeads);
+      applyFilter();
+      showToast(`🗑️ Lead "${nameHint}" deleted.`);
+    } catch(e){ console.error("deleteLead error:", e); alert("Delete failed: " + e.message); }
+  }
+
+  // ── TOAST ─────────────────────────────────────────────────────
+  function showToast(msg){
+    let t = document.getElementById("bsf-toast");
+    if(!t){
+      t = document.createElement("div");
+      t.id = "bsf-toast";
+      t.style.cssText = "position:fixed;bottom:1.5rem;right:1.5rem;background:#1a1a2e;color:#fff;padding:.7rem 1.2rem;border-radius:10px;font-size:.9rem;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:opacity .4s";
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.style.opacity = "1";
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => { t.style.opacity = "0"; }, 3000);
   }
 
   // ── STATS ───────────────────────────────────────────────────
@@ -521,14 +596,29 @@
     const st = document.getElementById("filterStatus").value.toLowerCase();
     const dc = document.getElementById("filterDecision").value.toLowerCase();
     return allLeads.filter(l => {
+      const matchTab= !activeStatusTab || (l.status||"") === activeStatusTab;
       const matchQ  = !q  || [l.name,l.phone,l.city,l.ticketId,l.plan].join(" ").toLowerCase().includes(q);
       const matchSw = !sw || (l.software||"").toLowerCase().includes(sw);
       const matchSt = !st || (l.status||"").toLowerCase() === st;
       const matchDc = !dc || (l.decision||"").toLowerCase() === dc;
-      return matchQ && matchSw && matchSt && matchDc;
+      return matchTab && matchQ && matchSw && matchSt && matchDc;
     });
   }
   function applyFilter(){ renderTable(getFilteredLeads()); }
+
+  // ── STATUS TAB COUNTS ────────────────────────────────────────
+  function updateStatusTabCounts(leads){
+    const counts = {"New":0,"Called":0,"Intersted":0,"Demo Schedule":0,"Converted":0,"Not Intrested":0};
+    leads.forEach(l => { if(counts[l.status] !== undefined) counts[l.status]++; });
+    const el = id => document.getElementById(id);
+    if(el("stc-all"))       el("stc-all").textContent       = leads.length;
+    if(el("stc-new"))       el("stc-new").textContent       = counts["New"];
+    if(el("stc-called"))    el("stc-called").textContent    = counts["Called"];
+    if(el("stc-interested"))el("stc-interested").textContent= counts["Intersted"];
+    if(el("stc-demo"))      el("stc-demo").textContent      = counts["Demo Schedule"];
+    if(el("stc-converted")) el("stc-converted").textContent = counts["Converted"];
+    if(el("stc-notint"))    el("stc-notint").textContent    = counts["Not Intrested"];
+  }
 
   document.getElementById("searchBox").addEventListener("input", applyFilter);
   document.getElementById("filterSw").addEventListener("change", applyFilter);
@@ -541,7 +631,7 @@
   document.getElementById("exportBtn").addEventListener("click", () => {
     if(!allLeads.length) return;
     const header = ["Date","Name","Phone","City","Software","Status","Decision","Plan","Ticket ID"];
-    const rows = allLeads.map(l => [l.dateStr,l.name,l.phone,l.city,l.software,l.status,l.decision,l.plan,l.ticketId]
+    const     const rows = allLeads.map(l => [l.dateStr,l.name,l.phone,l.city,l.software,l.status,l.decision,l.plan,l.ticketId]
       .map(v => `"${(v||"").replace(/"/g,'""')}"`)
       .join(","));
     const csv  = [header.join(","), ...rows].join("\n");
@@ -556,7 +646,21 @@
   function hide(id){ document.getElementById(id).style.display = "none"; }
   function setBody(html){ document.getElementById("leadsBody").innerHTML = html; }
   function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  // Expose status-tab setter so global setStatusTab can update the filter
+  window._setLeadsStatusTab = function(status){
+    activeStatusTab = status;
+    document.getElementById("filterStatus").value = "";
+    applyFilter();
+  };
 })();
+
+// ── STATUS TAB (leads filter pills) ──────────────────────────
+function setStatusTab(btn, status){
+  document.querySelectorAll("#statusTabsBar .stp").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  if(typeof window._setLeadsStatusTab === "function") window._setLeadsStatusTab(status);
+}
 
 // ── TAB SWITCHING ─────────────────────────────────────────────
 function switchTab(tab){
@@ -590,18 +694,16 @@ async function loadSettingsForm(){
     const token = await getToken();
     const res = await fetch(FS_SETTINGS, { headers:{ Authorization:`Bearer ${token}` }});
     if(!res.ok && res.status !== 404) return;
-    if(res.status === 404) return; // no settings yet — form stays empty
+    if(res.status === 404) return;
     const data = await res.json();
     const f = data.fields || {};
     const get = k => (f[k]?.stringValue) || "";
 
-    // Offer
     document.getElementById("s_offer_msg").value    = get("offer_msg");
     document.getElementById("s_offer_active").value = get("offer_active") || "false";
     if(get("offer_bg"))    document.getElementById("s_offer_bg").value    = get("offer_bg");
     if(get("offer_color")) document.getElementById("s_offer_color").value = get("offer_color");
 
-    // Prices
     PRICE_KEYS.forEach(k => {
       const el = document.getElementById("s_" + k);
       if(el && get(k)) el.value = get(k);
@@ -634,7 +736,6 @@ async function saveSection(section){
       });
     }
 
-    // Build updateMask from fields
     const mask = Object.keys(fields).map(k => "updateMask.fieldPaths=" + k).join("&");
     const res = await fetch(`${FS_SETTINGS}?${mask}`, {
       method: "PATCH",
@@ -644,6 +745,14 @@ async function saveSection(section){
     if(!res.ok) throw new Error(res.status);
     msgEl.textContent = "✅ Saved!"; msgEl.className = "save-msg ok";
     setTimeout(() => { msgEl.textContent = ""; }, 3000);
+  } catch(e){
+    msgEl.textContent = "❌ Error: " + e.message; msgEl.className = "save-msg err";
+  }
+}
+</script>
+</body>
+</html>
+""; }, 3000);
   } catch(e){
     msgEl.textContent = "❌ Error: " + e.message; msgEl.className = "save-msg err";
   }
