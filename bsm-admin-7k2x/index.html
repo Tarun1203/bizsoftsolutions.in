@@ -73,7 +73,7 @@
     .badge-other{background:#f3e5f5;color:#6a1b9a}
 
     /* STATUS & DECISION DROPDOWNS */
-    .sel-status,.sel-decision{padding:.3rem .5rem;border-radius:6px;font-size:.78rem;font-weight:600;border:1.5px solid var(--border);cursor:pointer;outline:none;width:100%;min-width:110px}
+    .sel-status,.sel-decision{padding:.3rem .5rem;border-radius:6px;font-size:.78rem;font-weight:600;border:1.5px solid var(--border);cursor:pointer;outline:none;width:100%;min-width:120px}
     .sel-status:focus,.sel-decision:focus{border-color:var(--primary)}
 
     /* Status colour coding */
@@ -85,14 +85,14 @@
     .s-lost      {background:#ffebee;color:#c62828;border-color:#ef9a9a}
 
     /* Decision colour coding */
-    .d-buy       {background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}
-    .d-time      {background:#fff8e1;color:#f57f17;border-color:#ffe082}
-    .d-payment   {background:#e3f2fd;color:#1565c0;border-color:#90caf9}
-    .d-discount  {background:#f3e5f5;color:#6a1b9a;border-color:#ce93d8}
-    .d-lost      {background:#ffebee;color:#c62828;border-color:#ef9a9a}
-    .d-pending   {background:#f5f5f5;color:#607d8b;border-color:#cfd8dc}
+    .d-buy      {background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}
+    .d-time     {background:#fff8e1;color:#f57f17;border-color:#ffe082}
+    .d-payment  {background:#e3f2fd;color:#1565c0;border-color:#90caf9}
+    .d-discount {background:#f3e5f5;color:#6a1b9a;border-color:#ce93d8}
+    .d-lost     {background:#ffebee;color:#c62828;border-color:#ef9a9a}
+    .d-pending  {background:#f5f5f5;color:#607d8b;border-color:#cfd8dc}
 
-    /* STATUS TABS (inside leads panel) */
+    /* STATUS PILLS (inside leads panel) */
     .status-tabs-bar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
     .stp{padding:.4rem 1rem;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:.8rem;font-weight:700;cursor:pointer;color:var(--muted);white-space:nowrap;transition:all .15s}
     .stp:hover{border-color:var(--primary);color:var(--primary)}
@@ -100,17 +100,15 @@
     .stp .cnt{display:inline-block;background:rgba(0,0,0,.12);border-radius:10px;padding:.05rem .45rem;font-size:.72rem;margin-left:.35rem}
 
     .ticket{font-family:monospace;font-size:.76rem;color:var(--muted)}
-    .saving{opacity:.5;pointer-events:none}
     .empty{text-align:center;padding:3rem;color:var(--muted);font-size:.95rem}
     .err-row{text-align:center;padding:2rem;color:var(--red)}
 
-    /* TABS */
+    /* MAIN TABS */
     .tab-bar{display:flex;gap:.5rem;margin-bottom:1.5rem}
     .tab-btn{padding:.55rem 1.3rem;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-size:.88rem;font-weight:700;cursor:pointer;color:var(--muted)}
     .tab-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 
     /* SETTINGS */
-    .settings-section{margin-bottom:2rem}
     .settings-card{background:var(--card);border-radius:10px;padding:1.5rem;margin-bottom:1.2rem;box-shadow:0 1px 4px rgba(0,0,0,.06)}
     .settings-card h3{font-size:1rem;font-weight:700;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
     .sf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.75rem;margin-bottom:1rem}
@@ -160,91 +158,92 @@
   </header>
   <div class="dash-body">
 
-    <!-- TAB BAR -->
+    <!-- MAIN TAB BAR -->
     <div class="tab-bar">
       <button class="tab-btn active" id="tabLeadsBtn" onclick="switchTab('leads')">📋 Leads</button>
       <button class="tab-btn" id="tabSettingsBtn" onclick="switchTab('settings')">⚙️ Settings</button>
     </div>
 
-    <!-- LEADS PANEL -->
+    <!-- ══ LEADS PANEL ══════════════════════════════════════════ -->
     <div id="tabLeads">
 
-    <!-- STATS -->
-    <div class="stats">
-      <div class="stat"><div class="stat-label">Total Leads</div><div class="stat-val" id="statTotal">—</div></div>
-      <div class="stat"><div class="stat-label">Today</div><div class="stat-val" id="statToday">—</div></div>
-      <div class="stat"><div class="stat-label">Vyapar</div><div class="stat-val" id="statVyapar">—</div></div>
-      <div class="stat green"><div class="stat-label">Biz Analyst</div><div class="stat-val" id="statBiz">—</div></div>
-      <div class="stat orange"><div class="stat-label">Bill Touch</div><div class="stat-val" id="statBill">—</div></div>
-      <div class="stat teal"><div class="stat-label">Converted</div><div class="stat-val" id="statConverted">—</div></div>
-    </div>
+      <!-- STATS -->
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Total Leads</div><div class="stat-val" id="statTotal">—</div></div>
+        <div class="stat"><div class="stat-label">Today</div><div class="stat-val" id="statToday">—</div></div>
+        <div class="stat"><div class="stat-label">Vyapar</div><div class="stat-val" id="statVyapar">—</div></div>
+        <div class="stat green"><div class="stat-label">Biz Analyst</div><div class="stat-val" id="statBiz">—</div></div>
+        <div class="stat orange"><div class="stat-label">Bill Touch</div><div class="stat-val" id="statBill">—</div></div>
+        <div class="stat teal"><div class="stat-label">Converted</div><div class="stat-val" id="statConverted">—</div></div>
+      </div>
 
-    <!-- STATUS TABS -->
-    <div class="status-tabs-bar" id="statusTabsBar">
-      <button class="stp active" data-st="" onclick="setStatusTab(this,'')">All<span class="cnt" id="stc-all">0</span></button>
-      <button class="stp" data-st="New" onclick="setStatusTab(this,'New')">🆕 New<span class="cnt" id="stc-new">0</span></button>
-      <button class="stp" data-st="Called" onclick="setStatusTab(this,'Called')">📞 Called<span class="cnt" id="stc-called">0</span></button>
-      <button class="stp" data-st="Intersted" onclick="setStatusTab(this,'Intersted')">✅ Intersted<span class="cnt" id="stc-interested">0</span></button>
-      <button class="stp" data-st="Demo Schedule" onclick="setStatusTab(this,'Demo Schedule')">📅 Demo Schedule<span class="cnt" id="stc-demo">0</span></button>
-      <button class="stp" data-st="Converted" onclick="setStatusTab(this,'Converted')">🎉 Converted<span class="cnt" id="stc-converted">0</span></button>
-      <button class="stp" data-st="Not Intrested" onclick="setStatusTab(this,'Not Intrested')">❌ Not Intrested<span class="cnt" id="stc-notint">0</span></button>
-    </div>
+      <!-- STATUS PILLS -->
+      <div class="status-tabs-bar" id="statusTabsBar">
+        <button class="stp active" onclick="setStatusTab(this,'')">All <span class="cnt" id="stc-all">0</span></button>
+        <button class="stp" onclick="setStatusTab(this,'New')">🆕 New <span class="cnt" id="stc-new">0</span></button>
+        <button class="stp" onclick="setStatusTab(this,'Called')">📞 Called <span class="cnt" id="stc-called">0</span></button>
+        <button class="stp" onclick="setStatusTab(this,'Intersted')">✅ Intersted <span class="cnt" id="stc-interested">0</span></button>
+        <button class="stp" onclick="setStatusTab(this,'Demo Schedule')">📅 Demo Schedule <span class="cnt" id="stc-demo">0</span></button>
+        <button class="stp" onclick="setStatusTab(this,'Converted')">🎉 Converted <span class="cnt" id="stc-converted">0</span></button>
+        <button class="stp" onclick="setStatusTab(this,'Not Intrested')">❌ Not Intrested <span class="cnt" id="stc-notint">0</span></button>
+      </div>
 
-    <!-- CONTROLS -->
-    <div class="controls">
-      <input type="text" id="searchBox" placeholder="🔍 Search name, phone, city, ticket…"/>
-      <select id="filterSw">
-        <option value="">All Software</option>
-        <option value="Vyapar">Vyapar</option>
-        <option value="Biz Analyst">Biz Analyst</option>
-        <option value="Bill Touch">Bill Touch</option>
-      </select>
-      <select id="filterStatus">
-        <option value="">All Status</option>
-        <option value="New">New</option>
-        <option value="Called">Called</option>
-        <option value="Intersted">Intersted</option>
-        <option value="Demo Schedule">Demo Schedule</option>
-        <option value="Converted">Converted</option>
-        <option value="Not Intrested">Not Intrested</option>
-      </select>
-      <select id="filterDecision">
-        <option value="">All Decisions</option>
-        <option value="Will Buy">Will Buy</option>
-        <option value="Need Time">Need Time</option>
-        <option value="Payment Processing">Payment Processing</option>
-        <option value="Waiting For Discount">Waiting For Discount</option>
-        <option value="Not Intrested">Not Intrested</option>
-      </select>
-      <button class="ctrl-btn" id="refreshBtn">↻ Refresh</button>
-      <button class="ctrl-btn" id="exportBtn">⬇ Export CSV</button>
-    </div>
+      <!-- CONTROLS -->
+      <div class="controls">
+        <input type="text" id="searchBox" placeholder="🔍 Search name, phone, city, ticket…"/>
+        <select id="filterSw">
+          <option value="">All Software</option>
+          <option value="Vyapar">Vyapar</option>
+          <option value="Biz Analyst">Biz Analyst</option>
+          <option value="Bill Touch">Bill Touch</option>
+        </select>
+        <select id="filterStatus">
+          <option value="">All Status</option>
+          <option value="New">New</option>
+          <option value="Called">Called</option>
+          <option value="Intersted">Intersted</option>
+          <option value="Demo Schedule">Demo Schedule</option>
+          <option value="Converted">Converted</option>
+          <option value="Not Intrested">Not Intrested</option>
+        </select>
+        <select id="filterDecision">
+          <option value="">All Decisions</option>
+          <option value="Will Buy">Will Buy</option>
+          <option value="Need Time">Need Time</option>
+          <option value="Payment Processing">Payment Processing</option>
+          <option value="Waiting For Discount">Waiting For Discount</option>
+          <option value="Not Intrested">Not Intrested</option>
+        </select>
+        <button class="ctrl-btn" id="refreshBtn">↻ Refresh</button>
+        <button class="ctrl-btn" id="exportBtn">⬇ Export CSV</button>
+      </div>
 
-    <!-- TABLE -->
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Date &amp; Time</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>City</th>
-            <th>Software</th>
-            <th>Status</th>
-            <th>Decision</th>
-            <th>Plan / Type</th>
-            <th>Ticket ID</th>
-          </tr>
-        </thead>
-        <tbody id="leadsBody">
-          <tr><td colspan="10" style="text-align:center;padding:2rem;color:var(--muted)">Loading leads…</td></tr>
-        </tbody>
-      </table>
-    </div>
+      <!-- TABLE -->
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date &amp; Time</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>City</th>
+              <th>Software</th>
+              <th>Status</th>
+              <th>Decision</th>
+              <th>Plan / Type</th>
+              <th>Ticket ID</th>
+            </tr>
+          </thead>
+          <tbody id="leadsBody">
+            <tr><td colspan="10" style="text-align:center;padding:2rem;color:var(--muted)">Loading leads…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
     </div><!-- /tabLeads -->
 
-    <!-- SETTINGS PANEL -->
+    <!-- ══ SETTINGS PANEL ═══════════════════════════════════════ -->
     <div id="tabSettings" style="display:none">
 
       <!-- OFFER BANNER -->
@@ -253,7 +252,7 @@
         <div class="sf-grid" style="grid-template-columns:1fr">
           <div class="sf-group">
             <label>Message (scrolls across all pages)</label>
-            <textarea id="s_offer_msg" placeholder="e.g. 🎉 Special Offer: Get Vyapar at 20% OFF this month! Call 98765 43210"></textarea>
+            <textarea id="s_offer_msg" placeholder="e.g. 🎉 Special Offer: Get Vyapar at 20% OFF this month!"></textarea>
           </div>
         </div>
         <div class="sf-grid">
@@ -279,8 +278,7 @@
 
       <!-- VYAPAR PRICES -->
       <div class="settings-card">
-        <h3>💼 Vyapar Plan Prices (enter numbers only, + GST auto-shown)</h3>
-
+        <h3>💼 Vyapar Plan Prices (numbers only, + GST auto-shown)</h3>
         <div class="sf-section-title">1 Year — Desktop Only</div>
         <div class="sf-grid">
           <div class="sf-group"><label>Silver</label><input type="number" id="s_v_s_1d" placeholder="3399"/></div>
@@ -290,7 +288,6 @@
           <div class="sf-group"><label>Mfg Pro</label><input type="number" id="s_v_m_1d" placeholder="8999"/></div>
           <div class="sf-group"><label>Platinum</label><input type="number" id="s_v_p_1d" placeholder="9999"/></div>
         </div>
-
         <div class="sf-section-title">1 Year — Desktop + Mobile</div>
         <div class="sf-grid">
           <div class="sf-group"><label>Silver</label><input type="number" id="s_v_s_1dm" placeholder="3999"/></div>
@@ -300,7 +297,6 @@
           <div class="sf-group"><label>Mfg Pro</label><input type="number" id="s_v_m_1dm" placeholder="9999"/></div>
           <div class="sf-group"><label>Platinum</label><input type="number" id="s_v_p_1dm" placeholder="11999"/></div>
         </div>
-
         <div class="sf-section-title">3 Year — Desktop Only</div>
         <div class="sf-grid">
           <div class="sf-group"><label>Silver</label><input type="number" id="s_v_s_3d" placeholder="7799"/></div>
@@ -310,7 +306,6 @@
           <div class="sf-group"><label>Mfg Pro</label><input type="number" id="s_v_m_3d" placeholder="19799"/></div>
           <div class="sf-group"><label>Platinum</label><input type="number" id="s_v_p_3d" placeholder="21999"/></div>
         </div>
-
         <div class="sf-section-title">3 Year — Desktop + Mobile</div>
         <div class="sf-grid">
           <div class="sf-group"><label>Silver</label><input type="number" id="s_v_s_3dm" placeholder="8699"/></div>
@@ -320,7 +315,6 @@
           <div class="sf-group"><label>Mfg Pro</label><input type="number" id="s_v_m_3dm" placeholder="21999"/></div>
           <div class="sf-group"><label>Platinum</label><input type="number" id="s_v_p_3dm" placeholder="25999"/></div>
         </div>
-
         <button class="save-btn" onclick="saveSection('vyapar')">Save Vyapar Prices</button>
         <span class="save-msg" id="msg_vyapar"></span>
       </div>
@@ -347,103 +341,99 @@
 <script>
 (function(){
   "use strict";
+
   const FB_API_KEY  = "AIzaSyBVq7cI62VX-fGfQj32-mdyu30JygMFwWQ";
   const FB_PROJECT  = "bizsoftsolutions-7a47d";
   const AUTH_DOMAIN = "bizsoftsolutions-7a47d.firebaseapp.com";
-  const FS_BASE     = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)`;
+  const FS_BASE     = "https://firestore.googleapis.com/v1/projects/" + FB_PROJECT + "/databases/(default)";
 
-  firebase.initializeApp({ apiKey:FB_API_KEY, authDomain:AUTH_DOMAIN, projectId:FB_PROJECT });
-  const auth = firebase.auth();
+  firebase.initializeApp({ apiKey: FB_API_KEY, authDomain: AUTH_DOMAIN, projectId: FB_PROJECT });
+  var auth = firebase.auth();
 
-  let allLeads = [];
-  let currentToken = "";
-  let activeStatusTab = "";
+  var allLeads     = [];
+  var currentToken = "";
+  var activeTab    = "";   // active status pill ("" = All)
 
   // ── AUTH STATE ──────────────────────────────────────────────
-  auth.onAuthStateChanged(async user => {
+  auth.onAuthStateChanged(function(user){
     if(user){
-      currentToken = await user.getIdToken(true);
-      show("dashScreen"); hide("loginScreen");
-      document.getElementById("userEmail").textContent = user.email;
-      loadLeads();
+      user.getIdToken(true).then(function(tok){
+        currentToken = tok;
+        show("dashScreen"); hide("loginScreen");
+        document.getElementById("userEmail").textContent = user.email;
+        loadLeads();
+      });
     } else {
       show("loginScreen"); hide("dashScreen");
     }
   });
 
   // ── LOGIN ───────────────────────────────────────────────────
-  document.getElementById("loginBtn").addEventListener("click", async () => {
-    const email = document.getElementById("loginEmail").value.trim();
-    const pass  = document.getElementById("loginPass").value;
-    const btn   = document.getElementById("loginBtn");
-    const err   = document.getElementById("loginErr");
+  document.getElementById("loginBtn").addEventListener("click", function(){
+    var email = document.getElementById("loginEmail").value.trim();
+    var pass  = document.getElementById("loginPass").value;
+    var btn   = document.getElementById("loginBtn");
+    var err   = document.getElementById("loginErr");
     err.style.display = "none";
     btn.disabled = true; btn.textContent = "Signing in…";
-    try {
-      await auth.signInWithEmailAndPassword(email, pass);
-    } catch(e) {
+    auth.signInWithEmailAndPassword(email, pass).catch(function(){
       err.style.display = "block";
       btn.disabled = false; btn.textContent = "Sign In →";
-    }
+    });
   });
-  document.getElementById("loginPass").addEventListener("keydown", e => { if(e.key==="Enter") document.getElementById("loginBtn").click(); });
-  document.getElementById("logoutBtn").addEventListener("click", () => auth.signOut());
+  document.getElementById("loginPass").addEventListener("keydown", function(e){
+    if(e.key === "Enter") document.getElementById("loginBtn").click();
+  });
+  document.getElementById("logoutBtn").addEventListener("click", function(){ auth.signOut(); });
 
-  // ── LOAD LEADS via runQuery ─────────────────────────────────
-  async function loadLeads(){
+  // ── LOAD LEADS ──────────────────────────────────────────────
+  function loadLeads(){
     setBody('<tr><td colspan="10" style="text-align:center;padding:2rem;color:var(--muted)">Loading leads…</td></tr>');
-    try {
-      // refresh token before fetch
-      if(auth.currentUser) currentToken = await auth.currentUser.getIdToken(true);
-
-      const res = await fetch(`${FS_BASE}/documents:runQuery`, {
+    auth.currentUser.getIdToken(true).then(function(tok){
+      currentToken = tok;
+      return fetch(FS_BASE + "/documents:runQuery", {
         method: "POST",
-        headers: { "Authorization": `Bearer ${currentToken}`, "Content-Type": "application/json" },
+        headers: { "Authorization": "Bearer " + tok, "Content-Type": "application/json" },
         body: JSON.stringify({
           structuredQuery: {
             from: [{ collectionId: "leads" }],
-            orderBy: [{ field:{ fieldPath:"timestamp" }, direction:"DESCENDING" }],
+            orderBy: [{ field: { fieldPath: "timestamp" }, direction: "DESCENDING" }],
             limit: 500
           }
         })
       });
-      if(!res.ok){ const t=await res.text(); throw new Error(res.status+" "+t.slice(0,200)); }
-      const rows = await res.json();
-      // runQuery returns array; each item has {document:{...}} or just {readTime} for empty
-      allLeads = rows
-        .filter(r => r.document)
-        .map(r => parseDoc(r.document));
-      renderTable(getFilteredLeads());
+    }).then(function(res){
+      if(!res.ok) return res.text().then(function(t){ throw new Error(res.status + " " + t.slice(0,200)); });
+      return res.json();
+    }).then(function(rows){
+      allLeads = rows.filter(function(r){ return r.document; }).map(function(r){ return parseDoc(r.document); });
+      applyFilter();
       updateStats(allLeads);
-      updateStatusTabCounts(allLeads);
-    } catch(e){
-      setBody(`<tr><td colspan="10" class="err-row">⚠️ ${esc(e.message)}</td></tr>`);
-      console.error("loadLeads error:", e);
-    }
+      updateTabCounts(allLeads);
+    }).catch(function(e){
+      setBody('<tr><td colspan="10" class="err-row">⚠️ ' + esc(e.message) + '</td></tr>');
+    });
   }
 
-  // ── PARSE FIRESTORE DOCUMENT ────────────────────────────────
+  // ── PARSE DOCUMENT ──────────────────────────────────────────
   function parseDoc(doc){
-    const f   = doc.fields || {};
-    const str = k => f[k]?.stringValue || "";
-    // timestamp stored as stringValue ISO string
-    const tsRaw = str("timestamp");
-    const ts  = tsRaw ? new Date(tsRaw) : new Date(0);
-    const isValidDate = !isNaN(ts.getTime()) && ts.getFullYear() > 2000;
+    var f   = doc.fields || {};
+    var str = function(k){ return (f[k] && f[k].stringValue) ? f[k].stringValue : ""; };
+    var tsRaw = str("timestamp");
+    var ts    = tsRaw ? new Date(tsRaw) : new Date(0);
+    var valid = !isNaN(ts.getTime()) && ts.getFullYear() > 2000;
     return {
-      docName:   doc.name,   // full path for PATCH
-      ts,
-      dateStr: isValidDate
-        ? ts.toLocaleString("en-IN",{timeZone:"Asia/Kolkata",day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})
-        : "—",
-      name:      str("name"),
-      phone:     str("phone"),
-      city:      str("city"),
-      software:  str("software"),
-      plan:      str("plan") || str("businessType"),
-      ticketId:  str("ticketId"),
-      status:    str("status")   || "New",
-      decision:  str("decision") || "",
+      docName:  doc.name,
+      ts:       ts,
+      dateStr:  valid ? ts.toLocaleString("en-IN",{timeZone:"Asia/Kolkata",day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}) : "—",
+      name:     str("name"),
+      phone:    str("phone"),
+      city:     str("city"),
+      software: str("software"),
+      plan:     str("plan") || str("businessType"),
+      ticketId: str("ticketId"),
+      status:   str("status")   || "New",
+      decision: str("decision") || ""
     };
   }
 
@@ -453,119 +443,196 @@
       setBody('<tr><td colspan="10" class="empty">No leads found.</td></tr>');
       return;
     }
-    setBody(leads.map((l,i) => {
-      const sw = (l.software||"").toLowerCase();
-      const bCls = sw.includes("vyapar") ? "badge-vyapar"
-                 : sw.includes("biz")    ? "badge-biz"
-                 : sw.includes("bill")   ? "badge-bill"
-                 : "badge-other";
-      return `<tr data-idx="${i}">
-        <td>${i+1}</td>
-        <td style="white-space:nowrap;font-size:.8rem">${l.dateStr}</td>
-        <td><strong>${esc(l.name)}</strong></td>
-        <td>${esc(l.phone)}</td>
-        <td>${esc(l.city)}</td>
-        <td><span class="badge ${bCls}">${esc(l.software)}</span></td>
-        <td>${statusSelect(l.status, i)}</td>
-        <td>${decisionSelect(l.decision, i)}</td>
-        <td style="font-size:.78rem;color:var(--muted)">${esc(l.plan)}</td>
-        <td class="ticket">${esc(l.ticketId)}</td>
-      </tr>`;
-    }).join(""));
+    var html = "";
+    for(var i = 0; i < leads.length; i++){
+      var l  = leads[i];
+      var sw = (l.software || "").toLowerCase();
+      var bCls = sw.indexOf("vyapar") >= 0 ? "badge-vyapar"
+               : sw.indexOf("biz")    >= 0 ? "badge-biz"
+               : sw.indexOf("bill")   >= 0 ? "badge-bill"
+               : "badge-other";
+      html += '<tr>' +
+        '<td>' + (i+1) + '</td>' +
+        '<td style="white-space:nowrap;font-size:.8rem">' + l.dateStr + '</td>' +
+        '<td><strong>' + esc(l.name) + '</strong></td>' +
+        '<td>' + esc(l.phone) + '</td>' +
+        '<td>' + esc(l.city) + '</td>' +
+        '<td><span class="badge ' + bCls + '">' + esc(l.software) + '</span></td>' +
+        '<td>' + statusSelect(l.status, i) + '</td>' +
+        '<td>' + decisionSelect(l.decision, i) + '</td>' +
+        '<td style="font-size:.78rem;color:var(--muted)">' + esc(l.plan) + '</td>' +
+        '<td class="ticket">' + esc(l.ticketId) + '</td>' +
+        '</tr>';
+    }
+    setBody(html);
 
-    // attach change listeners to all dropdowns
-    document.querySelectorAll(".sel-status").forEach(el => {
+    document.querySelectorAll(".sel-status").forEach(function(el){
       applyStatusClass(el);
-      el.addEventListener("change", () => { applyStatusClass(el); patchLead(+el.dataset.idx, "status", el.value, el); });
+      el.addEventListener("change", function(){
+        applyStatusClass(el);
+        patchLead(+el.dataset.idx, "status", el.value, el);
+      });
     });
-    document.querySelectorAll(".sel-decision").forEach(el => {
+    document.querySelectorAll(".sel-decision").forEach(function(el){
       applyDecisionClass(el);
-      el.addEventListener("change", () => { applyDecisionClass(el); patchLead(+el.dataset.idx, "decision", el.value, el); });
+      el.addEventListener("change", function(){
+        applyDecisionClass(el);
+        patchLead(+el.dataset.idx, "decision", el.value, el);
+      });
     });
   }
 
   function statusSelect(val, idx){
-    const opts = ["New","Called","Intersted","Demo Schedule","Converted","Not Intrested"];
-    return `<select class="sel-status" data-idx="${idx}">${opts.map(o=>`<option${o===val?" selected":""}>${esc(o)}</option>`).join("")}</select>`;
+    var opts = ["New","Called","Intersted","Demo Schedule","Converted","Not Intrested"];
+    var html = '<select class="sel-status" data-idx="' + idx + '">';
+    for(var i = 0; i < opts.length; i++){
+      html += '<option' + (opts[i] === val ? ' selected' : '') + '>' + esc(opts[i]) + '</option>';
+    }
+    return html + '</select>';
   }
   function decisionSelect(val, idx){
-    const opts = ["","Will Buy","Need Time","Payment Processing","Waiting For Discount","Not Intrested"];
-    return `<select class="sel-decision" data-idx="${idx}">${opts.map(o=>`<option${o===val?" selected":""}>${esc(o)}</option>`).join("")}</select>`;
+    var opts = ["","Will Buy","Need Time","Payment Processing","Waiting For Discount","Not Intrested"];
+    var html = '<select class="sel-decision" data-idx="' + idx + '">';
+    for(var i = 0; i < opts.length; i++){
+      html += '<option' + (opts[i] === val ? ' selected' : '') + '>' + esc(opts[i]) + '</option>';
+    }
+    return html + '</select>';
   }
 
   function applyStatusClass(el){
-    const map = {"New":"s-new","Called":"s-called","Intersted":"s-interested","Demo Schedule":"s-demo","Converted":"s-converted","Not Intrested":"s-lost"};
-    el.className = "sel-status " + (map[el.value]||"s-new");
+    var map = {"New":"s-new","Called":"s-called","Intersted":"s-interested","Demo Schedule":"s-demo","Converted":"s-converted","Not Intrested":"s-lost"};
+    el.className = "sel-status " + (map[el.value] || "s-new");
   }
   function applyDecisionClass(el){
-    const map = {"Will Buy":"d-buy","Need Time":"d-time","Payment Processing":"d-payment","Waiting For Discount":"d-discount","Not Intrested":"d-lost"};
-    el.className = "sel-decision " + (map[el.value]||"d-pending");
+    var map = {"Will Buy":"d-buy","Need Time":"d-time","Payment Processing":"d-payment","Waiting For Discount":"d-discount","Not Intrested":"d-lost"};
+    el.className = "sel-decision " + (map[el.value] || "d-pending");
   }
 
-  // ── PATCH FIRESTORE (update status / decision) ──────────────
-  async function patchLead(idx, field, value, triggerEl){
-    const visibleLeads = getFilteredLeads();
-    const lead = visibleLeads[idx];
+  // ── PATCH FIRESTORE ─────────────────────────────────────────
+  function patchLead(idx, field, value, triggerEl){
+    var visible = getFilteredLeads();
+    var lead    = visible[idx];
     if(!lead || !lead.docName) return;
+
     lead[field] = value;
-    const master = allLeads.find(l => l.docName === lead.docName);
+    var master = null;
+    for(var i = 0; i < allLeads.length; i++){
+      if(allLeads[i].docName === lead.docName){ master = allLeads[i]; break; }
+    }
     if(master) master[field] = value;
 
-    // Visual feedback: dim the dropdown while saving
     if(triggerEl){ triggerEl.disabled = true; triggerEl.style.opacity = ".5"; }
 
-    try {
-      if(auth.currentUser) currentToken = await auth.currentUser.getIdToken();
-      const res = await fetch(`https://firestore.googleapis.com/v1/${lead.docName}?updateMask.fieldPaths=${field}`, {
+    auth.currentUser.getIdToken().then(function(tok){
+      currentToken = tok;
+      return fetch("https://firestore.googleapis.com/v1/" + lead.docName + "?updateMask.fieldPaths=" + field, {
         method: "PATCH",
-        headers: { "Authorization": `Bearer ${currentToken}`, "Content-Type": "application/json" },
+        headers: { "Authorization": "Bearer " + tok, "Content-Type": "application/json" },
         body: JSON.stringify({ fields: { [field]: { stringValue: value } } })
       });
-      if(!res.ok){
-        const errBody = await res.text();
-        throw new Error(`HTTP ${res.status}: ${errBody.slice(0,120)}`);
+    }).then(function(res){
+      if(!res.ok) return res.text().then(function(t){ throw new Error("HTTP " + res.status + ": " + t.slice(0,100)); });
+      showToast((field === "status" ? "Status" : "Decision") + " saved → " + value);
+      var updated = master || lead;
+      if(updated.status === "Not Intrested" && updated.decision === "Not Intrested"){
+        var yes = confirm('Lead "' + updated.name + '" is Not Intrested on both.\n\nDelete permanently?');
+        if(yes){ deleteLead(updated.docName, updated.name); return; }
       }
-      showToast(`✅ ${field === "status" ? "Status" : "Decision"} saved → ${value}`);
-    } catch(e){
-      console.error("patchLead error:", e);
-      showToast(`❌ Save failed: ${e.message}`);
-    } finally {
-      if(triggerEl){ triggerEl.disabled = false; triggerEl.style.opacity = ""; }
-    }
-
-    // ── AUTO-DELETE when both Status AND Decision = "Not Intrested" ──
-    const updated = master || lead;
-    if(updated.status === "Not Intrested" && updated.decision === "Not Intrested"){
-      const yes = confirm(`Lead "${updated.name}" is Not Intrested on both status and decision.\n\nDelete this lead permanently?`);
-      if(yes) await deleteLead(updated.docName, updated.name);
-      else { updateStats(allLeads); return; }
-    } else {
       updateStats(allLeads);
-    }
-    updateStatusTabCounts(allLeads);
-    applyFilter();
-  }
-
-  // ── DELETE LEAD ───────────────────────────────────────────────
-  async function deleteLead(docName, nameHint){
-    try {
-      if(auth.currentUser) currentToken = await auth.currentUser.getIdToken();
-      const res = await fetch(`https://firestore.googleapis.com/v1/${docName}`, {
-        method: "DELETE",
-        headers: { "Authorization": `Bearer ${currentToken}` }
-      });
-      if(!res.ok) throw new Error(res.status);
-      allLeads = allLeads.filter(l => l.docName !== docName);
-      updateStats(allLeads);
-      updateStatusTabCounts(allLeads);
+      updateTabCounts(allLeads);
       applyFilter();
-      showToast(`🗑️ Lead "${nameHint}" deleted.`);
-    } catch(e){ console.error("deleteLead error:", e); alert("Delete failed: " + e.message); }
+    }).catch(function(e){
+      showToast("❌ Save failed: " + e.message);
+    }).then(function(){
+      if(triggerEl){ triggerEl.disabled = false; triggerEl.style.opacity = ""; }
+    });
   }
 
-  // ── TOAST ─────────────────────────────────────────────────────
+  // ── DELETE LEAD ─────────────────────────────────────────────
+  function deleteLead(docName, nameHint){
+    auth.currentUser.getIdToken().then(function(tok){
+      return fetch("https://firestore.googleapis.com/v1/" + docName, {
+        method: "DELETE",
+        headers: { "Authorization": "Bearer " + tok }
+      });
+    }).then(function(res){
+      if(!res.ok) throw new Error(res.status);
+      allLeads = allLeads.filter(function(l){ return l.docName !== docName; });
+      updateStats(allLeads);
+      updateTabCounts(allLeads);
+      applyFilter();
+      showToast('🗑️ Lead "' + nameHint + '" deleted.');
+    }).catch(function(e){
+      alert("Delete failed: " + e.message);
+    });
+  }
+
+  // ── STATS ────────────────────────────────────────────────────
+  function updateStats(leads){
+    var today = new Date().toISOString().slice(0,10);
+    document.getElementById("statTotal").textContent     = leads.length;
+    document.getElementById("statToday").textContent     = leads.filter(function(l){ return l.ts.toISOString().slice(0,10) === today; }).length;
+    document.getElementById("statVyapar").textContent    = leads.filter(function(l){ return (l.software||"").toLowerCase().indexOf("vyapar") >= 0; }).length;
+    document.getElementById("statBiz").textContent       = leads.filter(function(l){ return (l.software||"").toLowerCase().indexOf("biz") >= 0; }).length;
+    document.getElementById("statBill").textContent      = leads.filter(function(l){ return (l.software||"").toLowerCase().indexOf("bill") >= 0; }).length;
+    document.getElementById("statConverted").textContent = leads.filter(function(l){ return l.status === "Converted"; }).length;
+  }
+
+  // ── STATUS TAB COUNTS ────────────────────────────────────────
+  function updateTabCounts(leads){
+    var c = {"New":0,"Called":0,"Intersted":0,"Demo Schedule":0,"Converted":0,"Not Intrested":0};
+    leads.forEach(function(l){ if(c[l.status] !== undefined) c[l.status]++; });
+    var el = function(id){ return document.getElementById(id); };
+    el("stc-all").textContent        = leads.length;
+    el("stc-new").textContent        = c["New"];
+    el("stc-called").textContent     = c["Called"];
+    el("stc-interested").textContent = c["Intersted"];
+    el("stc-demo").textContent       = c["Demo Schedule"];
+    el("stc-converted").textContent  = c["Converted"];
+    el("stc-notint").textContent     = c["Not Intrested"];
+  }
+
+  // ── FILTER ───────────────────────────────────────────────────
+  function getFilteredLeads(){
+    var q  = document.getElementById("searchBox").value.toLowerCase();
+    var sw = document.getElementById("filterSw").value.toLowerCase();
+    var st = document.getElementById("filterStatus").value;
+    var dc = document.getElementById("filterDecision").value;
+    return allLeads.filter(function(l){
+      var matchTab = !activeTab || l.status === activeTab;
+      var matchQ   = !q  || [l.name,l.phone,l.city,l.ticketId,l.plan].join(" ").toLowerCase().indexOf(q) >= 0;
+      var matchSw  = !sw || (l.software||"").toLowerCase().indexOf(sw) >= 0;
+      var matchSt  = !st || l.status === st;
+      var matchDc  = !dc || l.decision === dc;
+      return matchTab && matchQ && matchSw && matchSt && matchDc;
+    });
+  }
+  function applyFilter(){ renderTable(getFilteredLeads()); }
+
+  document.getElementById("searchBox").addEventListener("input", applyFilter);
+  document.getElementById("filterSw").addEventListener("change", applyFilter);
+  document.getElementById("filterStatus").addEventListener("change", applyFilter);
+  document.getElementById("filterDecision").addEventListener("change", applyFilter);
+  document.getElementById("refreshBtn").addEventListener("click", loadLeads);
+
+  // ── EXPORT CSV ───────────────────────────────────────────────
+  document.getElementById("exportBtn").addEventListener("click", function(){
+    if(!allLeads.length) return;
+    var header = ["Date","Name","Phone","City","Software","Status","Decision","Plan","Ticket ID"];
+    var rows = allLeads.map(function(l){
+      return [l.dateStr,l.name,l.phone,l.city,l.software,l.status,l.decision,l.plan,l.ticketId]
+        .map(function(v){ return '"' + (v||"").replace(/"/g,'""') + '"'; }).join(",");
+    });
+    var csv = [header.join(",")].concat(rows).join("\n");
+    var a   = document.createElement("a");
+    a.href  = URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+    a.download = "bsft-leads-" + new Date().toISOString().slice(0,10) + ".csv";
+    a.click();
+  });
+
+  // ── TOAST ────────────────────────────────────────────────────
   function showToast(msg){
-    let t = document.getElementById("bsf-toast");
+    var t = document.getElementById("bsf-toast");
     if(!t){
       t = document.createElement("div");
       t.id = "bsf-toast";
@@ -575,108 +642,43 @@
     t.textContent = msg;
     t.style.opacity = "1";
     clearTimeout(t._timer);
-    t._timer = setTimeout(() => { t.style.opacity = "0"; }, 3000);
+    t._timer = setTimeout(function(){ t.style.opacity = "0"; }, 3000);
   }
-
-  // ── STATS ───────────────────────────────────────────────────
-  function updateStats(leads){
-    const today = new Date().toISOString().slice(0,10);
-    document.getElementById("statTotal").textContent     = leads.length;
-    document.getElementById("statToday").textContent     = leads.filter(l => l.ts.toISOString().slice(0,10) === today).length;
-    document.getElementById("statVyapar").textContent    = leads.filter(l => l.software?.toLowerCase().includes("vyapar")).length;
-    document.getElementById("statBiz").textContent       = leads.filter(l => l.software?.toLowerCase().includes("biz")).length;
-    document.getElementById("statBill").textContent      = leads.filter(l => l.software?.toLowerCase().includes("bill")).length;
-    document.getElementById("statConverted").textContent = leads.filter(l => l.status === "Converted").length;
-  }
-
-  // ── FILTER ──────────────────────────────────────────────────
-  function getFilteredLeads(){
-    const q  = document.getElementById("searchBox").value.toLowerCase();
-    const sw = document.getElementById("filterSw").value.toLowerCase();
-    const st = document.getElementById("filterStatus").value.toLowerCase();
-    const dc = document.getElementById("filterDecision").value.toLowerCase();
-    return allLeads.filter(l => {
-      const matchTab= !activeStatusTab || (l.status||"") === activeStatusTab;
-      const matchQ  = !q  || [l.name,l.phone,l.city,l.ticketId,l.plan].join(" ").toLowerCase().includes(q);
-      const matchSw = !sw || (l.software||"").toLowerCase().includes(sw);
-      const matchSt = !st || (l.status||"").toLowerCase() === st;
-      const matchDc = !dc || (l.decision||"").toLowerCase() === dc;
-      return matchTab && matchQ && matchSw && matchSt && matchDc;
-    });
-  }
-  function applyFilter(){ renderTable(getFilteredLeads()); }
-
-  // ── STATUS TAB COUNTS ────────────────────────────────────────
-  function updateStatusTabCounts(leads){
-    const counts = {"New":0,"Called":0,"Intersted":0,"Demo Schedule":0,"Converted":0,"Not Intrested":0};
-    leads.forEach(l => { if(counts[l.status] !== undefined) counts[l.status]++; });
-    const el = id => document.getElementById(id);
-    if(el("stc-all"))       el("stc-all").textContent       = leads.length;
-    if(el("stc-new"))       el("stc-new").textContent       = counts["New"];
-    if(el("stc-called"))    el("stc-called").textContent    = counts["Called"];
-    if(el("stc-interested"))el("stc-interested").textContent= counts["Intersted"];
-    if(el("stc-demo"))      el("stc-demo").textContent      = counts["Demo Schedule"];
-    if(el("stc-converted")) el("stc-converted").textContent = counts["Converted"];
-    if(el("stc-notint"))    el("stc-notint").textContent    = counts["Not Intrested"];
-  }
-
-  document.getElementById("searchBox").addEventListener("input", applyFilter);
-  document.getElementById("filterSw").addEventListener("change", applyFilter);
-  document.getElementById("filterStatus").addEventListener("change", applyFilter);
-  document.getElementById("filterDecision").addEventListener("change", applyFilter);
-
-  document.getElementById("refreshBtn").addEventListener("click", loadLeads);
-
-  // ── EXPORT CSV ──────────────────────────────────────────────
-  document.getElementById("exportBtn").addEventListener("click", () => {
-    if(!allLeads.length) return;
-    const header = ["Date","Name","Phone","City","Software","Status","Decision","Plan","Ticket ID"];
-    const     const rows = allLeads.map(l => [l.dateStr,l.name,l.phone,l.city,l.software,l.status,l.decision,l.plan,l.ticketId]
-      .map(v => `"${(v||"").replace(/"/g,'""')}"`)
-      .join(","));
-    const csv  = [header.join(","), ...rows].join("\n");
-    const a    = document.createElement("a");
-    a.href     = URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
-    a.download = `bsft-leads-${new Date().toISOString().slice(0,10)}.csv`;
-    a.click();
-  });
 
   // ── HELPERS ──────────────────────────────────────────────────
-  function show(id){ document.getElementById(id).style.display = id==="loginScreen"?"flex":"block"; }
+  function show(id){ document.getElementById(id).style.display = id === "loginScreen" ? "flex" : "block"; }
   function hide(id){ document.getElementById(id).style.display = "none"; }
   function setBody(html){ document.getElementById("leadsBody").innerHTML = html; }
   function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
-  // Expose status-tab setter so global setStatusTab can update the filter
-  window._setLeadsStatusTab = function(status){
-    activeStatusTab = status;
+  // Expose status-tab setter for the global setStatusTab function
+  window._setLeadsTab = function(status){
+    activeTab = status;
     document.getElementById("filterStatus").value = "";
     applyFilter();
   };
+
 })();
 
-// ── STATUS TAB (leads filter pills) ──────────────────────────
+// ── STATUS PILL CLICK ────────────────────────────────────────
 function setStatusTab(btn, status){
-  document.querySelectorAll("#statusTabsBar .stp").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll("#statusTabsBar .stp").forEach(function(b){ b.classList.remove("active"); });
   btn.classList.add("active");
-  if(typeof window._setLeadsStatusTab === "function") window._setLeadsStatusTab(status);
+  if(typeof window._setLeadsTab === "function") window._setLeadsTab(status);
 }
 
-// ── TAB SWITCHING ─────────────────────────────────────────────
+// ── MAIN TAB SWITCH ──────────────────────────────────────────
 function switchTab(tab){
-  document.getElementById("tabLeads").style.display    = tab==="leads"    ? "block" : "none";
-  document.getElementById("tabSettings").style.display = tab==="settings" ? "block" : "none";
-  document.getElementById("tabLeadsBtn").classList.toggle("active",    tab==="leads");
-  document.getElementById("tabSettingsBtn").classList.toggle("active", tab==="settings");
-  if(tab==="settings") loadSettingsForm();
+  document.getElementById("tabLeads").style.display    = tab === "leads"    ? "block" : "none";
+  document.getElementById("tabSettings").style.display = tab === "settings" ? "block" : "none";
+  document.getElementById("tabLeadsBtn").classList.toggle("active",    tab === "leads");
+  document.getElementById("tabSettingsBtn").classList.toggle("active", tab === "settings");
+  if(tab === "settings") loadSettingsForm();
 }
 
-// ── SETTINGS LOAD & SAVE ──────────────────────────────────────
-const FB_API_KEY_S  = "AIzaSyBVq7cI62VX-fGfQj32-mdyu30JygMFwWQ";
-const FB_PROJECT_S  = "bizsoftsolutions-7a47d";
-const FS_SETTINGS   = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT_S}/databases/(default)/documents/settings/config`;
-
-const PRICE_KEYS = [
+// ── SETTINGS ─────────────────────────────────────────────────
+var FS_SETTINGS = "https://firestore.googleapis.com/v1/projects/bizsoftsolutions-7a47d/databases/(default)/documents/settings/config";
+var PRICE_KEYS  = [
   "v_s_1d","v_g_1d","v_r_1d","v_d_1d","v_m_1d","v_p_1d",
   "v_s_1dm","v_g_1dm","v_r_1dm","v_d_1dm","v_m_1dm","v_p_1dm",
   "v_s_3d","v_g_3d","v_r_3d","v_d_3d","v_m_3d","v_p_3d",
@@ -684,78 +686,67 @@ const PRICE_KEYS = [
   "ba_1yr","ba_2yr","ba_5yr"
 ];
 
-async function getToken(){
-  const user = firebase.auth().currentUser;
-  return user ? await user.getIdToken() : "";
+function getToken(){
+  var user = firebase.auth().currentUser;
+  return user ? user.getIdToken() : Promise.resolve("");
 }
 
-async function loadSettingsForm(){
-  try {
-    const token = await getToken();
-    const res = await fetch(FS_SETTINGS, { headers:{ Authorization:`Bearer ${token}` }});
-    if(!res.ok && res.status !== 404) return;
-    if(res.status === 404) return;
-    const data = await res.json();
-    const f = data.fields || {};
-    const get = k => (f[k]?.stringValue) || "";
-
+function loadSettingsForm(){
+  getToken().then(function(tok){
+    return fetch(FS_SETTINGS, { headers: { Authorization: "Bearer " + tok } });
+  }).then(function(res){
+    if(res.status === 404) return null;
+    if(!res.ok) throw new Error(res.status);
+    return res.json();
+  }).then(function(data){
+    if(!data) return;
+    var f   = data.fields || {};
+    var get = function(k){ return (f[k] && f[k].stringValue) ? f[k].stringValue : ""; };
     document.getElementById("s_offer_msg").value    = get("offer_msg");
     document.getElementById("s_offer_active").value = get("offer_active") || "false";
     if(get("offer_bg"))    document.getElementById("s_offer_bg").value    = get("offer_bg");
     if(get("offer_color")) document.getElementById("s_offer_color").value = get("offer_color");
-
-    PRICE_KEYS.forEach(k => {
-      const el = document.getElementById("s_" + k);
+    PRICE_KEYS.forEach(function(k){
+      var el = document.getElementById("s_" + k);
       if(el && get(k)) el.value = get(k);
     });
-  } catch(e){ console.error("loadSettingsForm:", e); }
+  }).catch(function(e){ console.error("loadSettingsForm:", e); });
 }
 
-async function saveSection(section){
-  const msgEl = document.getElementById("msg_" + section);
+function saveSection(section){
+  var msgEl = document.getElementById("msg_" + section);
   msgEl.textContent = "Saving…"; msgEl.className = "save-msg";
-  try {
-    const token = await getToken();
-    const fields = {};
-
-    if(section === "offer"){
-      fields.offer_msg    = { stringValue: document.getElementById("s_offer_msg").value.trim() };
-      fields.offer_active = { stringValue: document.getElementById("s_offer_active").value };
-      fields.offer_bg     = { stringValue: document.getElementById("s_offer_bg").value };
-      fields.offer_color  = { stringValue: document.getElementById("s_offer_color").value };
-    } else if(section === "vyapar"){
-      const keys = PRICE_KEYS.filter(k => k.startsWith("v_"));
-      keys.forEach(k => {
-        const el = document.getElementById("s_" + k);
-        if(el && el.value) fields[k] = { stringValue: el.value };
-      });
-    } else if(section === "biz"){
-      ["ba_1yr","ba_2yr","ba_5yr"].forEach(k => {
-        const el = document.getElementById("s_" + k);
-        if(el && el.value) fields[k] = { stringValue: el.value };
-      });
-    }
-
-    const mask = Object.keys(fields).map(k => "updateMask.fieldPaths=" + k).join("&");
-    const res = await fetch(`${FS_SETTINGS}?${mask}`, {
-      method: "PATCH",
-      headers: { Authorization:`Bearer ${token}`, "Content-Type":"application/json" },
-      body: JSON.stringify({ fields })
+  var fields = {};
+  if(section === "offer"){
+    fields.offer_msg    = { stringValue: document.getElementById("s_offer_msg").value.trim() };
+    fields.offer_active = { stringValue: document.getElementById("s_offer_active").value };
+    fields.offer_bg     = { stringValue: document.getElementById("s_offer_bg").value };
+    fields.offer_color  = { stringValue: document.getElementById("s_offer_color").value };
+  } else if(section === "vyapar"){
+    PRICE_KEYS.filter(function(k){ return k.indexOf("v_") === 0; }).forEach(function(k){
+      var el = document.getElementById("s_" + k);
+      if(el && el.value) fields[k] = { stringValue: el.value };
     });
+  } else if(section === "biz"){
+    ["ba_1yr","ba_2yr","ba_5yr"].forEach(function(k){
+      var el = document.getElementById("s_" + k);
+      if(el && el      if(el && el.value) fields[k] = { stringValue: el.value };
+    });
+  }
+  var mask = Object.keys(fields).map(function(k){ return "updateMask.fieldPaths=" + k; }).join("&");
+  getToken().then(function(tok){
+    return fetch(FS_SETTINGS + "?" + mask, {
+      method: "PATCH",
+      headers: { Authorization: "Bearer " + tok, "Content-Type": "application/json" },
+      body: JSON.stringify({ fields: fields })
+    });
+  }).then(function(res){
     if(!res.ok) throw new Error(res.status);
-    msgEl.textContent = "✅ Saved!"; msgEl.className = "save-msg ok";
-    setTimeout(() => { msgEl.textContent = ""; }, 3000);
-  } catch(e){
-    msgEl.textContent = "❌ Error: " + e.message; msgEl.className = "save-msg err";
-  }
-}
-</script>
-</body>
-</html>
-""; }, 3000);
-  } catch(e){
-    msgEl.textContent = "❌ Error: " + e.message; msgEl.className = "save-msg err";
-  }
+    msgEl.textContent = "\u2705 Saved!"; msgEl.className = "save-msg ok";
+    setTimeout(function(){ msgEl.textContent = ""; }, 3000);
+  }).catch(function(e){
+    msgEl.textContent = "\u274C Error: " + e.message; msgEl.className = "save-msg err";
+  });
 }
 </script>
 </body>
