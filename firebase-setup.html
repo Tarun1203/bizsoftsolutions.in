@@ -94,7 +94,7 @@ pre .k{color:#c084fc} pre .s{color:#86efac} pre .c{color:#64748b}
 <div class="hdr">
   <h1>🔥 Firebase Setup Guide</h1>
   <p>Complete checklist to activate the BizSoft Solutions backend from scratch</p>
-  <div class="project">Project: <span>bizsoftsolutions-8846b</span> · <span>bizsoftsolutions.in</span></div>
+  <div class="project">Project: <span>bizsoftsolutions-7a47d</span> · <span>bizsoftsolutions.in</span></div>
 </div>
 
 <div class="progress-bar">
@@ -118,8 +118,8 @@ pre .k{color:#c084fc} pre .s{color:#86efac} pre .c{color:#64748b}
         <div class="step-body">
           <h3>Open your Firebase project</h3>
           <p>Your project is already created. Go directly to the console:</p>
-          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-8846b/overview" target="_blank">Open Firebase Console ↗</a>
-          <div class="info" style="margin-top:10px">Project ID: <code>bizsoftsolutions-8846b</code> · API Key: <code>AIzaSyB8mlpremZdKi66fbHag-SGFAb49MS1Tr4</code></div>
+          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-7a47d/overview" target="_blank">Open Firebase Console ↗</a>
+          <div class="info" style="margin-top:10px">Project ID: <code>bizsoftsolutions-7a47d</code> · API key: see Firebase Console → Project settings → General</div>
         </div>
       </div>
 
@@ -129,7 +129,7 @@ pre .k{color:#c084fc} pre .s{color:#86efac} pre .c{color:#64748b}
           <h3>Confirm Firestore Database exists</h3>
           <p>Check that the Firestore database is already created (it is, since lead forms work). Verify:</p>
           <div class="nav-path"><b>Firestore Database</b> <span class="arrow">→</span> Data tab <span class="arrow">→</span> should show the <b>leads</b> collection</div>
-          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-8846b/firestore" target="_blank">Open Firestore ↗</a>
+          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-7a47d/firestore" target="_blank">Open Firestore ↗</a>
         </div>
       </div>
 
@@ -150,7 +150,7 @@ pre .k{color:#c084fc} pre .s{color:#86efac} pre .c{color:#64748b}
         <div class="step-body">
           <h3>Enable the Email/Password sign-in provider</h3>
           <div class="nav-path"><b>Authentication</b> <span class="arrow">→</span> <b>Sign-in method</b> <span class="arrow">→</span> <b>Email/Password</b> <span class="arrow">→</span> toggle ON → Save</div>
-          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-8846b/authentication/providers" target="_blank">Open Sign-in Providers ↗</a>
+          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-7a47d/authentication/providers" target="_blank">Open Sign-in Providers ↗</a>
           <div class="info">Only enable "Email/Password". You do NOT need "Email link (passwordless)" or any other provider.</div>
         </div>
       </div>
@@ -161,7 +161,7 @@ pre .k{color:#c084fc} pre .s{color:#86efac} pre .c{color:#64748b}
           <h3>Create your admin user</h3>
           <div class="nav-path"><b>Authentication</b> <span class="arrow">→</span> <b>Users</b> tab <span class="arrow">→</span> <b>Add user</b> button</div>
           <p>Enter your admin email and a strong password (12+ chars, mix of letters/numbers/symbols). This is the only login that works in the BSF Console.</p>
-          <a class="go-btn amber" href="https://console.firebase.google.com/project/bizsoftsolutions-8846b/authentication/users" target="_blank">Open Users ↗</a>
+          <a class="go-btn amber" href="https://console.firebase.google.com/project/bizsoftsolutions-7a47d/authentication/users" target="_blank">Open Users ↗</a>
           <div class="warn">Write down this password securely. There is no "forgot password" in the console — you'd have to reset it from Firebase.</div>
         </div>
       </div>
@@ -192,7 +192,7 @@ pre .k{color:#c084fc} pre .s{color:#86efac} pre .c{color:#64748b}
         <div class="step-body">
           <h3>Open the Rules editor</h3>
           <div class="nav-path"><b>Firestore Database</b> <span class="arrow">→</span> <b>Rules</b> tab</div>
-          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-8846b/firestore/rules" target="_blank">Open Rules Editor ↗</a>
+          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-7a47d/firestore/rules" target="_blank">Open Rules Editor ↗</a>
         </div>
       </div>
 
@@ -319,7 +319,7 @@ pre .k{color:#c084fc} pre .s{color:#86efac} pre .c{color:#64748b}
           <p>In a terminal, <code>cd</code> into your project folder and run these commands one by one:</p>
           <div class="copy-block">
             <pre id="initCmd">firebase login
-firebase use bizsoftsolutions-8846b
+firebase use bizsoftsolutions-7a47d
 firebase init hosting</pre>
             <button class="copy-btn" onclick="copyId('initCmd',this)">Copy</button>
           </div>
@@ -342,9 +342,9 @@ firebase init hosting</pre>
             <pre id="deployCmd">firebase deploy --only hosting</pre>
             <button class="copy-btn" onclick="copyId('deployCmd',this)">Copy</button>
           </div>
-          <p>Firebase gives you a live URL like <code>https://bizsoftsolutions-8846b.web.app</code>. You can also connect your custom domain <code>bizsoftsolutions.in</code>:</p>
+          <p>Firebase gives you a live URL like <code>https://bizsoftsolutions-7a47d.web.app</code>. You can also connect your custom domain <code>bizsoftsolutions.in</code>:</p>
           <div class="nav-path"><b>Hosting</b> <span class="arrow">→</span> <b>Add custom domain</b> <span class="arrow">→</span> enter <b>bizsoftsolutions.in</b> → follow DNS steps</div>
-          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-8846b/hosting/sites" target="_blank">Open Hosting ↗</a>
+          <a class="go-btn" href="https://console.firebase.google.com/project/bizsoftsolutions-7a47d/hosting/sites" target="_blank">Open Hosting ↗</a>
           <div class="success">✔ Firebase Hosting includes free SSL, CDN, and 10 GB bandwidth/month — plenty for this site.</div>
         </div>
       </div>
