@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+  <meta name="theme-color" content="#1565c0"/>
   <title>Admin — BizSoft Solutions</title>
   <meta name="robots" content="noindex, nofollow"/>
   <style>
@@ -89,6 +93,10 @@
     .save-msg.ok{color:var(--green)} .save-msg.err{color:var(--red)}
     .sf-section-title{font-size:.8rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin:.9rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px dashed var(--border)}
     @media(max-width:640px){.stats{grid-template-columns:1fr 1fr}.controls input{min-width:150px}}
+    /* Respect the OS "reduce motion" setting */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
   </style>
 </head>
 <body>
@@ -460,7 +468,7 @@
   document.getElementById("exportBtn").addEventListener("click", () => {
     if (!LEADS.length) return;
     const hdr = ["Date","Name","Phone","City","Software","Status","Decision","Plan","Ticket"];
-    const rows = LEADS.map(l => [l.dateStr,l.name,l.phone,l.city,l.software,l.status,l.decision,l.plan,l.ticketId].map(v => '"'+(v||"").replace(/"/g,'""')+'"').join(","));
+    const rows = LEADS.map(l => [l.dateStr,l.name,l.phone,l.city,l.software,l.status,l.decision,l.plan,l.ticketId].map(v => '"'+String(v||"").replace(/^(?:[=@\t\r]|[+\-](?!\d[\d\s]*$))/,"'$&").replace(/"/g,'""')+'"').join(","));
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([[hdr.join(","),...rows].join("\n")],{type:"text/csv"}));
     a.download = "leads-" + new Date().toISOString().slice(0,10) + ".csv";
@@ -480,7 +488,7 @@
   function show(id) { document.getElementById(id).style.display = id==="loginScreen" ? "flex" : "block"; }
   function hide(id) { document.getElementById(id).style.display = "none"; }
   function setBody(h) { document.getElementById("leadsBody").innerHTML = h; }
-  function esc(s) { return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function esc(s) { return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
 
   window._setTab = s => { ACTIVE_TAB = s; document.getElementById("filterStatus").value = ""; refresh(); };
 })();

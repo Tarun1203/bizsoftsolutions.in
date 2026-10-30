@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="robots" content="noindex,nofollow"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+  <meta name="theme-color" content="#1565c0"/>
+  <meta name="robots" content="noindex,nofollow"/>
 <title>Firebase Setup Guide — BizSoft Solutions</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -79,7 +83,11 @@ pre .k{color:#c084fc} pre .s{color:#86efac} pre .c{color:#64748b}
 
 /* footer */
 .ft{text-align:center;color:#94a3b8;font-size:.8rem;margin-top:18px}
-</style>
+    /* Respect the OS "reduce motion" setting */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
 </head>
 <body>
 
