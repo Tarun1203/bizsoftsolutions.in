@@ -13,7 +13,6 @@ Static marketing site for [bizsoftsolutions.in](https://bizsoftsolutions.in): pr
 | `form.js` | Lead form: saves to Firestore `leads`, pings the Apps Script email alert |
 | `settings.js` | Reads Firestore `settings/config` for live prices and the offer banner |
 | `bsm-admin-7k2x/` | Admin console (Firebase Auth sign-in, lead list, pricing editor). `noindex` |
-| `firebase-setup.html` | One-time Firebase setup guide. `noindex` |
 | `firestore.rules` | Reference copy of the Firestore security rules |
 | `sitemap.xml`, `robots.txt` | Search engine files |
 | `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` | Site icons |
@@ -22,7 +21,9 @@ Static marketing site for [bizsoftsolutions.in](https://bizsoftsolutions.in): pr
 
 Hosted on GitHub Pages from `main` (custom domain in `CNAME`). Pushing to `main` publishes the site.
 
-`firestore.rules` is **not** deployed by a push. After changing it, paste it into Firebase Console → Firestore Database → Rules and click Publish.
+`firestore.rules` is **not** deployed by a push. After changing it, paste the whole file into Firebase Console → Firestore Database → Rules and click Publish. It is the only up-to-date copy of the rules.
+
+Every file in this repo is publicly served, so setup notes with internal details belong outside the repo.
 
 ## Adding a page
 
