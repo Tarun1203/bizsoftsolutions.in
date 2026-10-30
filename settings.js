@@ -6,8 +6,8 @@
 */
 (function(){
   "use strict";
-  var FB_API_KEY = "AIzaSyBVq7cI62VX-fGfQj32-mdyu30JygMFwWQ";
-  var FB_PROJECT = "bizsoftsolutions-7a47d";
+  var FB_API_KEY = window.BSF_CONFIG.firebaseApiKey;
+  var FB_PROJECT = window.BSF_CONFIG.firebaseProject;
 
   function fmtINR(n){
     var num = parseInt(String(n).replace(/,/g,""), 10);

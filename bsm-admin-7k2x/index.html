@@ -246,11 +246,12 @@
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="/config.js"></script>
 <script>
 (function(){
   "use strict";
-  const FB_KEY  = "AIzaSyBVq7cI62VX-fGfQj32-mdyu30JygMFwWQ";
-  const FB_PROJ = "bizsoftsolutions-7a47d";
+  const FB_KEY  = window.BSF_CONFIG.firebaseApiKey;
+  const FB_PROJ = window.BSF_CONFIG.firebaseProject;
   const FS      = "https://firestore.googleapis.com/v1/projects/" + FB_PROJ + "/databases/(default)";
 
   firebase.initializeApp({ apiKey: FB_KEY, authDomain: FB_PROJ + ".firebaseapp.com", projectId: FB_PROJ });
@@ -506,7 +507,7 @@ function switchTab(t) {
   if (t==="settings") loadSettings();
 }
 
-const FS_CFG = "https://firestore.googleapis.com/v1/projects/bizsoftsolutions-7a47d/databases/(default)/documents/settings/config";
+const FS_CFG = "https://firestore.googleapis.com/v1/projects/" + window.BSF_CONFIG.firebaseProject + "/databases/(default)/documents/settings/config";
 const PK = ["v_s_1d","v_g_1d","v_r_1d","v_d_1d","v_m_1d","v_p_1d","v_s_1dm","v_g_1dm","v_r_1dm","v_d_1dm","v_m_1dm","v_p_1dm","v_s_3d","v_g_3d","v_r_3d","v_d_3d","v_m_3d","v_p_3d","v_s_3dm","v_g_3dm","v_r_3dm","v_d_3dm","v_m_3dm","v_p_3dm","ba_1yr","ba_2yr","ba_5yr"];
 
 async function getToken() { const u = firebase.auth().currentUser; return u ? await u.getIdToken() : ""; }

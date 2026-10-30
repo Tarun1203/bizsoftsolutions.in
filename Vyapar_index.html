@@ -259,6 +259,7 @@
   <span class="ticker-inner" style="display:inline-block;white-space:nowrap;animation:bsfTicker 35s linear infinite"></span>
 </div>
 <style>@keyframes bsfTicker{from{transform:translateX(100vw)}to{transform:translateX(-100%)}}</style>
+<script src="/config.js"></script>
 <script src="/settings.js"></script>
 
 <nav>
@@ -718,10 +719,10 @@
 <script>
 (function(){
   "use strict";
-  var FB_API_KEY="AIzaSyBVq7cI62VX-fGfQj32-mdyu30JygMFwWQ";
-  var FB_PROJECT="bizsoftsolutions-7a47d";
-  var APPS_SCRIPT="https://script.google.com/macros/s/AKfycbyd18400nxsS1JvSSl17hlx6ImC0tu5W1HINXT2Q_WQ6Q5NqtQo89dmdCKT6Tn_f3SR_Q/exec";
-  var SECRET_TOKEN="bsft_alert_9x2k";
+  var FB_API_KEY=window.BSF_CONFIG.firebaseApiKey;
+  var FB_PROJECT=window.BSF_CONFIG.firebaseProject;
+  var APPS_SCRIPT=window.BSF_CONFIG.appsScriptUrl;
+  var SECRET_TOKEN=window.BSF_CONFIG.alertToken;
 
   function generateTicket(){
     var now=new Date();

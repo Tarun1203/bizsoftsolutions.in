@@ -1,10 +1,11 @@
 (function () {
   "use strict";
 
-  const FB_API_KEY   = "AIzaSyBVq7cI62VX-fGfQj32-mdyu30JygMFwWQ";
-  const FB_PROJECT   = "bizsoftsolutions-7a47d";
-  const APPS_SCRIPT  = "https://script.google.com/macros/s/AKfycbyd18400nxsS1JvSSl17hlx6ImC0tu5W1HINXT2Q_WQ6Q5NqtQo89dmdCKT6Tn_f3SR_Q/exec";
-  const SECRET_TOKEN = "bsft_alert_9x2k";
+  const CFG          = window.BSF_CONFIG;
+  const FB_API_KEY   = CFG.firebaseApiKey;
+  const FB_PROJECT   = CFG.firebaseProject;
+  const APPS_SCRIPT  = CFG.appsScriptUrl;
+  const SECRET_TOKEN = CFG.alertToken;
 
   function generateTicket() {
     const now  = new Date();
