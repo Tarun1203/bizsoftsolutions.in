@@ -15,7 +15,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-  <meta name="theme-color" content="#1565c0"/>
+  <meta name="theme-color" content="#0b1b33"/>
   <meta name="google-site-verification" content="7RKCFyhzo0VL0hE_Fd_IDniE33JRVrlgqsohvh3AAu8"/>
   <title>Biz Analyst App Review 2026 — Best Tally Mobile App</title>
   <meta name="description" content="Biz Analyst connects to Tally ERP 9 or TallyPrime and shows real-time business reports on your phone. Compare plans and pricing. Free consultation."/>
@@ -81,107 +81,15 @@
   ]
   </script>
 
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--primary:#2e7d32;--pl:#1b5e20;--accent:#ff6f00;--bg:#f8f9fa;--text:#1a1a2e;--muted:#607d8b;--border:#e0e0e0;--radius:12px}
-    body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:#fff;line-height:1.6}
-    a{text-decoration:none;color:inherit}
-
-    nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-    .logo{font-size:1.2rem;font-weight:800;color:#1565c0}
-    .logo span{color:var(--accent)}
-    nav ul{display:flex;gap:1.4rem;list-style:none;align-items:center}
-    nav ul a{font-size:.88rem;font-weight:500;color:var(--text);transition:color .15s}
-    nav ul a:hover{color:var(--primary)}
-    .nav-cta{background:var(--primary);color:#fff!important;padding:.45rem 1.1rem;border-radius:6px;font-weight:700!important}
-    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-    .hamburger span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px}
-    @media(max-width:768px){nav ul{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;padding:1rem 1.5rem;border-bottom:1px solid var(--border);gap:.6rem;align-items:flex-start} nav ul.open{display:flex} .hamburger{display:flex}}
-
-    .hero{background:linear-gradient(135deg,#2e7d32,#1b5e20 55%,#388e3c);color:#fff;padding:4.5rem 1.5rem 3.5rem;text-align:center}
-    .hero-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:.78rem;font-weight:700;padding:.3rem .9rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.5px;text-transform:uppercase}
-    .hero h1{font-size:clamp(1.8rem,4.5vw,3rem);font-weight:800;line-height:1.2;margin-bottom:1rem}
-    .hero h1 em{font-style:normal;color:#ffcc02}
-    .hero p{font-size:1.05rem;max-width:600px;margin:0 auto 2.2rem;opacity:.9}
-    .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
-    .btn-primary{background:#ff6f00;color:#fff;padding:.85rem 2rem;border-radius:8px;font-weight:700;font-size:1rem;display:inline-block;transition:.2s;border:none;cursor:pointer;font-family:inherit}
-    .btn-primary:hover{background:#e65100;transform:translateY(-2px)}
-    .btn-outline{border:2px solid rgba(255,255,255,.65);color:#fff;padding:.83rem 2rem;border-radius:8px;font-weight:600;display:inline-block;transition:.2s}
-    .btn-outline:hover{background:rgba(255,255,255,.1)}
-    .hero-stats{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
-    .stat{text-align:center}
-    .stat-num{display:block;font-size:1.6rem;font-weight:800}
-    .stat-lbl{font-size:.78rem;opacity:.75;text-transform:uppercase;letter-spacing:.3px}
-
-    section{padding:4rem 1.5rem}
-    .container{max-width:1100px;margin:0 auto}
-    .section-title{text-align:center;margin-bottom:2.5rem}
-    .section-title h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:.5rem}
-    .section-title p{color:var(--muted);max-width:560px;margin:0 auto;font-size:.93rem}
-
-    #features{background:var(--bg)}
-    .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
-    .feat-card{background:#fff;border-radius:var(--radius);padding:1.5rem;border:1px solid var(--border);transition:box-shadow .2s}
-    .feat-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.07)}
-    .feat-icon{font-size:2rem;margin-bottom:.6rem}
-    .feat-card h3{font-size:.97rem;font-weight:700;margin-bottom:.35rem}
-    .feat-card p{font-size:.85rem;color:var(--muted);line-height:1.5}
-
-    #pricing{background:#fff}
-    .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;max-width:860px;margin:0 auto}
-    .plan-card{border:2px solid var(--border);border-radius:var(--radius);padding:2rem 1.5rem;text-align:center;position:relative;transition:.2s}
-    .plan-card.popular{border-color:var(--primary);box-shadow:0 4px 24px rgba(46,125,50,.15)}
-    .popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.25rem .9rem;border-radius:20px;white-space:nowrap}
-    .plan-name{font-size:1.1rem;font-weight:800;margin-bottom:.3rem}
-    .plan-price{font-size:2rem;font-weight:900;color:var(--primary);margin:.5rem 0 .2rem}
-    .plan-price sup{font-size:1rem;vertical-align:super}
-    .plan-price span{font-size:.85rem;font-weight:400;color:var(--muted)}
-    .plan-note{font-size:.78rem;color:var(--muted);margin-bottom:1.2rem}
-    .plan-features{list-style:none;text-align:left;margin-bottom:1.5rem}
-    .plan-features li{font-size:.85rem;padding:.35rem 0;border-bottom:1px solid var(--bg);display:flex;gap:.5rem;align-items:flex-start}
-    .plan-features li:last-child{border-bottom:none}
-    .plan-features li::before{content:"✓";color:#2e7d32;font-weight:700;flex-shrink:0;margin-top:2px}
-    .plan-btn{display:block;width:100%;padding:.75rem;background:var(--primary);color:#fff;border-radius:8px;font-weight:700;font-size:.9rem;transition:background .2s;text-align:center;border:none;cursor:pointer;font-family:inherit}
-    .plan-btn:hover{background:var(--pl)}
-    .plan-btn.outline{background:#fff;color:var(--primary);border:2px solid var(--primary)}
-    .plan-btn.outline:hover{background:var(--primary);color:#fff}
-
-    #faq{background:var(--bg)}
-    .faq-list{max-width:800px;margin:0 auto}
-    details{background:#fff;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden}
-    details[open]{border-color:var(--primary)}
-    summary{padding:1rem 1.2rem;font-weight:600;font-size:.95rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
-    summary::after{content:"＋";font-size:1.1rem;color:var(--primary);flex-shrink:0}
-    details[open] summary::after{content:"－"}
-    details p{padding:0 1.2rem 1rem;font-size:.9rem;color:var(--muted);line-height:1.7}
-
-    #lead{background:#fff}
-    .lead-wrap{max-width:560px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:2rem}
-    .lead-wrap h2{font-size:1.05rem;font-weight:700;margin-bottom:1.2rem;text-align:center}
-    .fg{margin-bottom:.9rem}
-    .fg label{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:.3rem}
-    .fg input,.fg select{width:100%;padding:.7rem .85rem;border:1.5px solid var(--border);border-radius:6px;font-size:.9rem;font-family:inherit;color:var(--text)}
-    .fg input:focus,.fg select:focus{outline:none;border-color:var(--primary)}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-    @media(max-width:480px){.form-row{grid-template-columns:1fr}}
-    .submit-btn{width:100%;padding:.9rem;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s;font-family:inherit;margin-top:.3rem}
-    .submit-btn:hover{background:var(--pl)}
-    .submit-btn:disabled{background:#90a4ae;cursor:not-allowed}
-    .form-msg{font-size:.87rem;margin-top:.75rem;display:none;font-weight:500;text-align:center}
-
-    footer{background:#0d1b2a;color:#90a4ae;padding:2.5rem 1.5rem 1.5rem;text-align:center;font-size:.8rem}
-    footer a{color:#90a4ae;margin:0 .5rem}
-    footer a:hover{color:#fff}
-    .footer-links{margin-bottom:1rem}
-    .footer-logo{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem;display:block}
-    .footer-logo span{color:var(--accent)}
-    /* Respect the OS "reduce motion" setting */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-    }
-  </style>
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Mukta:wght@400;500;600;700&display=swap"/>
+  <link rel="stylesheet" href="/site.css"/>
+  <link rel="stylesheet" href="/pages.css"/>
 </head>
-<body>
+<body class="page-product page-biz">
+<a class="skip" href="#main">Skip to content</a>
 
 <div id="offerBanner" style="display:none;overflow:hidden;padding:.45rem 0;text-align:center;font-size:.85rem;font-weight:600;letter-spacing:.01em">
   <span class="ticker-inner" style="display:inline-block;white-space:nowrap;animation:bsfTicker 35s linear infinite"></span>
@@ -190,28 +98,32 @@
 <script src="/config.js"></script>
 <script src="/settings.js"></script>
 
-<nav>
-  <a href="/" class="logo">BizSoft<span>Solutions</span></a>
-  <button class="hamburger" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/Vyapar_index.html">Vyapar</a></li>
-    <li><a href="/BizAnalyst_index.html" style="color:var(--primary);font-weight:700">Biz Analyst</a></li>
-    <li><a href="/Biltouch_index.html">Bill Touch</a></li>
-    <li><a href="#lead" class="nav-cta">Get Consultation →</a></li>
-  </ul>
-</nav>
+<header class="site-head">
+  <nav class="site-nav" aria-label="Main">
+    <a href="/" class="logo">BizSoft<span>Solutions</span></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/Vyapar_index.html">Vyapar</a></li>
+      <li><a href="/BizAnalyst_index.html" aria-current="page">Biz Analyst</a></li>
+      <li><a href="/Biltouch_index.html">Bill Touch</a></li>
+      <li><a href="#lead" class="btn btn-primary">Free Consultation →</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
 
 <section class="hero">
+  <div class="spotlight"></div>
   <div class="container">
+    <img class="hero-art" src="/assets/icons/chart.webp" width="270" height="270" alt=""/>
     <div class="hero-badge">📊 Trusted by Tally Users Across India</div>
     <h1>Biz Analyst — <em>Tally on Your Mobile</em><br/>Access Reports Anytime, Anywhere</h1>
     <p>Connect Biz Analyst to your Tally ERP 9 or TallyPrime and get real-time business reports, outstanding tracking, and sales data on your smartphone.</p>
     <div class="hero-btns">
-      <a href="#lead" class="btn-primary">📞 Get Free Consultation →</a>
-      <a href="#pricing" class="btn-outline">View Pricing</a>
+      <a href="#lead" class="btn btn-primary">📞 Get Free Consultation →</a>
+      <a href="#pricing" class="btn btn-ghost">View Pricing</a>
     </div>
     <div class="hero-stats">
       <div class="stat"><span class="stat-num">85K+</span><span class="stat-lbl">Users</span></div>
@@ -224,29 +136,29 @@
 
 <section id="features">
   <div class="container">
-    <div class="section-title">
+    <div class="section-title reveal">
       <h2>What You Can Do with Biz Analyst</h2>
       <p>Access your complete Tally data on mobile — anytime, from anywhere.</p>
     </div>
     <div class="feat-grid">
-      <div class="feat-card"><div class="feat-icon">📈</div><h3>Real-Time Sales Reports</h3><p>View today's sales, month-to-date, and year-to-date figures synced live from your Tally.</p></div>
-      <div class="feat-card"><div class="feat-icon">💳</div><h3>Outstanding Tracking</h3><p>See party-wise outstanding receivables and payables. Send payment reminders directly from the app.</p></div>
-      <div class="feat-card"><div class="feat-icon">📦</div><h3>Stock Summary</h3><p>Check current stock levels, item-wise inventory, and godown stock — all from your phone.</p></div>
-      <div class="feat-card"><div class="feat-icon">📋</div><h3>Profit &amp; Loss</h3><p>View P&amp;L statement, balance sheet, and trial balance synced from your Tally in real time.</p></div>
-      <div class="feat-card"><div class="feat-icon">🏦</div><h3>Cash &amp; Bank Position</h3><p>Check your current cash and bank balances at any time without opening your desktop Tally.</p></div>
-      <div class="feat-card"><div class="feat-icon">👥</div><h3>Party-wise Reports</h3><p>See sales, purchases, and ledger statements for any party — with drill-down to individual vouchers.</p></div>
+      <div class="feat-card reveal"><img class="feat-icon" src="/assets/icons/flash.webp" width="76" height="76" loading="lazy" alt=""/><h3>Real-Time Sales Reports</h3><p>View today's sales, month-to-date, and year-to-date figures synced live from your Tally.</p></div>
+      <div class="feat-card reveal"><img class="feat-icon" src="/assets/icons/card.webp" width="76" height="76" loading="lazy" alt=""/><h3>Outstanding Tracking</h3><p>See party-wise outstanding receivables and payables. Send payment reminders directly from the app.</p></div>
+      <div class="feat-card reveal"><img class="feat-icon" src="/assets/icons/cube.webp" width="76" height="76" loading="lazy" alt=""/><h3>Stock Summary</h3><p>Check current stock levels, item-wise inventory, and godown stock — all from your phone.</p></div>
+      <div class="feat-card reveal"><img class="feat-icon" src="/assets/icons/calculator.webp" width="76" height="76" loading="lazy" alt=""/><h3>Profit &amp; Loss</h3><p>View P&amp;L statement, balance sheet, and trial balance synced from your Tally in real time.</p></div>
+      <div class="feat-card reveal"><img class="feat-icon" src="/assets/icons/locker.webp" width="76" height="76" loading="lazy" alt=""/><h3>Cash &amp; Bank Position</h3><p>Check your current cash and bank balances at any time without opening your desktop Tally.</p></div>
+      <div class="feat-card reveal"><img class="feat-icon" src="/assets/icons/notebook.webp" width="76" height="76" loading="lazy" alt=""/><h3>Party-wise Reports</h3><p>See sales, purchases, and ledger statements for any party — with drill-down to individual vouchers.</p></div>
     </div>
   </div>
 </section>
 
 <section id="pricing">
   <div class="container">
-    <div class="section-title">
+    <div class="section-title reveal">
       <h2>Biz Analyst Pricing Plans 2026</h2>
       <p>Simple pricing. All plans include full features and mobile access to your Tally data.</p>
     </div>
     <div class="pricing-grid">
-      <div class="plan-card">
+      <div class="plan-card reveal">
         <div class="plan-name">One Year</div>
         <div class="plan-price"><sup>₹</sup><span data-pk="ba_1yr">3,300</span><span>/year</span></div>
         <div class="plan-note">Annual subscription</div>
@@ -260,7 +172,7 @@
         </ul>
         <a href="#lead" class="plan-btn outline">Get Started →</a>
       </div>
-      <div class="plan-card popular">
+      <div class="plan-card reveal popular">
         <div class="popular-badge">💰 Best Value</div>
         <div class="plan-name">Business Plan</div>
         <div class="plan-price"><sup>₹</sup><span data-pk="ba_2yr">6,600</span><span>/2 years</span></div>
@@ -275,7 +187,7 @@
         </ul>
         <a href="#lead" class="plan-btn">Get Business Plan →</a>
       </div>
-      <div class="plan-card">
+      <div class="plan-card reveal">
         <div class="plan-name">Five Years</div>
         <div class="plan-price"><sup>₹</sup><span data-pk="ba_5yr">9,900</span><span>/5 years</span></div>
         <div class="plan-note">₹1,980/year — maximum savings</div>
@@ -295,7 +207,7 @@
 
 <section id="faq" style="background:var(--bg)">
   <div class="container">
-    <div class="section-title"><h2>Frequently Asked Questions</h2></div>
+    <div class="section-title reveal"><h2>Frequently Asked Questions</h2></div>
     <div class="faq-list">
       <details>
         <summary>What is Biz Analyst?</summary>
@@ -323,7 +235,7 @@
 
 <section id="lead">
   <div class="container">
-    <div class="section-title">
+    <div class="section-title reveal">
       <h2>Talk to a Biz Analyst Expert — Free</h2>
       <p>Get personalised guidance on setup and the right plan for your business.</p>
     </div>
@@ -354,26 +266,26 @@
             <option>Other</option>
           </select>
         </div>
-        <button type="submit" class="submit-btn" id="baSubmitBtn">Get Free Biz Analyst Guidance →</button>
+        <button type="submit" class="btn btn-primary submit-btn" id="baSubmitBtn">Get Free Biz Analyst Guidance →</button>
         <div class="form-msg" id="ba-msg"></div>
       </form>
     </div>
   </div>
 </section>
 
-<section style="background:#f8f9fa;padding:2.5rem 1.5rem;margin-top:1rem">
+<section style="background:var(--bg);padding:2.5rem 1.5rem;margin-top:1rem">
   <div style="max-width:900px;margin:0 auto">
-    <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;color:#1a1a2e">Related Articles</h2>
+    <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;color:var(--text)">Related Articles</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem">
-      <a href="/blog/biz-analyst-vs-credflow-vs-livekeeping.html" style="display:block;background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1rem;text-decoration:none;color:#1a1a2e">
+      <a href="/blog/biz-analyst-vs-credflow-vs-livekeeping.html" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem;text-decoration:none;color:var(--text)">
         <div style="font-size:.75rem;color:#2e7d32;font-weight:700;margin-bottom:.3rem">COMPARISON</div>
         <div style="font-size:.9rem;font-weight:600;line-height:1.4">Biz Analyst vs CredFlow vs LiveKeeping 2026</div>
       </a>
-      <a href="/blog/Blog_tally-vs-vyapar.html" style="display:block;background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1rem;text-decoration:none;color:#1a1a2e">
+      <a href="/blog/Blog_tally-vs-vyapar.html" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem;text-decoration:none;color:var(--text)">
         <div style="font-size:.75rem;color:#2e7d32;font-weight:700;margin-bottom:.3rem">COMPARISON</div>
         <div style="font-size:.9rem;font-weight:600;line-height:1.4">Tally vs Vyapar 2026 — Full Comparison</div>
       </a>
-      <a href="/blog/Blog_best-gst-billing-software-india.html" style="display:block;background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1rem;text-decoration:none;color:#1a1a2e">
+      <a href="/blog/Blog_best-gst-billing-software-india.html" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem;text-decoration:none;color:var(--text)">
         <div style="font-size:.75rem;color:#2e7d32;font-weight:700;margin-bottom:.3rem">GUIDE</div>
         <div style="font-size:.9rem;font-weight:600;line-height:1.4">Best GST Billing Software in India 2026</div>
       </a>
@@ -381,19 +293,43 @@
   </div>
 </section>
 
-<footer>
-  <a href="/" class="footer-logo">BizSoft<span>Solutions</span></a>
-  <div class="footer-links">
-    <a href="/">Home</a>
-    <a href="/Vyapar_index.html">Vyapar</a>
-    <a href="/Biltouch_index.html">Bill Touch</a>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="/" class="logo">BizSoft<span>Solutions</span></a>
+        <p>Expert guidance on GST billing, accounting, and POS software for Indian businesses.</p>
+      </div>
+      <div class="foot-col">
+        <h3>Software</h3>
+        <a href="/Vyapar_index.html">Vyapar</a>
+        <a href="/BizAnalyst_index.html">Biz Analyst</a>
+        <a href="/Biltouch_index.html">Bill Touch</a>
+      </div>
+      <div class="foot-col">
+        <h3>Guides</h3>
+        <a href="/blog/Blog_tally-vs-vyapar.html">Tally vs Vyapar</a>
+        <a href="/blog/Blog_best-gst-billing-software-india.html">Best GST Billing Software</a>
+        <a href="/blog/Blog_best-restaurant-pos-software.html">Best Restaurant POS</a>
+      </div>
+      <div class="foot-col">
+        <h3>Company</h3>
+        <a href="/#about">Why Us</a>
+        <a href="/#how">How It Works</a>
+        <a href="/#lead">Free Consultation</a>
+      </div>
+    </div>
+    <div class="foot-word" aria-hidden="true">BizSoft</div>
+    <p class="foot-legal">© 2026 BizSoft Solutions. Not affiliated with Biz Analyst or its parent company. Product names are trademarks of their respective owners.</p>
   </div>
-  <p>© 2026 BizSoft Solutions. Not affiliated with Biz Analyst or its parent company. Product names are trademarks of their respective owners.</p>
 </footer>
 
 <script src="/form.js"></script>
 <script>
   BIZSFT.wire({ formId:"baLeadForm", btnId:"baSubmitBtn", msgId:"ba-msg", softwareOverride:"Biz Analyst" });
 </script>
+<script src="/site.js" defer></script>
 </body>
 </html>

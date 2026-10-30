@@ -34,5 +34,5 @@ Access is enforced only by `firestore.rules`. The web API key in `form.js` and `
 1. Visitor submits a form; `form.js` generates a ticket ID (`BSF-YYYYMMDD-NNNN`).
 2. The lead is created in Firestore `leads`.
 3. `form.js` posts the lead to the Apps Script web app, which emails the team.
-4. Google Ads `conversion` and GA4 `generate_lead` events fire.
+4. Google Ads `conversion` and GA4 `generate_lead` events fire. The Vyapar page has its own inline form that sends the same events.
 5. The admin console lists leads, and staff update status and decision there.

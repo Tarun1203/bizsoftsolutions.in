@@ -10,6 +10,10 @@ Static marketing site for [bizsoftsolutions.in](https://bizsoftsolutions.in): pr
 | `Vyapar_index.html`, `BizAnalyst_index.html`, `Biltouch_index.html` | Product pages (pricing, FAQ, lead form) |
 | `blog/` | Articles and comparisons |
 | `404.html` | Custom not-found page |
+| `site.css`, `site.js` | Shared design system, header, footer and light animation |
+| `pages.css` | Styles for product pages and blog posts (load after `site.css`) |
+| `assets/icons/` | 3D icons from [3dicons](https://github.com/realvjy/3dicons) (CC0), as WebP |
+| `config.js` | Public client keys and endpoints |
 | `form.js` | Lead form: saves to Firestore `leads`, pings the Apps Script email alert |
 | `settings.js` | Reads Firestore `settings/config` for live prices and the offer banner |
 | `bsm-admin-7k2x/` | Admin console (Firebase Auth sign-in, lead list, pricing editor). `noindex` |
@@ -29,6 +33,7 @@ Every file in this repo is publicly served, so setup notes with internal details
 
 - Unique `<title>` (60 characters or fewer) and meta description (70–160 characters).
 - `<link rel="canonical">`, Open Graph tags, and the favicon links from any existing page.
+- Copy the font and stylesheet links, header and footer from an existing page, and load `site.js` before `</body>`.
 - Add the URL to `sitemap.xml`. Link to it from at least one related page.
 
 ## More
