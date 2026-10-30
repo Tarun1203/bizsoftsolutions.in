@@ -15,6 +15,14 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // Only the admin account may read leads or change pricing.
+    // Any signed-in user is NOT enough: anyone can create a Firebase
+    // account with the public web API key.
+    function isAdmin() {
+      return request.auth != null &&
+        request.auth.token.email == 'tarunchettam@gmail.com';
+    }
+
     // ── leads ─────────────────────────────────────────────────
     match /leads/{leadId} {
 
@@ -27,19 +35,19 @@ service cloud.firestore {
         request.resource.data.keys().size() <= 20;
 
       // Admin console (Firebase Auth) can read, update, delete
-      allow read, update, delete: if request.auth != null;
+      allow read, update, delete: if isAdmin();
     }
 
     // ── plans (live pricing) ───────────────────────────────────
     match /plans/{planId} {
       allow read: if true;                          // public — website renders prices
-      allow create, update, delete: if request.auth != null;  // admin only
+      allow create, update, delete: if isAdmin();   // admin only
     }
 
     // ── settings (offer banner + prices) ──────────────────────
     match /settings/{doc} {
       allow read: if true;                          // public — website reads prices + offer
-      allow write: if request.auth != null;         // admin only
+      allow write: if isAdmin();                    // admin only
     }
 
     // ── all other collections: deny ────────────────────────────
